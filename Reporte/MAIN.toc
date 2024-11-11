@@ -1,0 +1,1 @@
+\contentsline {section}{\numberline {1}Introducción a la Integración de Datos Clínicos en un Data Warehouse}{3}{section.1}%

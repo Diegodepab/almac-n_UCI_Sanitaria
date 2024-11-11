@@ -1,0 +1,58 @@
+\documentclass[12pt, a4paper, twoside]{article}
+
+%% Preamble
+\usepackage{pdfpages}           % Para incluir PDFs
+\usepackage{graphicx}           % Para gráficos
+\usepackage{subfiles}           % Para manejar subarchivos
+\usepackage{hyperref}           % Para enlaces
+\usepackage{listings}           % Para código fuente (ajusta lenguaje)
+\usepackage{verbatim}
+\usepackage[backend=bibtex,style=numeric]{biblatex} % Para citas numéricas
+\addbibresource{references.bib} % Cargar archivo .bib
+\usepackage{url}
+
+
+\usepackage{geometry}           % Para ajustar márgenes
+
+% Ajustes de márgenes
+\geometry{
+	left=3cm,       % Margen izquierdo
+	right=3cm,      % Margen derecho
+	top=2.5cm,      % Margen superior
+	bottom=2.5cm,   % Margen inferior
+	headheight=15pt, % Altura del encabezado
+	twoside          % Para documentos a dos caras
+}
+
+
+\graphicspath{{images/}{../images/}} % Ruta para imágenes
+
+\begin{document}
+	
+	%% Cover
+	\includepdf[noautoscale=true, width=\paperwidth]{cover.pdf}
+	
+	%% Title
+	\clearpage
+	\setcounter{page}{1}
+	\includepdf[noautoscale=true, width=\paperwidth]{title.pdf}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	% Índice automático
+	\tableofcontents
+	\newpage
+	
+	% Sections
+	\section{Introducción a la Integración de Datos Clínicos en un Data Warehouse}
+	
+
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\printbibliography
+	
+	
+	%% Back Cover
+	\includepdf[noautoscale=true, width=\paperwidth]{backcover.pdf}
+	
+\end{document}
