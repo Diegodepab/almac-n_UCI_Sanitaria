@@ -193,6 +193,8 @@
 	
 	\subsubsection{pacienteIngresado}
 	
+	
+	
 	\begin{itemize}
 		\item \textbf{Relevancia}: La tabla \texttt{pacienteIngresado} es el hecho que almacena información demográfica de los pacientes y detalles relacionados con sus ingresos y egresos del hospital y la UCI. Es fundamental para el análisis de la estancia en la UCI y la hospitalización, proporcionando una visión global de la evolución clínica y de los tiempos de atención.
 		
@@ -215,7 +217,9 @@
 	Algunos atributos no se han incluido debido a la duplicación o irrelevancia en el contexto del hecho pacienteIngresado. Por ejemplo, hospitalAdmitTime24 y hospitalDischargeYear ya cubren la información temporal necesaria, por lo que atributos como unitAdmitTime24 y unitDischargeTime24 no son necesarios en este nivel, ya que hacen referencia a eventos más específicos de la UCI, no del ingreso hospitalario. Igualmente, wardID y unitType se han excluido porque son detalles más relevantes para el contexto de la unidad de UCI, no para el hecho principal del paciente ingresado.  \cite{eICU2024}
 	
 	
-	\section{Diseño Lógico}
+	\section{Diseño Lógico - Copo de nieve}
+	
+	Para la elaboración del modelo lógico, nos fundamentamos en el modelo conceptual previamente diseñado:
 	
 	\begin{figure}[h!]
 		\centering
@@ -223,6 +227,71 @@
 		\caption{Diseño lógico}
 		\label{fig:11}
 	\end{figure}
+	
+	En el modelo lógico del almacén de datos, se ha implementado la normalización para organizar eficientemente las tablas y reducir la redundancia. Se ha propuesto una normalización en tablas, como PacienteIngresado, Medication, RespiratoryCharting, entre otras, menos la dimensión tiempo que se mantiene denormalizada.
+	
+	\subsection{FK's}
+	
+	\begin{itemize}
+		\item \textbf{PatientUnitStayID} en:
+		\begin{itemize}
+			\item \texttt{RespiratoryCare} $\rightarrow$ \texttt{PacienteIngresado.PatientUnitStayID}
+			\item \texttt{RespiratoryCharting} $\rightarrow$ \texttt{PacienteIngresado.PatientUnitStayID}
+			\item \texttt{AdmissionDx} $\rightarrow$ \texttt{PacienteIngresado.PatientUnitStayID}
+			\item \texttt{ApacheApsVar} $\rightarrow$ \texttt{PacienteIngresado.PatientUnitStayID}
+			\item \texttt{Medication} $\rightarrow$ \texttt{PacienteIngresado.PatientUnitStayID}
+			\item \texttt{Diagnosis} $\rightarrow$ \texttt{PacienteIngresado.PatientUnitStayID}
+		\end{itemize}
+		
+		Esto vincula las tablas que contienen información específica sobre los cuidados y condiciones del paciente con su estancia en UCI.
+		
+		\item \textbf{HospitalID} en:
+		\begin{itemize}
+			\item \texttt{PacienteIngresado} $\rightarrow$ \texttt{Hospital.HospitalID}
+		\end{itemize}
+		
+		Relaciona cada estancia del paciente con el hospital correspondiente.
+		
+		\item \textbf{Region} en:
+		\begin{itemize}
+			\item \texttt{Hospital} $\rightarrow$ \texttt{Region.regionID}
+		\end{itemize}
+		
+		Define la región en la que se encuentra el hospital.
+		
+		
+		\item \textbf{RouteAdmin} en:
+		\begin{itemize}
+			\item \texttt{Medication} $\rightarrow$ \texttt{RouteAdmin.RouteAdminID}
+		\end{itemize}
+		
+		Especifica la vía de administración de cada medicamento.
+		
+		\item \textbf{RespChartValueLabel} en:
+		\begin{itemize}
+			\item \texttt{RespiratoryCharting} $\rightarrow$ \texttt{Label.restChartValueLabelID}
+		\end{itemize}
+		
+		Define el tipo de valor en el gráfico de respiración.
+		
+		\item \textbf{TiempoID} en:
+		\begin{itemize}
+			\item \texttt{PacienteIngresado} $\rightarrow$ \texttt{Tiempo.TiempoID}
+		\end{itemize}
+		
+		Permite asociar información de tiempo como la admisión y el alta.
+		
+		\item \textbf{TipoID} en:
+		\begin{itemize}
+			\item \texttt{Allergy} $\rightarrow$ \texttt{Tipo.TipoID}
+		\end{itemize}
+		
+		Clasifica el tipo de alergia mediante una FK hacia \texttt{Tipo}.
+		
+	\end{itemize}
+	
+	
+	En lugar de incluir un ID genérico y un atributo que describa detalles (como en Region), optamos por almacenar el valor descriptivo directamente en regionID, eliminando la necesidad de otro campo y simplificando el modelo.
 	
 	% Sections
 	\section{Dificultades encontradas}
