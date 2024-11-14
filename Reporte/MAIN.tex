@@ -44,21 +44,34 @@
 	\newpage
 	
 	% Sections
+	
+		% Sections
 	\section{Introducción}
 	
-	La eICU Collaborative Research Database, fue desarrollada por el Philips eICU Research Institute (eRI) en colaboración con el MIT. Es una colección de datos desidentificados de pacientes de UCI en hospitales de Estados Unidos, que documenta detalles de sus ingresos, incluyendo diagnósticos, tratamientos, pruebas y resultados.
-	En este proyecto nos centraremos en la creación de un almacén de datos para analizar información clínica de pacientes con enfermedades respiratorias en UCI. Utilizaremos una versión modelada de la base de datos eICU.
+	El diseño y desarrollo de \textbf{almacenes de datos} es crucial para el análisis clínico, mejorando la toma de decisiones médicas y la calidad de atención a los pacientes. Para este proyecto, se utilizará una visión parcial de un almacén de datos basado en la \textit{Base de Datos de Investigación Colaborativa eICU}, la cual contiene una vasta cantidad de información sobre los ingresos en \textbf{Unidades de Cuidados Intensivos (UCI)} en diversos hospitales de los Estados Unidos.\cite{futuro}
 	
+	El enfoque de este trabajo está dirigido específicamente a los \textbf{pacientes con problemas respiratorios}. Estos casos son de especial relevancia en entornos de cuidados críticos, ya que las afecciones respiratorias representan una de las principales causas de ingreso en las UCI. Por lo cual un almacén de datos centrada en estas patologías sigue representando una gran fuente de información y con mucho interés para hacer un análisis de datos. \cite{pekar2021epidemiology, vincent2006epidemiology}.
 	
-	% Sections
+	En este trabajo, el \textbf{hecho principal} está constituido por los ingresos en la UCI, complementado por un conjunto de dimensiones que permiten analizar diversas variables. La selección de las tablas y atributos más relevantes de la base de datos eICU será el mayor reto para construir un \textbf{almacén de datos eficiente y de interés analítico}, que no solo facilite la consulta de información clave,
+	a su vez soporte y facilité tanto la investigación clínica como la optimización de los protocolos de tratamiento.
+	
 	\section{Objetivos}
 	
-	Buscamos desarrollar un diseño conceptual y lógico de un almacén de datos enfocado en los pacientes ingresados con problemas respiratorios en la UCI, utilizando una base de datos reducida del sistema eICU.
-	Tras restaurar la base de datos eICU en SQL Server, realizaremos una selección de las tablas más relevantes para un almacén de datos enfocado en pacientes ingresados en la UCI. En cada tabla seleccionada, identificaremos los atributos más significativos que aporten valor al análisis clínico y seguimiento de estos pacientes. Una vez seleccionadas y estructuradas todas las dimensiones y tablas de hechos, procederemos a diseñar el modelo conceptual utilizando draw.io. Posteriormente, el modelo lógico se creará empleando un diagrama de base de datos dentro del entorno de SQL Server.
+	El objetivo de este trabajo es desarrollar un \textbf{diseño conceptual y lógico} de un almacén de datos centrado en los pacientes ingresados en la \textbf{UCI} con afecciones respiratorias, seleccionando las partes más relevantes de la base de datos para el análisis de estas patologías.
+	
+	Se procederá a la restauración de dicha base de datos en \textit{SQL Server}, para realizar una selección de las tablas más relevantes que contribuyan a la construcción del almacén de datos centrado en estos pacientes. En cada una de las tablas seleccionadas, se identificarán los atributos más significativos para el análisis clínico y el seguimiento de los pacientes con problemas respiratorios. 
+	
+	Una vez completada la selección de dimensiones y tablas de hechos, se diseñará el modelo conceptual utilizando la herramienta \textit{draw.io}, y posteriormente se desarrollará el modelo lógico mediante un diagrama de base de datos en el entorno de \textit{SQL Server}. 
+	
 	
 	
 	% Sections
 	\section{eICU}
+	
+	La eICU Collaborative Research Database, fue desarrollada por el Philips eICU Research Institute (eRI) en colaboración con el MIT. Es una colección de datos desidentificados de pacientes de UCI en hospitales de Estados Unidos, que documenta detalles de sus ingresos, incluyendo diagnósticos, tratamientos, pruebas y resultados.
+	
+	Para cumplir con este objetivo, se ha restaurado la base de datos proporcionada en \textit{SQL Server Management Studio}. Aunque no se cuenta con un modelo entidad-relación (E/R) explícito, el análisis del modelo relacional de la base de datos ha permitido generar un \textbf{diseño lógico y conceptual} del almacén de datos. Este almacén se estructura alrededor de los \textit{datos de ingreso en UCI}, que se consideran como el hecho principal, complementado con un conjunto de medidas que facilitan su análisis.
+	
 	
 	\section{Diseño conceptual}
 	
