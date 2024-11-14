@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  14 NOV 2024 01:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  14 NOV 2024 02:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -837,11 +837,11 @@ Overfull \hbox (4.94507pt too wide) in paragraph at lines 150--151
 s-pi-tal, es-en-cial para la seg-mentaci^^Son
  []
 
-<image/diseño_logico.png, id=141, 496.85625pt x 458.9145pt>
+<image/diseño_logico.png, id=141, 453.49425pt x 479.391pt>
 File: image/diseño_logico.png Graphic file (type png)
 <use image/diseño_logico.png>
 Package pdftex.def Info: image/diseño_logico.png  used on input line 166.
-(pdftex.def)             Requested size: 341.43437pt x 315.36288pt.
+(pdftex.def)             Requested size: 341.43437pt x 360.94682pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -924,7 +924,7 @@ ublic/amsfonts/cm/cmcsc10.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fo
 nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jismbs/AppData/Local/Programs/
 MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/jismbs/AppData/Local
 /Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (10 pages, 253307 bytes).
+Output written on MAIN.pdf (10 pages, 253042 bytes).
 PDF statistics:
  224 PDF objects out of 1000 (max. 8388607)
  28 named destinations out of 1000 (max. 500000)
