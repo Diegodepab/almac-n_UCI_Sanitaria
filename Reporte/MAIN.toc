@@ -3,12 +3,16 @@
 \contentsline {section}{\numberline {3}Descripción de los datos utilizados (eICU)}{3}{section.3}%
 \contentsline {section}{\numberline {4}Diseño conceptual}{4}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Tablas}{5}{subsection.4.1}%
-\contentsline {subsubsection}{\numberline {4.1.1}Diagnosis}{5}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}respiratoryCharting}{6}{subsubsection.4.1.2}%
-\contentsline {subsubsection}{\numberline {4.1.3}respiratoryCare}{6}{subsubsection.4.1.3}%
-\contentsline {subsubsection}{\numberline {4.1.4}apacheApsVar}{7}{subsubsection.4.1.4}%
-\contentsline {subsubsection}{\numberline {4.1.5}pacienteIngresado}{7}{subsubsection.4.1.5}%
-\contentsline {section}{\numberline {5}Diseño Lógico - Copo de nieve}{8}{section.5}%
-\contentsline {subsection}{\numberline {5.1}FK's}{9}{subsection.5.1}%
-\contentsline {section}{\numberline {6}Dificultades encontradas}{10}{section.6}%
-\contentsline {section}{\numberline {7}Conclusiones}{10}{section.7}%
+\contentsline {subsubsection}{\numberline {4.1.1}PacienteIngresado}{5}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Diagnosis}{6}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}respiratoryCharting}{6}{subsubsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.4}respiratoryCare}{7}{subsubsection.4.1.4}%
+\contentsline {subsubsection}{\numberline {4.1.5}apacheApsVar}{7}{subsubsection.4.1.5}%
+\contentsline {subsubsection}{\numberline {4.1.6}Hospital}{8}{subsubsection.4.1.6}%
+\contentsline {subsubsection}{\numberline {4.1.7}AdmissionDx}{9}{subsubsection.4.1.7}%
+\contentsline {subsubsection}{\numberline {4.1.8}Allergy}{9}{subsubsection.4.1.8}%
+\contentsline {subsubsection}{\numberline {4.1.9}Medication}{10}{subsubsection.4.1.9}%
+\contentsline {section}{\numberline {5}Diseño Lógico - Copo de nieve}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}FK's}{11}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Dificultades encontradas}{12}{section.6}%
+\contentsline {section}{\numberline {7}Conclusiones}{12}{section.7}%

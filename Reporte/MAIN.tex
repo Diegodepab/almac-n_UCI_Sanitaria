@@ -104,6 +104,9 @@
 	
 	El diseño conceptual define las entidades, relaciones y requisitos de información de manera abstracta, sin detalles técnicos. Se enfoca en representar las necesidades y cómo organizar los datos para soportar la toma de decisiones.
 	
+	Recordando que se modela un almacén
+	que trata sobre una población de \textbf{pacientes con problemas respiratorios} las tablas elegidas son las siguientes:
+	
 	%En este apartado se explicará la relevancia de cada tabla y atributos.
 	
 	
@@ -120,78 +123,7 @@
 	
 	\subsection{Tablas}
 	
-	\subsubsection{Diagnosis} 
-	
-	\begin{itemize}
-		\item \textbf{Relevancia}: La tabla \texttt{Diagnosis} es clave para analizar diagnósticos de enfermedades respiratorias en pacientes de UCI, permitiendo filtrar y clasificar las condiciones por severidad.
-		
-		\item \textbf{Selección de atributos}:
-		\begin{itemize}
-			\item \texttt{patientUnitStayID}: Relaciona el diagnóstico con un paciente específico en la UCI.
-			\item \texttt{diagnosisID}: Clave primaria para diferenciar cada diagnóstico.
-			\item \texttt{diagnosisString}: Descripción completa del diagnóstico para consultas específicas.
-			\item \texttt{diagnosisPriority}: Indica la prioridad del diagnóstico (Primario, Mayor, Otro).
-		\end{itemize}
-	\end{itemize}
-	
-	No se han incluido atributos como diagnosisOffset e ICD9Code debido a que nuestro análisis se centra más en la naturaleza y prioridad del diagnóstico que en el tiempo específico de entrada o el código ICD-9. \cite{eICU2024}
-	
-	\subsubsection{respiratoryCharting}
-	
-	\begin{itemize}
-		\item \textbf{Relevancia}: La tabla \texttt{RespiratoryCharting} es fundamental para el monitoreo de los valores respiratorios de los pacientes en UCI, especialmente en aquellos con enfermedades respiratorias graves.
-		
-		\item \textbf{Selección de atributos}:
-		\begin{itemize}
-			\item \texttt{patientUnitStayID}: Asocia los datos respiratorios con un paciente específico.
-			\item \texttt{respCareID}: Identificador único del registro respiratorio.
-			\item \texttt{respChartValueLabel}: Describe el tipo de valor respiratorio (ej. HR, I:E Ratio), útil para categorizar los datos.
-		\end{itemize}
-		
-	\end{itemize}
-	
-	Decidimos que datos como respChartOffset y respChartValue añadían detalles precisos, por lo que priorizamos la relevancia clínica general sobre estos detalles puntuales, ya que el objetivo es estudiar tendencias y no el seguimiento minuto a minuto.  \cite{eICU2024}
-	
-	\subsubsection{respiratoryCare}
-	
-	\begin{itemize}
-		\item \textbf{Relevancia}: La tabla \texttt{RespiratoryCare} es clave para el análisis de los cuidados respiratorios proporcionados a los pacientes en la UCI, ya que permite evaluar las intervenciones de ventilación mecánica y otras terapias respiratorias.
-		
-		\item \textbf{Selección de atributos}:
-		\begin{itemize}
-			\item \texttt{patientUnitStayID}: Asocia el cuidado respiratorio a un paciente específico.
-			\item \texttt{respCareID}: Identificador único para cada intervención de cuidado respiratorio.
-			\item \texttt{ventStartOffset}: Refleja el inicio de la ventilación, crucial para analizar la relación entre el inicio de la intervención y la evolución del paciente.
-			\item \texttt{ventEndOffset}: Indica el final de la ventilación, permitiendo estudiar la duración de las intervenciones respiratorias.
-			\item \texttt{lowExhMVLimit}: Establece el límite inferior del volumen minuto expiratorio, importante para evaluar la efectividad de la ventilación.
-			\item \texttt{hiExhMVLimit}: Define el límite superior del volumen minuto expiratorio, igualmente relevante para evaluar la capacidad de los sistemas respiratorios.
-		\end{itemize}
-		
-	\end{itemize}
-	
-	Hemos excluido atributos como \texttt{airwayType} y \texttt{cuffPressure} porque nos centramos en los parámetros que permiten observar el impacto de la ventilación mecánica en la evolución de los pacientes y no tanto en los detalles técnicos de cada intervención.\cite{eICU2024}
-	
-	\subsubsection{apacheApsVar}
-	
-	\begin{itemize}
-		\item \textbf{Relevancia}: La tabla \texttt{apacheApsVar} es esencial para el cálculo del \texttt{Acute Physiology Score} (APS) III, un sistema ampliamente utilizado para evaluar la gravedad de la enfermedad de los pacientes al ingreso en la UCI. Esta puntuación es parte del sistema \texttt{APACHE} para predecir los resultados de los pacientes críticos.
-		
-		\item \textbf{Selección de atributos}:
-		\begin{itemize}
-			\item \texttt{patientUnitStayID}: Relaciona a cada entrada de paciente en la UCI con su respectivo registro en la tabla de pacientes.
-			\item \texttt{apacheApsVarID}: Clave primaria que identifica de manera única cada conjunto de variables de \texttt{APACHE APS}.
-			\item \texttt{intubated}: Indica si el paciente fue intubado al momento de obtener el peor valor de gasometría (ABG), crucial para evaluar la necesidad de intervención respiratoria.
-			\item \texttt{vent}: Indica si el paciente fue ventilado al momento de registrar la peor frecuencia respiratoria, reflejando la gravedad de la insuficiencia respiratoria.
-			\item \texttt{respiratoryRate}: Refleja la frecuencia respiratoria más baja durante el período de \texttt{APACHE}, utilizada para medir la función respiratoria del paciente.
-			\item \texttt{fio2}: Mide la fracción inspirada de oxígeno, importante para evaluar la insuficiencia respiratoria del paciente y su respuesta al tratamiento con oxígeno.
-			\item \texttt{pao2}: Mide la presión parcial de oxígeno en sangre, un indicador clave de la gravedad de la hipoxia en los pacientes.
-		\end{itemize}
-		
-	\end{itemize}
-	
-	Atributos como la puntuación de Glasgow (GCS), los valores de creatinina, glucosa, o hematocrito, aunque son importantes para el cálculo del puntaje APACHE, no están tan directamente relacionados el análisis de los problemas respiratorios.  \cite{eICU2024}
-	
-	\subsubsection{pacienteIngresado}
+	\subsubsection{PacienteIngresado}
 	
 	
 	
@@ -214,7 +146,147 @@
 		
 	\end{itemize}
 	
-	Algunos atributos no se han incluido debido a la duplicación o irrelevancia en el contexto del hecho pacienteIngresado. Por ejemplo, hospitalAdmitTime24 y hospitalDischargeYear ya cubren la información temporal necesaria, por lo que atributos como unitAdmitTime24 y unitDischargeTime24 no son necesarios en este nivel, ya que hacen referencia a eventos más específicos de la UCI, no del ingreso hospitalario. Igualmente, wardID y unitType se han excluido porque son detalles más relevantes para el contexto de la unidad de UCI, no para el hecho principal del paciente ingresado.  \cite{eICU2024}
+	Algunos atributos no se han incluido debido a la duplicación o irrelevancia en el contexto del hecho pacienteIngresado. Por ejemplo, \texttt{hospitalAdmitTime24} y \texttt{hospitalDischargeYear}  ya cubren la información temporal necesaria, por lo que atributos como \texttt{unitAdmitTime24}  y \texttt{unitDischargeTime24} no son necesarios en este nivel, ya que hacen referencia a eventos más específicos de la UCI, no del ingreso hospitalario. Igualmente, \texttt{wardID} y \texttt{unitType} se han excluido porque son detalles más relevantes para el contexto de la unidad de UCI, no para el hecho principal del paciente ingresado.  \cite{eICU2024}
+	
+	
+	\subsubsection{Diagnosis} 
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{Diagnosis} es clave para analizar diagnósticos de enfermedades respiratorias en pacientes, permitiendo filtrar y clasificar las condiciones por severidad.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Relaciona el diagnóstico con un paciente específico en la UCI.
+			\item \texttt{diagnosisID}: Clave primaria para diferenciar cada diagnóstico.
+			\item \texttt{diagnosisString}: Descripción completa del diagnóstico para consultas específicas.
+			\item \texttt{diagnosisPriority}: Indica la prioridad del diagnóstico (Primario, Mayor, Otro).
+		\end{itemize}
+	\end{itemize}
+	
+	No se han incluido atributos como \texttt{diagnosisOffset} e \texttt{ICD9Code} debido a que este proyecto se centra más en la naturaleza y prioridad del diagnóstico que en el tiempo específico de entrada o el código ICD-9. \cite{eICU2024}
+	
+	\subsubsection{respiratoryCharting}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{RespiratoryCharting} es fundamental para el monitoreo de los valores respiratorios de los pacientes en UCI, especialmente en aquellos con enfermedades respiratorias graves.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Asocia los datos respiratorios con un paciente específico.
+			\item \texttt{respCareID}: Identificador único del registro respiratorio.
+			\item \texttt{respChartValueLabel}: Describe el tipo de valor respiratorio (ej. HR, I:E Ratio), útil para categorizar los datos.
+		\end{itemize}
+		
+	\end{itemize}
+	
+	Se decidió que datos como \texttt{respChartOffset} y \texttt{respChartValue} añadían detalles muy específicos, estos se descartaron para enfocar la relevancia clínica general sobre estos detalles puntuales, ya que el objetivo es estudiar tendencias en vez del seguimiento minuto a minuto.\cite{eICU2024}
+	
+	\subsubsection{respiratoryCare}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{RespiratoryCare} es clave para el análisis de los cuidados respiratorios proporcionados a los pacientes en la UCI, ya que permite evaluar las intervenciones de ventilación mecánica y otras terapias respiratorias.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Asocia el cuidado respiratorio a un paciente específico.
+			\item \texttt{respCareID}: Identificador único para cada intervención de cuidado respiratorio.
+			\item \texttt{ventStartOffset}: Refleja el inicio de la ventilación, crucial para analizar la relación entre el inicio de la intervención y la evolución del paciente.
+			\item \texttt{ventEndOffset}: Indica el final de la ventilación, permitiendo estudiar la duración de las intervenciones respiratorias.
+			\item \texttt{lowExhMVLimit}: Establece el límite inferior del volumen minuto expiratorio, importante para evaluar la efectividad de la ventilación.
+			\item \texttt{hiExhMVLimit}: Define el límite superior del volumen minuto expiratorio, igualmente relevante para evaluar la capacidad de los sistemas respiratorios.
+		\end{itemize}
+		
+	\end{itemize}
+	
+	Se han excluido atributos como \texttt{airwayType} y \texttt{cuffPressure} porque el estudio se centra en parámetros que permiten observar el impacto de la ventilación mecánica en la evolución de los pacientes y no tanto en los detalles técnicos de cada intervención.\cite{eICU2024}
+	
+	\subsubsection{apacheApsVar}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{apacheApsVar} es esencial para el cálculo del \texttt{Acute Physiology Score} (APS) III, un sistema ampliamente utilizado para evaluar la gravedad de la enfermedad de los pacientes al ingreso en la UCI. Esta puntuación es parte del sistema \texttt{APACHE} para predecir los resultados de los pacientes críticos.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Relaciona a cada entrada de paciente en la UCI con su respectivo registro en la tabla de pacientes.
+			\item \texttt{apacheApsVarID}: Clave primaria que identifica de manera única cada conjunto de variables de \texttt{APACHE APS}.
+			\item \texttt{intubated}: Indica si el paciente fue intubado al momento de obtener el peor valor de gasometría (ABG), crucial para evaluar la necesidad de intervención respiratoria.
+			\item \texttt{vent}: Indica si el paciente fue ventilado al momento de registrar la peor frecuencia respiratoria, reflejando la gravedad de la insuficiencia respiratoria.
+			\item \texttt{respiratoryRate}: Refleja la frecuencia respiratoria más baja durante el período de \texttt{APACHE}, utilizada para medir la función respiratoria del paciente.
+			\item \texttt{fio2}: Mide la fracción inspirada de oxígeno, importante para evaluar la insuficiencia respiratoria del paciente y su respuesta al tratamiento con oxígeno.
+			\item \texttt{pao2}: Mide la presión parcial de oxígeno en sangre, un indicador clave de la gravedad de la hipoxia en los pacientes.
+		\end{itemize}
+		
+	\end{itemize}
+	
+	Atributos como la puntuación de \texttt{Glasgow (GCS)}, los valores de \texttt{creatinina}, \texttt{glucosa}, o \texttt{hematocrito}, aunque son importantes para el cálculo del puntaje APACHE, no están tan directamente relacionados al análisis de los problemas respiratorios.  \cite{eICU2024}
+	
+	
+	\subsubsection{Hospital}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{hospital} es relevante ya que almacena información sobre los hospitales donde fueron ingresados los pacientes. Al estar vinculada mediante una clave foránea en \texttt{pacienteIngresado}, permite realizar análisis comparativos entre las instituciones médicas que forman parte del programa eICU.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{hospitalID}: Clave primaria que identifica de manera única cada hospital. Es fundamental para relacionar las estancias de los pacientes con el centro médico correspondiente.
+			\item \texttt{region}: Identificador de la región geográfica del hospital, útil para realizar análisis comparativos entre áreas geográficas.
+		\end{itemize}
+		
+		
+		No se han incluido atributos como \texttt{numbedsCategory} y \texttt{teachingStatus}, ya que aunque pueden aportar información sobre el tamaño y la categoría del hospital, se consideran irrelevantes para el enfoque principal de este proyecto, que se centra más en los pacientes y su tratamiento que en las características institucionales de los hospitales. \cite{eICU2024}
+		
+	\end{itemize}
+	
+	\subsubsection{AdmissionDx}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{admissionDx} contiene el diagnóstico principal de admisión a la UCI, esencial para los cálculos del sistema de puntuación APACHE. Es fundamental para identificar la causa principal de ingreso y analizar cómo los diagnósticos iniciales impactan en la evolución de los pacientes.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Identificador único que enlaza con la estancia del paciente en la UCI, crucial para asociar el diagnóstico de admisión con el paciente correspondiente.
+			\item \texttt{admissionDxID}: Clave primaria que identifica de manera única cada diagnóstico de admisión.
+			\item \texttt{admitDxName}: Nombre del diagnóstico de admisión, que proporciona una descripción del motivo clínico principal de ingreso.
+			\item \texttt{admitDxEnteredOffset}: Minutos desde la admisión a la unidad cuando se ingresó el diagnóstico, relevante para analizar la prontitud del diagnóstico al ingreso en la UCI.
+		\end{itemize}
+		
+	\end{itemize}
+	
+	No se han incluido atributos como \texttt{admitDxPath} y \texttt{admitDxText}, ya que se consideran menos relevantes para el enfoque de este proyecto, que prioriza el diagnóstico principal y el tiempo de entrada del mismo, sin profundizar en los detalles jerárquicos o valores amplificadores del diagnóstico. \cite{eICU2024}
+	
+	
+	\subsubsection{Allergy}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{allergy} contiene información sobre las alergias de los pacientes, incluyendo alergias a medicamentos, lo que resulta crucial para la gestión segura de tratamientos en la UCI.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{allergyID}: Clave primaria que identifica de manera única cada registro de alergia.
+			\item \texttt{patientUnitStayID}: Identificador único que enlaza con la estancia del paciente en la UCI, permitiendo asociar las alergias al paciente correspondiente.
+			\item \texttt{allergyType}: Tipo de alergia, indicando si es a un medicamento o no, un dato de gran importancia para la selección de tratamientos adecuados.
+			\item \texttt{allergyName}: Nombre de la alergia, que proporciona información específica sobre el alérgeno.
+		\end{itemize}
+	\end{itemize}
+	
+	No se han incluido atributos como \texttt{allergyOffset}, \texttt{specialtyType} o \texttt{userType}, ya que se consideran menos relevantes al ser detalles adicionales sobre cuándo y por quién fueron registradas. \cite{eICU2024}
+	
+	\subsubsection{Medication}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{medication} almacena información sobre los medicamentos prescritos para los pacientes en la UCI. Esto es fundamental para realizar análisis sobre los tratamientos administrados y su relación con los resultados clínicos de los pacientes.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Identificador único que enlaza la estancia del paciente en la UCI, permitiendo asociar los medicamentos prescritos al paciente correspondiente.
+			\item \texttt{medicationID}: Clave primaria que identifica de manera única cada registro de medicamento.
+			\item \texttt{drugName}: Nombre del medicamento prescrito, proporcionando información sobre el tipo de tratamiento administrado.
+			\item \texttt{routeAdmin}: Ruta de administración del medicamento.
+			\item \texttt{dosage}: La dosis del medicamento, que permite realizar un seguimiento detallado de los tratamientos y evaluar su efectividad o posibles efectos adversos.
+		\end{itemize}
+	\end{itemize}
+	
+	No se han incluido atributos como \texttt{drugOrderOffset}, \texttt{frequency} o \texttt{PRN}, al ser detalles temporales o la frecuencia con la que fue recetado puede llegar aumentar la complejidad del estudio. \cite{eICU2024}
 	
 	
 	\section{Diseño Lógico - Copo de nieve}
