@@ -62,7 +62,101 @@
 	
 	\section{Diseño conceptual}
 	
+	\subsection{Tablas}
 	
+	\subsubsection{Diagnosis} 
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{Diagnosis} es clave para analizar diagnósticos de enfermedades respiratorias en pacientes de UCI, permitiendo filtrar y clasificar las condiciones por severidad.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Relaciona el diagnóstico con un paciente específico en la UCI.
+			\item \texttt{diagnosisID}: Clave primaria para diferenciar cada diagnóstico.
+			\item \texttt{diagnosisString}: Descripción completa del diagnóstico para consultas específicas.
+			\item \texttt{diagnosisPriority}: Indica la prioridad del diagnóstico (Primario, Mayor, Otro).
+		\end{itemize}
+	\end{itemize}
+	
+	No se han incluido atributos como diagnosisOffset e ICD9Code debido a que nuestro análisis se centra más en la naturaleza y prioridad del diagnóstico que en el tiempo específico de entrada o el código ICD-9. \cite{eICU2024}
+	
+	\subsubsection{respiratoryCharting}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{RespiratoryCharting} es fundamental para el monitoreo de los valores respiratorios de los pacientes en UCI, especialmente en aquellos con enfermedades respiratorias graves.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Asocia los datos respiratorios con un paciente específico.
+			\item \texttt{respCareID}: Identificador único del registro respiratorio.
+			\item \texttt{respChartValueLabel}: Describe el tipo de valor respiratorio (ej. HR, I:E Ratio), útil para categorizar los datos.
+		\end{itemize}
+		
+	\end{itemize}
+	
+	Decidimos que datos como respChartOffset y respChartValue añadían detalles precisos, por lo que priorizamos la relevancia clínica general sobre estos detalles puntuales, ya que el objetivo es estudiar tendencias y no el seguimiento minuto a minuto.  \cite{eICU2024}
+	
+	\subsubsection{respiratoryCare}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{RespiratoryCare} es clave para el análisis de los cuidados respiratorios proporcionados a los pacientes en la UCI, ya que permite evaluar las intervenciones de ventilación mecánica y otras terapias respiratorias.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Asocia el cuidado respiratorio a un paciente específico.
+			\item \texttt{respCareID}: Identificador único para cada intervención de cuidado respiratorio.
+			\item \texttt{ventStartOffset}: Refleja el inicio de la ventilación, crucial para analizar la relación entre el inicio de la intervención y la evolución del paciente.
+			\item \texttt{ventEndOffset}: Indica el final de la ventilación, permitiendo estudiar la duración de las intervenciones respiratorias.
+			\item \texttt{lowExhMVLimit}: Establece el límite inferior del volumen minuto expiratorio, importante para evaluar la efectividad de la ventilación.
+			\item \texttt{hiExhMVLimit}: Define el límite superior del volumen minuto expiratorio, igualmente relevante para evaluar la capacidad de los sistemas respiratorios.
+		\end{itemize}
+		
+	\end{itemize}
+	
+	Hemos excluido atributos como \texttt{airwayType} y \texttt{cuffPressure} porque nos centramos en los parámetros que permiten observar el impacto de la ventilación mecánica en la evolución de los pacientes y no tanto en los detalles técnicos de cada intervención.\cite{eICU2024}
+	
+	\subsubsection{apacheApsVar}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{apacheApsVar} es esencial para el cálculo del \texttt{Acute Physiology Score} (APS) III, un sistema ampliamente utilizado para evaluar la gravedad de la enfermedad de los pacientes al ingreso en la UCI. Esta puntuación es parte del sistema \texttt{APACHE} para predecir los resultados de los pacientes críticos.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Relaciona a cada entrada de paciente en la UCI con su respectivo registro en la tabla de pacientes.
+			\item \texttt{apacheApsVarID}: Clave primaria que identifica de manera única cada conjunto de variables de \texttt{APACHE APS}.
+			\item \texttt{intubated}: Indica si el paciente fue intubado al momento de obtener el peor valor de gasometría (ABG), crucial para evaluar la necesidad de intervención respiratoria.
+			\item \texttt{vent}: Indica si el paciente fue ventilado al momento de registrar la peor frecuencia respiratoria, reflejando la gravedad de la insuficiencia respiratoria.
+			\item \texttt{respiratoryRate}: Refleja la frecuencia respiratoria más baja durante el período de \texttt{APACHE}, utilizada para medir la función respiratoria del paciente.
+			\item \texttt{fio2}: Mide la fracción inspirada de oxígeno, importante para evaluar la insuficiencia respiratoria del paciente y su respuesta al tratamiento con oxígeno.
+			\item \texttt{pao2}: Mide la presión parcial de oxígeno en sangre, un indicador clave de la gravedad de la hipoxia en los pacientes.
+		\end{itemize}
+		
+	\end{itemize}
+	
+	Atributos como la puntuación de Glasgow (GCS), los valores de creatinina, glucosa, o hematocrito, aunque son importantes para el cálculo del puntaje APACHE, no están tan directamente relacionados el análisis de los problemas respiratorios.  \cite{eICU2024}
+	
+	\subsubsection{pacienteIngresado}
+	
+	\begin{itemize}
+		\item \textbf{Relevancia}: La tabla \texttt{pacienteIngresado} es el hecho que almacena información demográfica de los pacientes y detalles relacionados con sus ingresos y egresos del hospital y la UCI. Es fundamental para el análisis de la estancia en la UCI y la hospitalización, proporcionando una visión global de la evolución clínica y de los tiempos de atención.
+		
+		\item \textbf{Selección de atributos}:
+		\begin{itemize}
+			\item \texttt{patientUnitStayID}: Clave primaria que identifica de manera única la estancia del paciente en la UCI. Relaciona con el registro de \texttt{patient} mediante este identificador.
+			\item \texttt{patientHealthSystemStayID}: Identificador del ingreso hospitalario, vincula las estancias hospitalarias de un paciente durante un mismo periodo.
+			\item \texttt{ethnicity}: Etnia del paciente, una variable importante para el análisis demográfico y la disparidad en la atención.
+			\item \texttt{gender}: Género del paciente, relevante para estudios epidemiológicos y de salud pública.
+			\item \texttt{age}: Edad del paciente, crucial para la estratificación del riesgo y el análisis de comorbilidades.
+			\item \texttt{hospitalID}: Identificador único del hospital, esencial para la segmentación por centro de atención.
+			\item \texttt{hospitalDischargeStatus}: Estado del paciente al momento del alta hospitalaria, indicando si está vivo, fallecido, o en otro estado.
+			\item \texttt{hospitalAdmitTime24}: Hora exacta del ingreso al hospital, importante para el análisis temporal de la atención.
+			\item \texttt{hospitalDischargeYear}: Año de alta hospitalaria, relevante para la evaluación de tendencias a lo largo del tiempo.
+			\item \texttt{UniquePID}: Identificador único del paciente, utilizado para distinguir a los pacientes en el sistema.
+		\end{itemize}
+		
+	\end{itemize}
+	
+	Algunos atributos no se han incluido debido a la duplicación o irrelevancia en el contexto del hecho pacienteIngresado. Por ejemplo, hospitalAdmitTime24 y hospitalDischargeYear ya cubren la información temporal necesaria, por lo que atributos como unitAdmitTime24 y unitDischargeTime24 no son necesarios en este nivel, ya que hacen referencia a eventos más específicos de la UCI, no del ingreso hospitalario. Igualmente, wardID y unitType se han excluido porque son detalles más relevantes para el contexto de la unidad de UCI, no para el hecho principal del paciente ingresado.  \cite{eICU2024}
 	
 	
 	\section{Diseño Lógico}
@@ -81,7 +175,7 @@
 	
 	\section{Conclusiones}
 
-	
+	Todo el proyecto está accesible en github \cite{depab2024}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\printbibliography
 	

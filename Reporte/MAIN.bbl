@@ -16,5 +16,52 @@
   {}
 \endgroup
 
-\datalist[entry]{nty/global//global/global/global}\enddatalist
+\datalist[entry]{nty/global//global/global/global}
+  \entry{eICU2024}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=eCRD}{%
+         prefix={eICU},
+         prefixi={e\bibinitperiod},
+         family={Collaborative Research\bibnamedelima Database},
+         familyi={C\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim
+  D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CRDe1}
+    \strng{fullhash}{CRDe1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{howpublished}{\url{https://eicu-crd.mit.edu/about/eicu/}}
+    \field{note}{Accessed: 2024-11-14}
+    \field{title}{eICU Collaborative Research Database}
+    \verb{url}
+    \verb https://eicu-crd.mit.edu/about/eicu/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{depab2024}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=D}{%
+         family={Diegodepab},
+         familyi={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{D1}
+    \strng{fullhash}{D1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+  \field{howpublished}{\url{https://github.com/Diegodepab/almacen_UCI_Sanitaria}}
+    \field{note}{Accessed: 2024-11-14}
+    \field{title}{Almacén UCI Sanitaria}
+    \verb{url}
+    \verb https://github.com/Diegodepab/almacen_UCI_Sanitaria
+    \endverb
+    \field{year}{2024}
+  \endentry
+\enddatalist
 \endinput
