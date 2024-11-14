@@ -288,19 +288,24 @@
 	
 	No se han incluido atributos como \texttt{drugOrderOffset}, \texttt{frequency} o \texttt{PRN}, al ser detalles temporales o la frecuencia con la que fue recetado puede llegar aumentar la complejidad del estudio. \cite{eICU2024}
 	
+	Al crear un diagrama conceptual y modelar una base de datos específica, la reducción de información es clave. Este enfoque optimiza el espacio, simplifica el sistema y se enfoca en los datos relevantes, eliminando los innecesarios. La selección de datos en este modelo facilita la integración, análisis y las recomendaciones de estudios previos. Aunque esta implementación es adecuada para este estudio, existen enfoques alternativos que pueden considerar otros aspectos sin implicar una mayor o menor calidad.
+	
 	
 	\section{Diseño Lógico - Copo de nieve}
 	
-	Para la elaboración del modelo lógico, nos fundamentamos en el modelo conceptual previamente diseñado:
+	El \textbf{modelo lógico} en un almacén de datos define la estructura y relaciones entre tablas, organizando los datos de forma eficiente y sin redundancias, podría decirse que es la evolución del diseño conceptual previamente visto. En este proyecto, se ha implementado un \textbf{modelo en copo de nieve}, caracterizado por la alta normalización de las dimensiones. Esto descompone las tablas en varios niveles, reduciendo la duplicación de datos, lo que optimiza el espacio y mejora la consistencia, aunque podría aumentar la complejidad en las consultas.
+	
+	El modelo lógico, representado en la figura \ref{fig:11}, fue desarrollado utilizando \textit{Oracle SQL Developer Data Modeler}. Este modelo originalmente contenía la estructura lógica del almacén de datos, y se ha aplicado un proceso de normalización para organizar las tablas de manera eficiente y reducir la redundancia. Se ha propuesto la normalización de tablas como \texttt{PacienteIngresado}, \texttt{Medication}, \texttt{RespiratoryCharting}, entre otras, exceptuando la dimensión de tiempo, que se ha mantenido denormalizada.
+	
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=0.8\textwidth]{image/diseño_logico.png}
+		\includegraphics[width=1\textwidth]{image/diseño_logico.png}
 		\caption{Diseño lógico}
 		\label{fig:11}
 	\end{figure}
 	
-	En el modelo lógico del almacén de datos, se ha implementado la normalización para organizar eficientemente las tablas y reducir la redundancia. Se ha propuesto una normalización en tablas, como PacienteIngresado, Medication, RespiratoryCharting, entre otras, menos la dimensión tiempo que se mantiene denormalizada.
+
 	
 	\subsection{FK's}
 	
@@ -368,9 +373,14 @@
 	% Sections
 	\section{Dificultades encontradas}
 	
-	Principalmente la complejidad de la base de datos eICU, que contiene numerosas tablas y atributos, y ha requerido un análisis exhaustivo para identificar las tablas y campos más relevantes para un modelo de datos centrado en pacientes con enfermedades respiratorias. También hemos tenido que lidiar con problemas de permisos al visualizar el modelo relacional en SQL Server, lo que requirió modificar la autorización del propietario de la base de datos para acceder a los diagramas de relación.
+	
+	Una de las principales dificultades fue la complejidad de la base de datos eICU, que incluye una gran cantidad de tablas y atributos. Esto exigió un análisis detallado para identificar las tablas y campos clave en un modelo centrado en pacientes con enfermedades respiratorias. Además, enfrentamos problemas de permisos al intentar visualizar el modelo relacional en SQL Server, lo que requirió modificar las autorizaciones del propietario de la base de datos para acceder a los diagramas de relación.
+	
+	Además el comienzo del trabajo podría ser lo más angustioso, al tener tanta información y opciones llega a ser un poco abrumador, desde la selección de una población concreta y modelar un almacén para dicha población termina dejando muchas dudas sobre cuantas tablas es esperable eliminar, si se esta simplificando de más o se esta tomando una decisión que afectará los siguientes apartados. 
 	
 	\section{Conclusiones}
+	
+	\section{Github}
 
 	Todo el proyecto está accesible en github \cite{depab2024}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
