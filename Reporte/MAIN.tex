@@ -63,17 +63,60 @@
 	
 	Una vez completada la selección de dimensiones y tablas de hechos, se diseñará el modelo conceptual utilizando la herramienta \textit{draw.io}, y posteriormente se desarrollará el modelo lógico mediante un diagrama de base de datos en el entorno de \textit{SQL Server}. 
 	
+	\section{Descripción de los datos utilizados (eICU)}
+	
+	 La base de datos \textit{eICU-CRD}, desarrollada por el Philips eICU Research Institute (eRI), contiene datos desidentificados de pacientes ingresados en Unidades de Cuidados Intensivos (UCI). Esta base de datos, que forma parte del programa de telesalud en cuidados críticos de Philips, documenta detalles sobre diagnósticos, tratamientos, pruebas y resultados.
+	
+	La \textit{eICU-CRD} recopila una amplia cantidad de datos clínicos con fines de investigación, permitiendo estudiar los resultados de los pacientes, identificar tendencias clínicas y evaluar protocolos de mejores prácticas utilizados en distintos centros de atención médica. Esta base de datos tiene como fin facilitar la investigación para mejorar la calidad de la atención en UCI.
+	
+	La \textit{eICU-CRD} contiene un total de 31 tablas, que agrupan 391 columnas de datos y un total de 457,325,320 filas. Esta vasta cantidad de información abarca diversos aspectos clínicos, como datos demográficos de los pacientes, información clínica obtenida durante el ingreso, pruebas y diagnósticos realizados, tratamientos y terapias administradas, así como la evolución y resultados durante la estancia en la UCI. Dada la magnitud de los datos. En este trabajo, se ha optado por simplificar el almacén, enfocándose en aquellos datos más relevantes para el análisis de pacientes ingresados en la UCI con problemas respiratorios. A continuación, se presentan las 9 tablas seleccionadas del almacén original:
+	
+	\begin{itemize}
+		\item \texttt{ApacheApsVar:} Contiene diversas métricas utilizadas para evaluar la gravedad de la enfermedad de los pacientes al ingreso en la UCI como parte del sistema APACHE.
+		
+		\item \texttt{Admissiondx:} Contiene el diagnóstico principal por el cual el paciente fue admitido en la UCI, de acuerdo con los criterios de puntuación APACHE.
+		
+		\item \texttt{Allergy:} Contiene información sobre las alergias del paciente.
+		
+		\item \texttt{Diagnosis}: Contiene los diagnósticos documentados para cada paciente. Permite identificar las enfermedades documentadas durante la estancia en UCI, así como el momento en que se registraron.
+		
+		\item \texttt{Hospital:} contiene información sobre los hospitales participantes en el programa y sus pacientes vinculados.
+		
+		\item \texttt{Medication:} Contiene las órdenes activas de medicamentos para los pacientes.
+		
+		\item \texttt{Patient:} Contiene los datos demográficos del paciente, así como los detalles de su admisión y alta del hospital y la UCI.
+				
+		
+		\item \texttt{RespiratoryCare:} Contiene información sobre el cuidado respiratorio.
+
+		\item \texttt{RespiratoryCharting:} Contiene datos sobre la configuración respiratoria, como el tipo de gráfico y valores respiratorios.
+
+
+	\end{itemize}
+
 	
 	
-	% Sections
-	\section{eICU}
+	Además de reducir el número de tablas también se encontró oportuno reducir el número de atributos de las mismas, al contener información poco esencial o que no se ve utilidad para las siguientes fases del trabajo. (Vea la figura \ref{fig:conceptual} para detallar las tablas y sus atributos de manera global)
 	
-	La eICU Collaborative Research Database, fue desarrollada por el Philips eICU Research Institute (eRI) en colaboración con el MIT. Es una colección de datos desidentificados de pacientes de UCI en hospitales de Estados Unidos, que documenta detalles de sus ingresos, incluyendo diagnósticos, tratamientos, pruebas y resultados.
-	
-	Para cumplir con este objetivo, se ha restaurado la base de datos proporcionada en \textit{SQL Server Management Studio}. Aunque no se cuenta con un modelo entidad-relación (E/R) explícito, el análisis del modelo relacional de la base de datos ha permitido generar un \textbf{diseño lógico y conceptual} del almacén de datos. Este almacén se estructura alrededor de los \textit{datos de ingreso en UCI}, que se consideran como el hecho principal, complementado con un conjunto de medidas que facilitan su análisis.
 	
 	
 	\section{Diseño conceptual}
+	
+	El diseño conceptual define las entidades, relaciones y requisitos de información de manera abstracta, sin detalles técnicos. Se enfoca en representar las necesidades y cómo organizar los datos para soportar la toma de decisiones.
+	
+	%En este apartado se explicará la relevancia de cada tabla y atributos.
+	
+	
+	\begin{figure}[h!]
+		\begin{center}  % Usamos el entorno 'center'
+			\includegraphics[width=1\textwidth]{image/diseno_conceptual.png}
+			\caption{Diseño conceptual}
+			\label{fig:conceptual}
+		\end{center}
+	\end{figure}
+	
+	%\vspace{-20pt} % Ajusta este valor para reducir el espacio
+	
 	
 	\subsection{Tablas}
 	

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.27)  14 NOV 2024 03:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.27)  14 NOV 2024 04:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -867,105 +867,121 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [2{C:/Users/Diego De Pablo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 
 [3]
-Overfull \hbox (6.41914pt too wide) in paragraph at lines 90--91
+<image/diseno_conceptual.png, id=133, 772.8875pt x 631.35875pt>
+File: image/diseno_conceptual.png Graphic file (type png)
+<use image/diseno_conceptual.png>
+Package pdftex.def Info: image/diseno_conceptual.png  used on input line 112.
+(pdftex.def)             Requested size: 426.79135pt x 348.63565pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[4]
+Overfull \hbox (6.41914pt too wide) in paragraph at lines 133--134
 []\OT1/cmtt/m/n/12 diagnosisPriority\OT1/cmr/m/n/12 : In-dica la pri-or-i-dad d
 el di-agn^^Sostico (Pri-mario, Mayor,
  []
 
 
 
-[4]
-Overfull \hbox (2.3403pt too wide) in paragraph at lines 129--130
+[5 <./image/diseno_conceptual.png>]
+Overfull \hbox (2.3403pt too wide) in paragraph at lines 172--173
 \OT1/cmr/m/n/12 tramos en los par^^Sametros que per-miten ob-ser-var el im-pact
 o de la ven-ti-laci^^Son mec^^Sanica
  []
 
 
 
-[5]
-Overfull \hbox (4.94507pt too wide) in paragraph at lines 163--164
+[6]
+
+[7]
+Overfull \hbox (4.94507pt too wide) in paragraph at lines 206--207
 []\OT1/cmtt/m/n/12 hospitalID\OT1/cmr/m/n/12 : Iden-ti-fi-cador ^^Sunico del ho
 s-pi-tal, es-en-cial para la seg-mentaci^^Son
  []
 
-
-
-[6]
-<image/diseño_logico.png, id=153, 453.49425pt x 479.391pt>
+<image/diseño_logico.png, id=162, 453.49425pt x 479.391pt>
 File: image/diseño_logico.png Graphic file (type png)
 <use image/diseño_logico.png>
-Package pdftex.def Info: image/diseño_logico.png  used on input line 179.
+Package pdftex.def Info: image/diseño_logico.png  used on input line 222.
 (pdftex.def)             Requested size: 341.43437pt x 360.94682pt.
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[7 <./image/diseño_logico.png>]
-
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=169, 597.23125pt x 845.1575pt>
-File: backcover.pdf Graphic file (type pdf)
-<use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 197.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-File: backcover.pdf Graphic file (type pdf)
-<use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 197.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-
-
-pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
-ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=172, page=1, 597.23125pt x 845.1575pt>
-File: backcover.pdf Graphic file (type pdf)
-<use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 197.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 [8]
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+<backcover.pdf, id=176, 597.23125pt x 845.1575pt>
+File: backcover.pdf Graphic file (type pdf)
+<use backcover.pdf>
+Package pdftex.def Info: backcover.pdf  used on input line 240.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+File: backcover.pdf Graphic file (type pdf)
+<use backcover.pdf>
+Package pdftex.def Info: backcover.pdf  used on input line 240.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
+ersion <1.7>, but at most version <1.5> allowed
+<backcover.pdf, id=179, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 197.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 240.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+
+
+[9]
+File: backcover.pdf Graphic file (type pdf)
+<use backcover.pdf, page 1>
+Package pdftex.def Info: backcover.pdf , page1 used on input line 240.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 197.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 240.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 197.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 240.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-[9
+[10
 
- <./backcover.pdf>] (MAIN.aux)
+ <./backcover.pdf>]
+
+[11 <./image/diseño_logico.png>] (MAIN.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-08-30>
  ***********
 Package rerunfilecheck Info: File `MAIN.out' has not changed.
-(rerunfilecheck)             Checksum: 7C330D68F921DDB92A471FEEF72752AB;1563.
+(rerunfilecheck)             Checksum: A2FFBAF8ED9571BC730322E3DE843CC1;1777.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19201 strings out of 473899
- 338963 string characters out of 5722216
- 952908 words of memory out of 5000000
- 41847 multiletter control sequences out of 15000+600000
+ 19214 strings out of 473899
+ 339294 string characters out of 5722216
+ 951949 words of memory out of 5000000
+ 41857 multiletter control sequences out of 15000+600000
  563477 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,81p,1905b,1314s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,17n,81p,1905b,1470s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Diego De Pablo\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dp
 i600\tcrm1200.pk><C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Diego De Pablo/AppData/Local/Progr
@@ -974,9 +990,9 @@ AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/User
 s/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
 mti12.pfb><C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (10 pages, 264721 bytes).
+Output written on MAIN.pdf (12 pages, 300644 bytes).
 PDF statistics:
- 235 PDF objects out of 1000 (max. 8388607)
- 31 named destinations out of 1000 (max. 500000)
- 170 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 247 PDF objects out of 1000 (max. 8388607)
+ 34 named destinations out of 1000 (max. 500000)
+ 175 words of extra memory for PDF output out of 10000 (max. 10000000)
 
