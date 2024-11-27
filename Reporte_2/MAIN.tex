@@ -69,7 +69,35 @@
 	
 	 La base de datos basad\textit{eICU-CRD}, desarrollada por el Philips eICU Research Institute (eRI), contiene datos desidentificados de pacientes ingresados en Unidades de Cuidados Intensivos (UCI). Esta base de datos, que forma parte del programa de telesalud en cuidados críticos de Philips, documenta detalles sobre diagnósticos, tratamientos, pruebas y resultados.
 	
-	La \textit{eICU-CRD} recopila una amplia cantidad de datos clínicos con fines de investigación, permitiendo estudiar los resultados de los pacientes, identificar tendencias clínicas y evaluar protocolos de mejores prácticas utilizados en distintos centros de atención médica. Esta base de datos tiene como fin facilitar la investigación para mejorar la calidad de la atención en UCI.
+	En los cambios realizados al almacén de datos, se ha modificado algunas tablas y relaciones para ajustarlas a las recomendaciones del profesor y para mejorar la estructura del modelo. A continuación, se detallan los ajustes más relevantes:
+	
+	\textbf{IngresoUCI}: El único cambio que se ha realizado en esta tabla ha sido la adición del atributo \textit{hospitalDischargeOffset}, siguiendo la indicación de almacenar el tiempo de hospitalización del paciente. Este campo permite calcular el tiempo exacto que el paciente estuvo ingresado.
+	
+	\textbf{Tiempo}: Se ha decidido almacenar únicamente los campos \textit{hospitalDischargeTime24} y \textit{hospitalDischargeYear}, ya que no existe un campo para el año de admisión del hospital (\textit{hospitalAdmitYear}), como sugirió el profesor. Este cambio simplifica el almacenamiento de información temporal sobre la estancia del paciente.
+	
+	\textbf{Paciente}: Se ha creado una nueva tabla llamada \textit{Paciente}, donde el identificador principal (PK) es \textit{uniquePID}. También se ha incluido el campo de la \textit{edad}. Además, se ha desarrollado una jerarquía paralela para los atributos de \textit{género} y \textit{etnia}, basándose en el trabajo de los compañeros Gonzalo y Carmen, ya que esta estructura resulta adecuada para la representación de estos datos.
+	
+	\section*{Cambios en las relaciones}
+	
+	1. \textbf{Paciente}: Se ha establecido una relación de \textbf{1-n} entre Paciente e IngresoUCI, donde cada paciente puede tener múltiples ingresos a la UCI en diferentes momentos.
+	
+	2. \textbf{Diagnosis}: El profesor ya había indicado que la relación entre IngresoUCI y Diagnosis es \textbf{n-m}. Un paciente puede tener varios diagnósticos durante un ingreso, y un diagnóstico específico puede estar asociado a varios ingresos de diferentes pacientes.
+	
+	3. \textbf{Medicamentos}: La relación aquí también es \textbf{n-m}, ya que cada ingreso puede requerir varios medicamentos, y un medicamento puede administrarse en varios ingresos.
+	
+	4. \textbf{Alergia}: La relación entre Paciente y Alergia es \textbf{n-m}, dado que un paciente puede tener múltiples alergias, y cada alergia puede estar relacionada con varios ingresos, debido a su impacto en el tratamiento.
+	
+	5. \textbf{RespiratoryCharting}: Se ha mantenido una relación de \textbf{1-n} entre IngresoUCI y RespiratoryCharting, ya que cada ingreso puede tener varios registros de datos respiratorios (como la saturación de oxígeno).
+	
+	6. \textbf{RespiratoryCare}: En este caso, la relación también es de \textbf{1-n}. Cada ingreso puede tener múltiples intervenciones de cuidado respiratorio, como la administración de oxígeno o ventilación mecánica.
+	
+	7. \textbf{apacheApsVar}: La relación entre IngresoUCI y \textit{apacheApsVar} puede ser de \textbf{1-1} o de \textbf{1-n}, dependiendo de si se desea almacenar un solo resumen de evaluación APS por ingreso o varios componentes evaluados.
+	
+	8. \textbf{Admissiondx}: La relación es \textbf{1-n}, ya que cada ingreso tiene un diagnóstico primario de admisión, aunque los diagnósticos secundarios se almacenan en otra tabla.
+	
+	9. \textbf{Hospital}: La relación es de \textbf{1-n}. Un hospital puede tener múltiples ingresos a la UCI asociados, dado que cada ingreso pertenece a un único hospital.
+	
+	
 	
 	\begin{figure}[h!]
 		\centering
