@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.27)  27 NOV 2024 17:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.27)  27 NOV 2024 18:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -754,7 +754,7 @@ Package biblatex Info: Reference segment=0 on input line 30.
 
 pdfTeX warning: pdflatex.exe (file ./cover.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<cover.pdf, id=83, 597.19112pt x 845.19763pt>
+<cover.pdf, id=27, 597.19112pt x 845.19763pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
 Package pdftex.def Info: cover.pdf  used on input line 33.
@@ -775,7 +775,7 @@ on <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./cover.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<cover.pdf, id=86, page=1, 597.19112pt x 845.19763pt>
+<cover.pdf, id=30, page=1, 597.19112pt x 845.19763pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
 Package pdftex.def Info: cover.pdf , page1 used on input line 33.
@@ -801,7 +801,7 @@ Package pdftex.def Info: cover.pdf , page1 used on input line 33.
 
 pdfTeX warning: pdflatex.exe (file ./title.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<title.pdf, id=107, 597.19112pt x 845.19763pt>
+<title.pdf, id=51, 597.19112pt x 845.19763pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf>
 Package pdftex.def Info: title.pdf  used on input line 38.
@@ -822,7 +822,7 @@ on <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./title.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<title.pdf, id=110, page=1, 597.19112pt x 845.19763pt>
+<title.pdf, id=54, page=1, 597.19112pt x 845.19763pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf, page 1>
 Package pdftex.def Info: title.pdf , page1 used on input line 38.
@@ -851,14 +851,7 @@ Package pdftex.def Info: title.pdf , page1 used on input line 38.
  [1
 
 
- <./title.pdf>] (MAIN.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 5.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 5.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 5.
-)
+ <./title.pdf>] (MAIN.toc)
 \tf@toc=\write5
 \openout5 = `MAIN.toc'.
 
@@ -867,76 +860,28 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [2{C:/Users/Diego De Pablo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 
 [3]
-<image/diseno_conceptual.png, id=166, 772.8875pt x 631.35875pt>
-File: image/diseno_conceptual.png Graphic file (type png)
-<use image/diseno_conceptual.png>
-Package pdftex.def Info: image/diseno_conceptual.png  used on input line 115.
-(pdftex.def)             Requested size: 426.79135pt x 348.63565pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-
-[4]
-
-[5 <./image/diseno_conceptual.png>]
-Overfull \hbox (4.94507pt too wide) in paragraph at lines 140--141
-[]\OT1/cmtt/m/n/12 hospitalID\OT1/cmr/m/n/12 : Iden-ti-fi-cador ^^Sunico del ho
-s-pi-tal, es-en-cial para la seg-mentaci^^Son
- []
-
-
-Overfull \hbox (6.41914pt too wide) in paragraph at lines 162--163
-[]\OT1/cmtt/m/n/12 diagnosisPriority\OT1/cmr/m/n/12 : In-dica la pri-or-i-dad d
-el di-agn^^Sostico (Pri-mario, Mayor,
- []
-
-
-
-[6]
-
-[7]
-Overfull \hbox (14.97057pt too wide) in paragraph at lines 221--222
-\OT1/cmtt/m/n/12 glucosa\OT1/cmr/m/n/12 , o \OT1/cmtt/m/n/12 hematocrito\OT1/cm
-r/m/n/12 , aunque son im-por-tantes para el c^^Salculo del pun-taje APACHE,
- []
-
-
-
-[8]
-
-[9]
-Overfull \hbox (6.67807pt too wide) in paragraph at lines 298--299
-\OT1/cmr/m/n/12 mal-izaci^^Son de tablas como \OT1/cmtt/m/n/12 PacienteIngresad
-o\OT1/cmr/m/n/12 , \OT1/cmtt/m/n/12 Medication\OT1/cmr/m/n/12 , \OT1/cmtt/m/n/1
-2 RespiratoryCharting\OT1/cmr/m/n/12 ,
- []
-
-<image/diseño_logico.png, id=208, 817.8555pt x 430.60875pt>
+<image/diseño_logico.png, id=95, 817.8555pt x 430.60875pt>
 File: image/diseño_logico.png Graphic file (type png)
 <use image/diseño_logico.png>
-Package pdftex.def Info: image/diseño_logico.png  used on input line 303.
+Package pdftex.def Info: image/diseño_logico.png  used on input line 76.
 (pdftex.def)             Requested size: 426.79135pt x 224.7063pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[4 <./image/diseño_logico.png>]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 111.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 111.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 111.
 
-
-[10]
-
-[11 <./image/diseño_logico.png>]
-
-[12]
-
-[13]
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=242, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=111, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 419.
+Package pdftex.def Info: backcover.pdf  used on input line 115.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -944,7 +889,7 @@ pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 419.
+Package pdftex.def Info: backcover.pdf  used on input line 115.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -954,29 +899,29 @@ ersion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=245, page=1, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=114, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 419.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 115.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
-[14]
+[5]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 419.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 115.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 419.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 115.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 419.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 115.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-[15
+[6
 
  <./backcover.pdf>] (MAIN.aux)
  ***********
@@ -984,31 +929,29 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-08-30>
  ***********
 Package rerunfilecheck Info: File `MAIN.out' has not changed.
-(rerunfilecheck)             Checksum: BEA2A915585B495969D997C4128DA679;3085.
+(rerunfilecheck)             Checksum: 1FC5EA993A5309C00B46BA5F84A99841;1150.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19232 strings out of 473899
- 339552 string characters out of 5722216
- 952952 words of memory out of 5000000
- 41864 multiletter control sequences out of 15000+600000
- 563477 words of font info for 54 fonts, out of 8000000 for 9000
+ 19177 strings out of 473899
+ 338584 string characters out of 5722216
+ 952882 words of memory out of 5000000
+ 41834 multiletter control sequences out of 15000+600000
+ 562535 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,81p,1905b,1475s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\Diego De Pablo\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dp
-i600\tcrm1200.pk><C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Diego De Pablo/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Diego De Pablo/
-AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/User
-s/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
-msy10.pfb><C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmti12.pfb><C:/Users/Diego De Pablo/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (16 pages, 333171 bytes).
+ 75i,17n,81p,1905b,1359s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb><C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Diego De Pablo/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Diego De Pabl
+o/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/U
+sers/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmtt12.pfb>
+Output written on MAIN.pdf (7 pages, 250752 bytes).
 PDF statistics:
- 311 PDF objects out of 1000 (max. 8388607)
- 45 named destinations out of 1000 (max. 500000)
- 231 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 174 PDF objects out of 1000 (max. 8388607)
+ 21 named destinations out of 1000 (max. 500000)
+ 114 words of extra memory for PDF output out of 10000 (max. 10000000)
 

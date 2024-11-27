@@ -1,0 +1,117 @@
+\documentclass[12pt, a4paper, twoside]{article}
+
+%% Preamble
+\usepackage{pdfpages}           % Para incluir PDFs
+\usepackage{graphicx}           % Para gráficos
+\usepackage{subfiles}           % Para manejar subarchivos
+\usepackage{hyperref}           % Para enlaces
+\usepackage{listings}           % Para código fuente (ajusta lenguaje)
+\usepackage{verbatim}
+\usepackage[backend=bibtex,style=numeric]{biblatex} % Para citas numéricas
+\addbibresource{references.bib} % Cargar archivo .bib
+\usepackage{url}
+
+
+\usepackage{geometry}           % Para ajustar márgenes
+
+% Ajustes de márgenes
+\geometry{
+	left=3cm,       % Margen izquierdo
+	right=3cm,      % Margen derecho
+	top=2.5cm,      % Margen superior
+	bottom=2.5cm,   % Margen inferior
+	headheight=15pt, % Altura del encabezado
+	twoside          % Para documentos a dos caras
+}
+
+
+\graphicspath{{images/}{../images/}} % Ruta para imágenes
+
+\begin{document}
+	
+	%% Cover
+	\includepdf[noautoscale=true, width=\paperwidth]{cover.pdf}
+	
+	%% Title
+	\clearpage
+	\setcounter{page}{1}
+	\includepdf[noautoscale=true, width=\paperwidth]{title.pdf}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	% Índice automático
+	\tableofcontents
+	\newpage
+	
+	% Sections
+	
+		% Sections
+	\section{Introducción}
+	
+	El diseño y desarrollo de \textbf{almacenes de datos} es crucial para el análisis clínico, mejorando la toma de decisiones médicas y la calidad de atención a los pacientes. Para este proyecto, se utilizará una visión parcial de un almacén de datos basado en la \textit{Base de Datos de Investigación Colaborativa eICU}, la cual contiene una vasta cantidad de información sobre los ingresos en \textbf{Unidades de Cuidados Intensivos (UCI)} en diversos hospitales de los Estados Unidos.\cite{futuro}
+	
+	El enfoque de este trabajo está dirigido específicamente a los \textbf{pacientes con problemas respiratorios}. Estos casos son de especial relevancia en entornos de cuidados críticos, ya que las afecciones respiratorias representan una de las principales causas de ingreso en las UCI. Por lo cual un almacén de datos centrada en estas patologías sigue representando una gran fuente de información y con mucho interés para hacer un análisis de datos. \cite{pekar2021epidemiology, vincent2006epidemiology}.
+	
+	En este trabajo, el \textbf{hecho principal} está constituido por los ingresos en la UCI, complementado por un conjunto de dimensiones que permiten analizar diversas variables. La selección de las tablas y atributos más relevantes de la base de datos eICU será el mayor reto para construir un \textbf{almacén de datos eficiente y de interés analítico}, que no solo facilite la consulta de información clave,
+	a su vez soporte y facilité tanto la investigación clínica como la optimización de los protocolos de tratamiento.
+	
+	\section{Objetivos}
+	
+	El objetivo de este trabajo es desarrollar un \textbf{diseño conceptual y lógico} de un almacén de datos centrado en los pacientes ingresados en la \textbf{UCI} con afecciones respiratorias, seleccionando las partes más relevantes de la base de datos para el análisis de estas patologías.
+	
+	Se procederá a la restauración de dicha base de datos en \textit{SQL Server}, para realizar una selección de las tablas más relevantes que contribuyan a la construcción del almacén de datos centrado en estos pacientes. En cada una de las tablas seleccionadas, se identificarán los atributos más significativos para el análisis clínico y el seguimiento de los pacientes con problemas respiratorios. 
+	
+	Una vez completada la selección de dimensiones y tablas de hechos, se diseñará el modelo conceptual utilizando la herramienta \textit{draw.io}, y posteriormente se desarrollará el modelo lógico mediante un diagrama de base de datos en el entorno de \textit{SQL Server}. 
+	
+	\section{Modificación del almacén de datos}
+	
+	NOTA: Si se ha modificado el almacén de datos de la tarea anterior debéis comentar las modificaciones realizadas (y justificarlas) en una sección de esta tarea. 
+	
+	 La base de datos basad\textit{eICU-CRD}, desarrollada por el Philips eICU Research Institute (eRI), contiene datos desidentificados de pacientes ingresados en Unidades de Cuidados Intensivos (UCI). Esta base de datos, que forma parte del programa de telesalud en cuidados críticos de Philips, documenta detalles sobre diagnósticos, tratamientos, pruebas y resultados.
+	
+	La \textit{eICU-CRD} recopila una amplia cantidad de datos clínicos con fines de investigación, permitiendo estudiar los resultados de los pacientes, identificar tendencias clínicas y evaluar protocolos de mejores prácticas utilizados en distintos centros de atención médica. Esta base de datos tiene como fin facilitar la investigación para mejorar la calidad de la atención en UCI.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/diseño_logico.png}
+		\caption{Diseño lógico}
+		\label{fig:11}
+	\end{figure}
+	
+	
+
+	
+	
+	
+	
+	% Sections
+	\section{Dificultades encontradas}
+	
+	
+	Una de las principales dificultades fue la complejidad de la base de datos eICU, que incluye una gran cantidad de tablas y atributos. Esto exigió un análisis detallado para identificar las tablas y campos clave en un modelo centrado en pacientes con enfermedades respiratorias. Además, enfrentamos problemas de permisos al intentar visualizar el modelo relacional en SQL Server, lo que requirió modificar las autorizaciones del propietario de la base de datos para acceder a los diagramas de relación.
+	
+	Además el comienzo del trabajo podría ser lo más angustioso, al tener tanta información y opciones llega a ser un poco abrumador, desde la selección de una población concreta y modelar un almacén para dicha población termina dejando muchas dudas sobre cuantas tablas es esperable eliminar, si se esta simplificando de más o se esta tomando una decisión que afectará los siguientes apartados. 
+	
+	\section{Conclusiones}
+	
+	Durante el desarrollo del almacén, se tomó la decisión de integrar únicamente los datos más relevantes de pacientes con patologías respiratorias, lo que implicó reducir significativamente el número de tablas y atributos presentes en la base de datos original. Este proceso permitió centrarse en la información esencial para el análisis, facilitando la optimización del sistema y garantizando que los datos fueran manejables y claros para los futuros pasos del proyecto. A lo largo de esta fase, se pudo aprender mucho sobre el contenido y la estructura de cada tabla, lo que ayudó a realizar una selección cuidadosa de las que mejor se alineaban con los requerimientos del modelo de datos, mejorando así la calidad del análisis final.
+	
+	El diagrama conceptual fue una herramienta crucial en este proceso, ya que permitió plasmar de forma clara las ideas y objetivos principales del almacén de datos. Gracias a este enfoque, se logró una mejor organización y se tomaron decisiones informadas en cuanto a las entidades y relaciones a incluir. Este esquema conceptual facilitó no solo una representación más clara de la estructura, sino que también permitió anticipar ajustes necesarios y optar por decisiones estratégicas que beneficiarían el rendimiento y escalabilidad del sistema a largo plazo.
+	
+	Por otro lado, el diagrama lógico implementado, a través del modelo en copo de nieve, ofreció una representación detallada de la base de datos. Este modelo permitió una alta normalización, reduciendo la redundancia de datos sin comprometer la consistencia de la información. A pesar de la mayor complejidad en el diseño, este enfoque aseguró una estructura sólida y flexible para futuros análisis.
+	
+	Finalmente, habiendo completado todas las etapas de análisis, diseño conceptual y lógico, el sistema se encuentra preparado para proceder con la fase de integración de datos. 
+	
+
+
+	\section{Github y conjunto de instrucciones para su correcto despliegue en SQL Server.}
+
+	Todo el proyecto está accesible en github \cite{depab2024} donde se detalla más específicamente como desplegar en SQL.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\printbibliography
+	
+	
+	%% Back Cover
+	\includepdf[noautoscale=true, width=\paperwidth]{backcover.pdf}
+	
+\end{document}
