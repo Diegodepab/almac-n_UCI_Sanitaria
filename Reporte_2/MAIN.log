@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.27)  27 NOV 2024 19:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.27)  29 NOV 2024 01:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -754,7 +754,7 @@ Package biblatex Info: Reference segment=0 on input line 30.
 
 pdfTeX warning: pdflatex.exe (file ./cover.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<cover.pdf, id=27, 597.19112pt x 845.19763pt>
+<cover.pdf, id=51, 597.19112pt x 845.19763pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
 Package pdftex.def Info: cover.pdf  used on input line 33.
@@ -775,7 +775,7 @@ on <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./cover.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<cover.pdf, id=30, page=1, 597.19112pt x 845.19763pt>
+<cover.pdf, id=54, page=1, 597.19112pt x 845.19763pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
 Package pdftex.def Info: cover.pdf , page1 used on input line 33.
@@ -801,7 +801,7 @@ Package pdftex.def Info: cover.pdf , page1 used on input line 33.
 
 pdfTeX warning: pdflatex.exe (file ./title.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<title.pdf, id=51, 597.19112pt x 845.19763pt>
+<title.pdf, id=75, 597.19112pt x 845.19763pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf>
 Package pdftex.def Info: title.pdf  used on input line 38.
@@ -822,7 +822,7 @@ on <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./title.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<title.pdf, id=54, page=1, 597.19112pt x 845.19763pt>
+<title.pdf, id=78, page=1, 597.19112pt x 845.19763pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf, page 1>
 Package pdftex.def Info: title.pdf , page1 used on input line 38.
@@ -851,7 +851,14 @@ Package pdftex.def Info: title.pdf , page1 used on input line 38.
  [1
 
 
- <./title.pdf>] (MAIN.toc)
+ <./title.pdf>] (MAIN.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 4.
+)
 \tf@toc=\write5
 \openout5 = `MAIN.toc'.
 
@@ -860,37 +867,29 @@ Package pdftex.def Info: title.pdf , page1 used on input line 38.
 [2{C:/Users/Diego De Pablo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 
 [3]
-<image/diseño_logico.png, id=95, 817.8555pt x 430.60875pt>
+
+[4]
+<image/diseño_logico.png, id=131, 817.8555pt x 430.60875pt>
 File: image/diseño_logico.png Graphic file (type png)
 <use image/diseño_logico.png>
-Package pdftex.def Info: image/diseño_logico.png  used on input line 104.
+Package pdftex.def Info: image/diseño_logico.png  used on input line 130.
 (pdftex.def)             Requested size: 426.79135pt x 224.7063pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \vbox (badness 1226) has occurred while \output is active []
 
+[5]
 
-
-[4]
-
-[5 <./image/diseño_logico.png>]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 139.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 139.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 139.
-
+[6 <./image/diseño_logico.png>]
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=116, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=158, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 143.
+Package pdftex.def Info: backcover.pdf  used on input line 170.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -898,7 +897,7 @@ pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 143.
+Package pdftex.def Info: backcover.pdf  used on input line 170.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -908,29 +907,29 @@ ersion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=119, page=1, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=161, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 143.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 170.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
-[6]
+[7]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 143.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 170.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 143.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 170.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 143.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 170.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-[7
+[8
 
  <./backcover.pdf>] (MAIN.aux)
  ***********
@@ -938,29 +937,30 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-08-30>
  ***********
 Package rerunfilecheck Info: File `MAIN.out' has not changed.
-(rerunfilecheck)             Checksum: 1FC5EA993A5309C00B46BA5F84A99841;1150.
+(rerunfilecheck)             Checksum: 77F45C4BAFD77DC22DA408B270C79553;2354.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19179 strings out of 473899
- 338600 string characters out of 5722216
- 952882 words of memory out of 5000000
- 41834 multiletter control sequences out of 15000+600000
- 562535 words of font info for 51 fonts, out of 8000000 for 9000
+ 19209 strings out of 473899
+ 338999 string characters out of 5722216
+ 951831 words of memory out of 5000000
+ 41848 multiletter control sequences out of 15000+600000
+ 563477 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,81p,1905b,1361s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmbx12.pfb><C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Diego De Pablo/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Diego De Pabl
-o/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/U
-sers/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
-m/cmtt12.pfb>
-Output written on MAIN.pdf (8 pages, 258289 bytes).
+ 75i,17n,81p,1905b,1315s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Diego De Pablo\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dp
+i600\tcrm1200.pk><C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Diego De Pablo/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Diego De Pablo/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/User
+s/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
+mti12.pfb><C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmtt12.pfb>
+Output written on MAIN.pdf (9 pages, 265480 bytes).
 PDF statistics:
- 179 PDF objects out of 1000 (max. 8388607)
- 23 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 230 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 500000)
+ 162 words of extra memory for PDF output out of 10000 (max. 10000000)
 

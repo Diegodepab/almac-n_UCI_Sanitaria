@@ -43,74 +43,108 @@
 	\tableofcontents
 	\newpage
 	
-	% Sections
-	
-		% Sections
 	\section{Introducción}
 	
-	El diseño y desarrollo de \textbf{almacenes de datos} es crucial para el análisis clínico, mejorando la toma de decisiones médicas y la calidad de atención a los pacientes. Para este proyecto, se utilizará una visión parcial de un almacén de datos basado en la \textit{Base de Datos de Investigación Colaborativa eICU}, la cual contiene una vasta cantidad de información sobre los ingresos en \textbf{Unidades de Cuidados Intensivos (UCI)} en diversos hospitales de los Estados Unidos.\cite{futuro}
+	Este documento constituye una continuación del trabajo previo, donde se desarrolló el diseño conceptual y lógico de un almacén de datos basado en la información proporcionada por la \textit{Base de Datos de Investigación Colaborativa eICU} \cite{eICU2024}. En ese proyecto, el enfoque principal fue la selección y análisis de información relativa a \textbf{pacientes con patologías respiratorias}, determinando las tablas y columnas más relevantes para permitir un análisis exhaustivo de esta población específica.
 	
-	El enfoque de este trabajo está dirigido específicamente a los \textbf{pacientes con problemas respiratorios}. Estos casos son de especial relevancia en entornos de cuidados críticos, ya que las afecciones respiratorias representan una de las principales causas de ingreso en las UCI. Por lo cual un almacén de datos centrada en estas patologías sigue representando una gran fuente de información y con mucho interés para hacer un análisis de datos. \cite{pekar2021epidemiology, vincent2006epidemiology}.
+	En esta nueva fase, se procederá a la implementación del proceso de \textbf{Extracción, Transformación y Carga} (ETL, por sus siglas en inglés). Este proceso es fundamental para la integración de datos en cualquier almacén de datos, ya que permite extraer datos de múltiples fuentes, transformarlos según las necesidades del modelo, y finalmente cargarlos en el sistema de almacenamiento. El proceso ETL es clave para garantizar la calidad, consistencia e integridad de los datos, factores esenciales para que el análisis posterior sea preciso y confiable.
 	
-	En este trabajo, el \textbf{hecho principal} está constituido por los ingresos en la UCI, complementado por un conjunto de dimensiones que permiten analizar diversas variables. La selección de las tablas y atributos más relevantes de la base de datos eICU será el mayor reto para construir un \textbf{almacén de datos eficiente y de interés analítico}, que no solo facilite la consulta de información clave,
-	a su vez soporte y facilité tanto la investigación clínica como la optimización de los protocolos de tratamiento.
+	El éxito de este proceso asegura que las tablas del almacén de datos estén adecuadamente pobladas con información precisa, sentando las bases para un \textbf{análisis de datos} eficiente. Este proceso facilita la realización de consultas complejas o la integración de herramientas como \textit{Reporting Services}, que permiten la visualización clara y sencilla de la información más relevante, apoyando la toma de decisiones clínicas fundamentadas.
+	
+	Por lo tanto, este documento también incluirá un tutorial detallado del proceso de carga para las tablas del almacén de datos personalizado. Además, se presentará un análisis de las dificultades encontradas durante la implementación y las estrategias empleadas para superarlas.
 	
 	\section{Objetivos}
 	
-	El objetivo de este trabajo es desarrollar un \textbf{diseño conceptual y lógico} de un almacén de datos centrado en los pacientes ingresados en la \textbf{UCI} con afecciones respiratorias, seleccionando las partes más relevantes de la base de datos para el análisis de estas patologías.
+	El principal objetivo de este informe es documentar de manera detallada la ejecución del proceso ETL en dos contextos diferentes:
 	
-	Se procederá a la restauración de dicha base de datos en \textit{SQL Server}, para realizar una selección de las tablas más relevantes que contribuyan a la construcción del almacén de datos centrado en estos pacientes. En cada una de las tablas seleccionadas, se identificarán los atributos más significativos para el análisis clínico y el seguimiento de los pacientes con problemas respiratorios. 
+	\begin{itemize}
+		\item El almacén de datos \textit{NorthwindDW}, utilizado como referencia durante las sesiones prácticas, cuya carga será replicada siguiendo los procedimientos previamente establecidos.
+		\item El almacén de datos del \textit{eICU}, adaptado específicamente para el análisis de \textbf{pacientes con patologías respiratorias}, que será implementado utilizando el modelo lógico desarrollado en la fase anterior del proyecto.
+	\end{itemize}
 	
-	Una vez completada la selección de dimensiones y tablas de hechos, se diseñará el modelo conceptual utilizando la herramienta \textit{draw.io}, y posteriormente se desarrollará el modelo lógico mediante un diagrama de base de datos en el entorno de \textit{SQL Server}. 
+	A lo largo del documento se mostrará cómo se ha llevado a cabo la integración de datos en ambos almacenes, resaltando los desafíos enfrentados y las soluciones aplicadas, con el fin de proporcionar una guía clara y replicable del proceso.
+	
+	 
 	
 	\section{Modificación del almacén de datos}
 	
-	NOTA: Si se ha modificado el almacén de datos de la tarea anterior debéis comentar las modificaciones realizadas (y justificarlas) en una sección de esta tarea. 
+	Durante la implementación del almacén de datos se realizaron diversas modificaciones en su estructura original, con el fin de adaptarlo lo mejor posible siguiendo las mejores prácticas para crear un buen almacén de datos. A continuación, se detallan los principales cambios efectuados y la justificación detrás de cada uno de ellos.
 	
-	 La base de datos basad\textit{eICU-CRD}, desarrollada por el Philips eICU Research Institute (eRI), contiene datos desidentificados de pacientes ingresados en Unidades de Cuidados Intensivos (UCI). Esta base de datos, que forma parte del programa de telesalud en cuidados críticos de Philips, documenta detalles sobre diagnósticos, tratamientos, pruebas y resultados.
+	\subsection{Ingreso a la UCI}
+	El mayor cambio que hubo es que el hecho Ingreso a la UCI fue separado de la tabla paciente, Además se incorporó el atributo \texttt{hospitalDischargeOffset}, que indica la duración de la estancia del paciente en la UCI, medida en minutos desde el ingreso hasta el alta hospitalaria. Este ajuste fue sugerido para permitir el análisis del tiempo de hospitalización de cada paciente, un factor relevante en los estudios de recuperación y tratamiento de enfermedades respiratorias.
 	
-	En los cambios realizados al almacén de datos, se ha modificado algunas tablas y relaciones para ajustarlas a las recomendaciones del profesor y para mejorar la estructura del modelo. A continuación, se detallan los ajustes más relevantes:
+	\subsection{Tiempo de Alta}
+	Para estudiar el tiempo en este proyecto se decidió almacenar únicamente los atributos \texttt{hospitalDischargeTime24} y \texttt{hospitalDischargeYear}, ya que la base de datos no contiene un campo \texttt{hospitalAdmitYear}, como se había sugerido originalmente. Esta decisión se tomó con base en la disponibilidad de datos y la coherencia con el diseño del modelo lógico.
 	
-	\textbf{IngresoUCI}: El único cambio que se ha realizado en esta tabla ha sido la adición del atributo \textit{hospitalDischargeOffset}, siguiendo la indicación de almacenar el tiempo de hospitalización del paciente. Este campo permite calcular el tiempo exacto que el paciente estuvo ingresado.
+	\subsection{Paciente}
+	La tabla \textbf{Paciente}, cuyo identificador único (\texttt{PK}) es el campo \texttt{uniquePID}. Además de este identificador, se incluyeron atributos relevantes como la \texttt{edad}. También se estableció una jerarquía paralela para \textbf{género} y \textbf{etnia}, lo que permitió organizar estos atributos de forma más estructurada y lógica.
 	
-	\textbf{Tiempo}: Se ha decidido almacenar únicamente los campos \textit{hospitalDischargeTime24} y \textit{hospitalDischargeYear}, ya que no existe un campo para el año de admisión del hospital (\textit{hospitalAdmitYear}), como sugirió el profesor. Este cambio simplifica el almacenamiento de información temporal sobre la estancia del paciente.
+	\subsection{Relaciones entre Tablas}
+	A continuación se describen las relaciones establecidas entre las tablas del almacén de datos, modificadas para garantizar un diseño coherente y funcional:
 	
-	\textbf{Paciente}: Se ha creado una nueva tabla llamada \textit{Paciente}, donde el identificador principal (PK) es \textit{uniquePID}. También se ha incluido el campo de la \textit{edad}. Además, se ha desarrollado una jerarquía paralela para los atributos de \textit{género} y \textit{etnia}, basándose en el trabajo de los compañeros Gonzalo y Carmen, ya que esta estructura resulta adecuada para la representación de estos datos.
+	\begin{enumerate}
+		\item \textbf{Paciente} \\
+		\textit{Relación: 1-n} \\
+		Cada paciente puede tener múltiples ingresos a la UCI, lo que refleja que un mismo paciente puede ser readmitido en distintos momentos debido a recaídas o nuevas patologías.
+		
+		\item \textbf{Diagnosis} \\
+		\textit{Relación: n-m} \\
+		Un paciente puede tener múltiples diagnósticos asociados a un único ingreso, y el mismo diagnóstico puede repetirse en diferentes ingresos y entre distintos pacientes.
+		
+		\item \textbf{Medicamentos} \\
+		\textit{Relación: n-m} \\
+		Un ingreso puede estar asociado a la administración de varios medicamentos. Además, un medicamento puede ser utilizado en distintos ingresos de múltiples pacientes.
+		
+		\item \textbf{Alergia} \\
+		\textit{Relación: n-m} \\
+		Cada paciente puede tener múltiples alergias documentadas, las cuales son relevantes para su tratamiento durante cada ingreso a la UCI. Por lo tanto, una alergia puede estar relacionada con múltiples ingresos.
+		
+		\item \textbf{RespiratoryCharting} \\
+		\textit{Relación: 1-n} \\
+		Cada ingreso a la UCI puede tener múltiples registros de datos respiratorios, como saturación de oxígeno, volumen corriente, entre otros. Estos datos se documentan por cada ingreso individual.
+		
+		\item \textbf{RespiratoryCare} \\
+		\textit{Relación: 1-n} \\
+		Similar a \textit{RespiratoryCharting}, cada ingreso puede tener múltiples intervenciones de cuidado respiratorio, como la administración de oxígeno o ventilación mecánica, asociadas a un ingreso específico.
+		
+		\item \textbf{apacheApsVar} \\
+		\textit{Relación: 1-1} \\
+		Cada ingreso a la UCI tiene una única evaluación APS asociada. Dependiendo del diseño, esta relación puede ser de uno a uno (si se almacena como un único resumen por ingreso) o de uno a muchos (si se almacena como varios componentes individuales evaluados), se decidió que la primera forma otorga más información y mayor relación con el hecho.
+		
+		\item \textbf{Admissiondx} \\
+		\textit{Relación: 1-n} \\
+		Cada ingreso tiene un diagnóstico primario de admisión, aunque pueden existir diagnósticos  más concretos que se documentan en otra tabla, como \textit{Diagnosis} que contiene información más clara y estudiada.
+		
+		\item \textbf{Hospital} \\
+		\textit{Relación: 1-n} \\
+		Cada hospital puede tener múltiples ingresos a la UCI. Los ingresos se asocian exclusivamente a un hospital, dependiendo del centro de atención en el que se encuentre la unidad.
+	\end{enumerate}
 	
-	\section*{Cambios en las relaciones}
+	Los cambios en las relaciones entre tablas buscan optimizar el diseño del almacén de datos, adaptándolo a las necesidades específicas del análisis clínico de los pacientes con patologías respiratorias. Estas modificaciones garantizan la integridad de los datos y la flexibilidad para realizar análisis detallados en contextos hospitalarios. 
 	
-	1. \textbf{Paciente}: Se ha establecido una relación de \textbf{1-n} entre Paciente e IngresoUCI, donde cada paciente puede tener múltiples ingresos a la UCI en diferentes momentos.
-	
-	2. \textbf{Diagnosis}: El profesor ya había indicado que la relación entre IngresoUCI y Diagnosis es \textbf{n-m}. Un paciente puede tener varios diagnósticos durante un ingreso, y un diagnóstico específico puede estar asociado a varios ingresos de diferentes pacientes.
-	
-	3. \textbf{Medicamentos}: La relación aquí también es \textbf{n-m}, ya que cada ingreso puede requerir varios medicamentos, y un medicamento puede administrarse en varios ingresos.
-	
-	4. \textbf{Alergia}: La relación entre Paciente y Alergia es \textbf{n-m}, dado que un paciente puede tener múltiples alergias, y cada alergia puede estar relacionada con varios ingresos, debido a su impacto en el tratamiento.
-	
-	5. \textbf{RespiratoryCharting}: Se ha mantenido una relación de \textbf{1-n} entre IngresoUCI y RespiratoryCharting, ya que cada ingreso puede tener varios registros de datos respiratorios (como la saturación de oxígeno).
-	
-	6. \textbf{RespiratoryCare}: En este caso, la relación también es de \textbf{1-n}. Cada ingreso puede tener múltiples intervenciones de cuidado respiratorio, como la administración de oxígeno o ventilación mecánica.
-	
-	7. \textbf{apacheApsVar}: La relación entre IngresoUCI y \textit{apacheApsVar} puede ser de \textbf{1-1} o de \textbf{1-n}, dependiendo de si se desea almacenar un solo resumen de evaluación APS por ingreso o varios componentes evaluados.
-	
-	8. \textbf{Admissiondx}: La relación es \textbf{1-n}, ya que cada ingreso tiene un diagnóstico primario de admisión, aunque los diagnósticos secundarios se almacenan en otra tabla.
-	
-	9. \textbf{Hospital}: La relación es de \textbf{1-n}. Un hospital puede tener múltiples ingresos a la UCI asociados, dado que cada ingreso pertenece a un único hospital.
-	
+	Para simplificar toda la información previa se puede ver el diagrama de la figura \ref{fig:11} en la cual se llega a apreciar el proyecto actualizado en el cual se basará para hacer el ETL referente a elCU
 	
 	
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1\textwidth]{image/diseño_logico.png}
-		\caption{Diseño lógico}
+		\caption{Diagrama actualizado (Correcciones implementadas)}
 		\label{fig:11}
 	\end{figure}
 	
 	
-
 	
+	Tengo que realizar unos ultimos cambios en el diagrama y añadirlo aquí
 	
+	\section{ETL del almacén de datos NorthwindDW}
 	
+	Sección de muestre la imagen de la carga completa de NorthwindDW, con todos los "ticks" en verde. Esto querrá decir que se ha cargado correctamente el almacén. Si habéis tenido alguna dificultad o comentario a realizar sobre el ETL de este almacén de datos debéis incluirlo en esa sección. 
+	
+	\section{ETL del almacén de datos de pacientes con patologías respiratorias}
+	
+	ección que describa a modo de tutorial el proceso para alimentar las tablas del almacén de vuestro proyecto. El estilo del tutorial deberá ser similar al suministrado en las prácticas guiadas. Por cada tabla alimentada se recomienda poner la imagen con los "ticks" en verde de su correcto funcionamiento. Además, se debe incluir una imagen de la carga completa como en la sección anterior. En la descripción de esta sección deberéis comentar principalmente las dificultades encontradas y cómo lo habéis solventado.
+	
+	Los IDs de las tablas destino (DW) deberán ser autogenerados y no se ha usado el id obtenido de la tabla origen (salvo justificación que implique lo contrario).
 	
 	% Sections
 	\section{Dificultades encontradas}
@@ -122,13 +156,6 @@
 	
 	\section{Conclusiones}
 	
-	Durante el desarrollo del almacén, se tomó la decisión de integrar únicamente los datos más relevantes de pacientes con patologías respiratorias, lo que implicó reducir significativamente el número de tablas y atributos presentes en la base de datos original. Este proceso permitió centrarse en la información esencial para el análisis, facilitando la optimización del sistema y garantizando que los datos fueran manejables y claros para los futuros pasos del proyecto. A lo largo de esta fase, se pudo aprender mucho sobre el contenido y la estructura de cada tabla, lo que ayudó a realizar una selección cuidadosa de las que mejor se alineaban con los requerimientos del modelo de datos, mejorando así la calidad del análisis final.
-	
-	El diagrama conceptual fue una herramienta crucial en este proceso, ya que permitió plasmar de forma clara las ideas y objetivos principales del almacén de datos. Gracias a este enfoque, se logró una mejor organización y se tomaron decisiones informadas en cuanto a las entidades y relaciones a incluir. Este esquema conceptual facilitó no solo una representación más clara de la estructura, sino que también permitió anticipar ajustes necesarios y optar por decisiones estratégicas que beneficiarían el rendimiento y escalabilidad del sistema a largo plazo.
-	
-	Por otro lado, el diagrama lógico implementado, a través del modelo en copo de nieve, ofreció una representación detallada de la base de datos. Este modelo permitió una alta normalización, reduciendo la redundancia de datos sin comprometer la consistencia de la información. A pesar de la mayor complejidad en el diseño, este enfoque aseguró una estructura sólida y flexible para futuros análisis.
-	
-	Finalmente, habiendo completado todas las etapas de análisis, diseño conceptual y lógico, el sistema se encuentra preparado para proceder con la fase de integración de datos. 
 	
 
 
