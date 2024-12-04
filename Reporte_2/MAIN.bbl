@@ -17,47 +17,6 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global/global}
-  \entry{futuro}{article}{}{}
-    \name{author}{3}{}{%
-      {{hash=BC}{%
-         family={Bah},
-         familyi={B\bibinitperiod},
-         given={Chamsi},
-         giveni={C\bibinitperiod},
-      }}%
-      {{hash=AS}{%
-         family={Alharthi},
-         familyi={A\bibinitperiod},
-         given={Sultan},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=EMA}{%
-         family={El\bibnamedelima Metwally},
-         familyi={E\bibinitperiod\bibinitdelim M\bibinitperiod},
-         given={Ashraf},
-         giveni={A\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Hindawi}%
-    }
-    \strng{namehash}{BCASEMA1}
-    \strng{fullhash}{BCASEMA1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{B}
-    \field{sortinithash}{B}
-    \verb{doi}
-    \verb 10.1155/2017/8326740
-    \endverb
-    \field{pages}{1\bibrangedash 11}
-    \field{title}{Clinical data warehousing: A review of current systems and
-  future directions}
-    \field{volume}{2017}
-    \field{journaltitle}{Journal of Healthcare Engineering}
-    \field{year}{2017}
-  \endentry
-
   \entry{eICU2024}{misc}{}{}
     \name{author}{1}{}{%
       {{hash=eCRD}{%
@@ -103,89 +62,6 @@
     \verb https://github.com/Diegodepab/almacen_UCI_Sanitaria
     \endverb
     \field{year}{2024}
-  \endentry
-
-  \entry{pekar2021epidemiology}{article}{}{}
-    \name{author}{3}{}{%
-      {{hash=PC}{%
-         family={Pekar},
-         familyi={P\bibinitperiod},
-         given={Christopher},
-         giveni={C\bibinitperiod},
-      }}%
-      {{hash=GS}{%
-         family={Gordan},
-         familyi={G\bibinitperiod},
-         given={Sven},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=GE}{%
-         family={Goligher},
-         familyi={G\bibinitperiod},
-         given={Ewan},
-         giveni={E\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {BioMed Central}%
-    }
-    \strng{namehash}{PCGSGE1}
-    \strng{fullhash}{PCGSGE1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{P}
-    \field{sortinithash}{P}
-    \verb{doi}
-    \verb 10.1186/s13054-021-03772-y
-    \endverb
-    \field{number}{1}
-    \field{pages}{1\bibrangedash 9}
-    \field{title}{Epidemiology of respiratory failure in the intensive care
-  unit: A review}
-    \field{volume}{25}
-    \field{journaltitle}{Critical Care}
-    \field{year}{2021}
-  \endentry
-
-  \entry{vincent2006epidemiology}{article}{}{}
-    \name{author}{3}{}{%
-      {{hash=VJL}{%
-         family={Vincent},
-         familyi={V\bibinitperiod},
-         given={Jean-Louis},
-         giveni={J\bibinithyphendelim L\bibinitperiod},
-      }}%
-      {{hash=SY}{%
-         family={Sakr},
-         familyi={S\bibinitperiod},
-         given={Yasser},
-         giveni={Y\bibinitperiod},
-      }}%
-      {{hash=RVM}{%
-         family={Ranieri},
-         familyi={R\bibinitperiod},
-         given={V\bibnamedelima Marco},
-         giveni={V\bibinitperiod\bibinitdelim M\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Elsevier}%
-    }
-    \strng{namehash}{VJLSYRVM1}
-    \strng{fullhash}{VJLSYRVM1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{V}
-    \field{sortinithash}{V}
-    \verb{doi}
-    \verb 10.1378/chest.129.1.90
-    \endverb
-    \field{number}{1}
-    \field{pages}{90\bibrangedash 99}
-    \field{title}{The epidemiology of respiratory failure in the ICU}
-    \field{volume}{129}
-    \field{journaltitle}{Chest}
-    \field{year}{2006}
   \endentry
 \enddatalist
 \endinput

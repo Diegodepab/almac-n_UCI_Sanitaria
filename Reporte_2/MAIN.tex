@@ -68,7 +68,15 @@
 	
 	\section{Modificación del almacén de datos}
 	
-	Durante la implementación del almacén de datos se realizaron diversas modificaciones en su estructura original, con el fin de adaptarlo lo mejor posible siguiendo las mejores prácticas para crear un buen almacén de datos. A continuación, se detallan los principales cambios efectuados y la justificación detrás de cada uno de ellos.
+	Durante la implementación del almacén de datos se realizaron diversas modificaciones en su estructura original, con el fin de adaptarlo lo mejor posible siguiendo las mejores prácticas para crear un buen almacén de datos. A continuación, se detallan los principales cambios efectuados y la justificación detrás de cada uno de ellos (puede ver también la figura \ref{fig:1}).
+	
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/diagrama_correcicones.png}
+		\caption{Diagrama actualizado (Correcciones implementadas)}
+		\label{fig:1}
+	\end{figure}
 	
 	\subsection{Ingreso a la UCI}
 	El mayor cambio que hubo es que el hecho Ingreso a la UCI fue separado de la tabla paciente, Además se incorporó el atributo \texttt{hospitalDischargeOffset}, que indica la duración de la estancia del paciente en la UCI, medida en minutos desde el ingreso hasta el alta hospitalaria. Este ajuste fue sugerido para permitir el análisis del tiempo de hospitalización de cada paciente, un factor relevante en los estudios de recuperación y tratamiento de enfermedades respiratorias.
@@ -78,6 +86,9 @@
 	
 	\subsection{Paciente}
 	La tabla \textbf{Paciente}, cuyo identificador único (\texttt{PK}) es el campo \texttt{uniquePID}. Además de este identificador, se incluyeron atributos relevantes como la \texttt{edad}. También se estableció una jerarquía paralela para \textbf{género} y \textbf{etnia}, lo que permitió organizar estos atributos de forma más estructurada y lógica.
+	
+	\subsection{Supreción de Respiratory Charting}
+	La tabla \textbf{Respiratory Charting}, fue eliminada al trabajar más detenidamente en ella se observó múltiples inconsistencias como es la baja cantidad de datos en comparación a otros datos, cierto parentesco para algunas métricas que ya se calculaban en ApacheApsVar y que dependiendo del paciente se le hacía una métrica especifíca, lo cual terminaba siendo rellenado con cierta cantidad de errores. Por pro de mantener un almacén más claro y simple se elimina esta tabla del DDL.
 	
 	\subsection{Relaciones entre Tablas}
 	A continuación se describen las relaciones establecidas entre las tablas del almacén de datos, modificadas para garantizar un diseño coherente y funcional:
@@ -99,10 +110,6 @@
 		\textit{Relación: n-m} \\
 		Cada paciente puede tener múltiples alergias documentadas, las cuales son relevantes para su tratamiento durante cada ingreso a la UCI. Por lo tanto, una alergia puede estar relacionada con múltiples ingresos.
 		
-		\item \textbf{RespiratoryCharting} \\
-		\textit{Relación: 1-n} \\
-		Cada ingreso a la UCI puede tener múltiples registros de datos respiratorios, como saturación de oxígeno, volumen corriente, entre otros. Estos datos se documentan por cada ingreso individual.
-		
 		\item \textbf{RespiratoryCare} \\
 		\textit{Relación: 1-n} \\
 		Similar a \textit{RespiratoryCharting}, cada ingreso puede tener múltiples intervenciones de cuidado respiratorio, como la administración de oxígeno o ventilación mecánica, asociadas a un ingreso específico.
@@ -122,15 +129,7 @@
 	
 	Los cambios en las relaciones entre tablas buscan optimizar el diseño del almacén de datos, adaptándolo a las necesidades específicas del análisis clínico de los pacientes con patologías respiratorias. Estas modificaciones garantizan la integridad de los datos y la flexibilidad para realizar análisis detallados en contextos hospitalarios. 
 	
-	Para simplificar toda la información previa se puede ver el diagrama de la figura \ref{fig:11} en la cual se llega a apreciar el proyecto actualizado en el cual se basará para hacer el ETL referente a elCU
-	
-	
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[width=1\textwidth]{image/diseño_logico.png}
-		\caption{Diagrama actualizado (Correcciones implementadas)}
-		\label{fig:11}
-	\end{figure}
+	Para simplificar toda la información previa se puede ver el diagrama de la figura  en la cual se llega a apreciar el proyecto actualizado en el cual se basará para hacer el ETL referente a elCU
 	
 	
 	
@@ -138,14 +137,36 @@
 	
 	\section{ETL del almacén de datos NorthwindDW}
 	
-	Sección de muestre la imagen de la carga completa de NorthwindDW, con todos los "ticks" en verde. Esto querrá decir que se ha cargado correctamente el almacén. Si habéis tenido alguna dificultad o comentario a realizar sobre el ETL de este almacén de datos debéis incluirlo en esa sección. 
+	Sección de muestre la imagen de la carga completa de NorthwindDW, con todos los "ticks" en verde. 
+	No sé si destacarás algo más o mencionarás algunas dificultades
 	
 	\section{ETL del almacén de datos de pacientes con patologías respiratorias}
 	
-	ección que describa a modo de tutorial el proceso para alimentar las tablas del almacén de vuestro proyecto. El estilo del tutorial deberá ser similar al suministrado en las prácticas guiadas. Por cada tabla alimentada se recomienda poner la imagen con los "ticks" en verde de su correcto funcionamiento. Además, se debe incluir una imagen de la carga completa como en la sección anterior. En la descripción de esta sección deberéis comentar principalmente las dificultades encontradas y cómo lo habéis solventado.
+	\textbf{Aquí creo que sería bueno aclarar lo de las claves del hecho y sobre porque se guardo el atributo PatientOG}
 	
-	Los IDs de las tablas destino (DW) deberán ser autogenerados y no se ha usado el id obtenido de la tabla origen (salvo justificación que implique lo contrario).
+	Así mismo en este apartado se explicará más detenidamente todo el proceso de carga aplicado para este proyecto, partiendo desde el uso de \textit{Microsoft SQL Server Management Studio} para restaurar las bases de datos, tanto la fuente de datos correspondiente a La base de datos de investigación colaborativa, \textit{eICU Collaborative Research Database}, disponible en este \href{https://uma365-my.sharepoint.com/:u:/g/personal/rmluque_uma_es/EebuEtDjp8VImt-_PhweiZMBu1_7XkPqZHkD74iGgg0fXQ?e=lOivcI}{enlace}. Además del \textit{DDL} creado específicamente para esta actividad, accesible en el repositorio de GitHub a través de este \href{https://github.com/Diegodepab/almacen_UCI_Sanitaria/blob/main/ETL/base_de_datos.ddl}{enlace}. A partir de un enfoque para pacientes con patología respiratorias 
 	
+	Una vez restaurada las bases de datos y preparadas sus conexiones para el repositorio de \textit{Visual Studio, SQL Server Integration Services Project}, se podrá empezar el proceso de ETL a nuestro nuevo Data Warehouse (DW), como se observa en la figura \ref{fig:2} al contar con gran cantidad de tablas en el modelo copo de nieve resultará bastantes flujos de datos en nuestro repositorio.
+	
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/100_ETL_ejecutandose.png}
+		\caption{Flujo de control una vez acabado el ETL}
+		\label{fig:2}
+	\end{figure}
+	
+	A continuación la explicación tarea por tarea de cada actividad planteada en el flujo de control, es importante destacar que el trabajo sigue cierta secuencialidad en algunas secciones que dependen de fases anteriores, se íntentará destacar la paralelización de tareas y la tarea previa a cada actividad pero es importante seguir las flechas mostradas en la figura \ref{fig:2}. 
+	
+	La primera actividad por excelencia en cualquier proyecto de integración de servicios es el borrado del almacén, para evitar duplicar datos al aplicar múltiples compilaciones, como se observa en la figura \ref{fig:3} se aplica una \textit{Tarea Ejecutar SQL}, indicando el \textit{SQLStatment y IsQueryStoredProcedure}, para este punto se debe volver a \textit{SQL Server Management} para crear un procedimiento almacenado, el cual se encargará de deshabilitar las restricciones de claves foráneas (útil para esta ocasión donde se desea eliminar todas las tablas para preparar el ETL) se elimina los registros de las tablas y por último habilita nuevamente las restricciones de claves foráneas, a través de este \href{https://github.com/Diegodepab/almacen_UCI_Sanitaria/blob/main/ETL/BorrarAlmacenUCI.sql}{enlace podrá ver el código detalladamente}.
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/101_BorrarAlmacenUCI.png}
+		\caption{Diagrama actualizado (Correcciones implementadas)}
+		\label{fig:3}
+	\end{figure}
+
 	% Sections
 	\section{Dificultades encontradas}
 	
