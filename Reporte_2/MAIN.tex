@@ -10,6 +10,7 @@
 \usepackage[backend=bibtex,style=numeric]{biblatex} % Para citas numéricas
 \addbibresource{references.bib} % Cargar archivo .bib
 \usepackage{url}
+\usepackage{float}
 
 
 \usepackage{geometry}           % Para ajustar márgenes
@@ -88,7 +89,7 @@
 	La tabla \textbf{Paciente}, cuyo identificador único (\texttt{PK}) es el campo \texttt{uniquePID}. Además de este identificador, se incluyeron atributos relevantes como la \texttt{edad}. También se estableció una jerarquía paralela para \textbf{género} y \textbf{etnia}, lo que permitió organizar estos atributos de forma más estructurada y lógica.
 	
 	\subsection{Supreción de Respiratory Charting}
-	La tabla \textbf{Respiratory Charting}, fue eliminada al trabajar más detenidamente en ella se observó múltiples inconsistencias como es la baja cantidad de datos en comparación a otros datos, cierto parentesco para algunas métricas que ya se calculaban en ApacheApsVar y que dependiendo del paciente se le hacía una métrica especifíca, lo cual terminaba siendo rellenado con cierta cantidad de errores. Por pro de mantener un almacén más claro y simple se elimina esta tabla del DDL.
+	La tabla \textbf{Respiratory Charting}, fue eliminada al trabajar más detenidamente en ella se observó múltiples inconsistencias como es la baja cantidad de datos en comparación a otros datos, cierto parentesco para algunas métricas que ya se calculaban en \textit{ApacheApsVar} y que dependiendo del paciente se le hacía una métrica especifica, lo cual terminaba siendo rellenado con cierta cantidad de errores. En búsqueda de mantener un almacén más claro y simple se elimina esta tabla del DDL.
 	
 	\subsection{Relaciones entre Tablas}
 	A continuación se describen las relaciones establecidas entre las tablas del almacén de datos, modificadas para garantizar un diseño coherente y funcional:
@@ -129,11 +130,6 @@
 	
 	Los cambios en las relaciones entre tablas buscan optimizar el diseño del almacén de datos, adaptándolo a las necesidades específicas del análisis clínico de los pacientes con patologías respiratorias. Estas modificaciones garantizan la integridad de los datos y la flexibilidad para realizar análisis detallados en contextos hospitalarios. 
 	
-	Para simplificar toda la información previa se puede ver el diagrama de la figura  en la cual se llega a apreciar el proyecto actualizado en el cual se basará para hacer el ETL referente a elCU
-	
-	
-	
-	Tengo que realizar unos ultimos cambios en el diagrama y añadirlo aquí
 	
 	\section{ETL del almacén de datos NorthwindDW}
 	
@@ -158,14 +154,35 @@
 	
 	A continuación la explicación tarea por tarea de cada actividad planteada en el flujo de control, es importante destacar que el trabajo sigue cierta secuencialidad en algunas secciones que dependen de fases anteriores, se íntentará destacar la paralelización de tareas y la tarea previa a cada actividad pero es importante seguir las flechas mostradas en la figura \ref{fig:2}. 
 	
-	La primera actividad por excelencia en cualquier proyecto de integración de servicios es el borrado del almacén, para evitar duplicar datos al aplicar múltiples compilaciones, como se observa en la figura \ref{fig:3} se aplica una \textit{Tarea Ejecutar SQL}, indicando el \textit{SQLStatment y IsQueryStoredProcedure}, para este punto se debe volver a \textit{SQL Server Management} para crear un procedimiento almacenado, el cual se encargará de deshabilitar las restricciones de claves foráneas (útil para esta ocasión donde se desea eliminar todas las tablas para preparar el ETL) se elimina los registros de las tablas y por último habilita nuevamente las restricciones de claves foráneas, a través de este \href{https://github.com/Diegodepab/almacen_UCI_Sanitaria/blob/main/ETL/BorrarAlmacenUCI.sql}{enlace podrá ver el código detalladamente}.
+	La primera actividad por excelencia en cualquier proyecto de integración de servicios es \textbf{BorrarAlmacenUCI}, para evitar duplicar datos al crear la carga de datos, como se observa en la figura \ref{fig:3} se aplica una \textit{Tarea Ejecutar SQL}, indicando el \textit{SQLStatment y IsQueryStoredProcedure}, para este punto se debe volver a \textit{SQL Server Management} para crear un procedimiento almacenado (en la database, la carpeta \textit{Programmability y StoredProcedures}), el cual se encargará de deshabilitar las restricciones de claves foráneas (útil para esta ocasión donde se desea eliminar todas las tablas para preparar el ETL y evitar errores por borrar tablas en un orden equivocado) se elimina los registros de cada tabla y por último habilita nuevamente las restricciones de claves foráneas, a través de este \href{https://github.com/Diegodepab/almacen_UCI_Sanitaria/blob/main/ETL/BorrarAlmacenUCI.sql}{enlace podrá ver el código detalladamente}.
 
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1\textwidth]{image/101_BorrarAlmacenUCI.png}
-		\caption{Diagrama actualizado (Correcciones implementadas)}
+		\caption{Ventana de información de BorrarAlmacenUCI, ya configurada}
 		\label{fig:3}
 	\end{figure}
+	
+	Una vez realizado el borrado de las cargas anteriores, se puede proceder con las tareas reales de carga del almacén. Es fundamental evitar la secuencialidad en el trabajo, por lo que los flujos de datos que puedan ejecutarse en paralelo deben iniciarse. Tras ejecutar el proceso \textit{BorrarAlmacenUCI}, se inician inmediatamente los siguientes seis flujos de datos:
+	
+	\begin{itemize}
+		\item Carga de Región
+		\item Carga de Género y Etnia
+		\item Carga de Tiempo
+		\item Carga de Priority
+		\item Carga de Tipo
+		\item Carga de RouteAdmin
+	\end{itemize}
+	
+	En el caso de \textbf{Carga Region} se puede las tareas que se realizan en el flujo de datos en la figura \ref{fig:4}, en esta misma 
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.35\textwidth]{image/103_region.png}
+		\caption{Carga de las distintas regiones para los hospitales de la base de datos elCU}
+		\label{fig:4}
+	\end{figure}
+	
 
 	% Sections
 	\section{Dificultades encontradas}
