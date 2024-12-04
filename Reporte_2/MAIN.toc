@@ -9,6 +9,16 @@
 \contentsline {section}{\numberline {4}ETL del almacén de datos NorthwindDW}{6}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Dificultades en Northwind}{7}{subsection.4.1}%
 \contentsline {section}{\numberline {5}ETL del almacén de datos de pacientes con patologías respiratorias}{9}{section.5}%
-\contentsline {section}{\numberline {6}Dificultades encontradas}{11}{section.6}%
-\contentsline {section}{\numberline {7}Conclusiones}{11}{section.7}%
-\contentsline {section}{\numberline {8}Github y conjunto de instrucciones para su correcto despliegue en SQL Server.}{11}{section.8}%
+\contentsline {subsection}{\numberline {5.1}Carga de Región}{11}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Carga de Género y Etnia}{11}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Carga Tiempo}{12}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Carga Priority}{13}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Carga Tipo}{13}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Carga RouteAdmin}{13}{subsection.5.6}%
+\contentsline {subsection}{\numberline {5.7}Carga Hospital}{13}{subsection.5.7}%
+\contentsline {subsection}{\numberline {5.8}Carga Paciente}{14}{subsection.5.8}%
+\contentsline {subsection}{\numberline {5.9}Carga IngresoUCI}{17}{subsection.5.9}%
+\contentsline {subsection}{\numberline {5.10}Carga Diagnosis}{19}{subsection.5.10}%
+\contentsline {section}{\numberline {6}Dificultades encontradas}{19}{section.6}%
+\contentsline {section}{\numberline {7}Conclusiones}{22}{section.7}%
+\contentsline {section}{\numberline {8}Github y conjunto de instrucciones para su correcto despliegue en SQL Server.}{22}{section.8}%

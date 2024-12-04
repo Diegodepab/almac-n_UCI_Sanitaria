@@ -209,14 +209,8 @@
 	
 	Una vez realizado el borrado de las cargas anteriores, se puede proceder con las tareas reales de carga del almacén. Es fundamental evitar la secuencialidad en el trabajo, por lo que los flujos de datos que puedan ejecutarse en paralelo deben iniciarse. Tras ejecutar el proceso \textit{BorrarAlmacenUCI}, se inician inmediatamente los siguientes seis flujos de datos:
 	
-	\begin{itemize}
-		\item Carga de Región
-		\item Carga de Género y Etnia
-		\item Carga de Tiempo
-		\item Carga de Priority
-		\item Carga de Tipo
-		\item Carga de RouteAdmin
-	\end{itemize}
+	
+	\subsection{Carga de Región}
 	
 	En el caso de \textbf{Carga Region} se puede las tareas que se realizan en el flujo de datos en la figura \ref{fig:4}, en esta misma 
 	
@@ -227,6 +221,224 @@
 		\label{fig:4}
 	\end{figure}
 	
+	
+	\subsection{Carga de Género y Etnia}
+	
+	Utilizamos un contenedor de secuencias. Se lleva a cabo debido a que género y etnia son jerarquías paralelas y consideramos correcto establecer un orden en sus cargas.
+	
+	Para la \textbf{carga de género} (ver Figura \ref{fig:10}), se utilizó como origen la base de datos \textbf{[eICU Collaborative Research Database]}. En lugar de emplear directamente la tabla de género, se utilizó la siguiente consulta:
+	
+	\begin{verbatim} SELECT DISTINCT Gender FROM Patient \end{verbatim}
+	
+	El objetivo de esta consulta fue almacenar únicamente los géneros distintos, incluyendo los valores \textbf{NULL} para evitar discriminar a pacientes cuyo género no fue registrado.
+	
+	Adicionalmente, se realizó una conversión de datos, ya que en el almacén de destino el campo \texttt{genderString} está definido como una cadena Unicode (\texttt{DT\_WSTR}) con una longitud de 25 caracteres. Finalmente, se almacenaron los géneros distintos en el destino, y la clave \texttt{genderID} fue autogenerada en la nueva base de datos.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/106_carga_generos.png}
+		\caption{Carga géneros}
+		\label{fig:10}
+	\end{figure}
+	
+	En la \textbf{carga de etnia} se siguió la misma lógica utilizada para la carga de géneros. Se realizó una conversión de datos para ajustar el campo \texttt{Ethnicity} del origen al campo \texttt{ethnicityString} del destino. Finalmente, los valores procesados se almacenaron en la nueva base de datos.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/107_carga_etnia.png}
+		\caption{Carga etnia}
+		\label{fig:11}
+	\end{figure}
+	
+	
+	\subsection{Carga Tiempo}
+	
+	Para la \textbf{carga de la tabla tiempo \ref{fig:18}}, únicamente se trasladaron las tuplas de la tabla \texttt{Paciente} de la base de datos del eICU, específicamente los campos \texttt{HospitalDischargeTime24} y \texttt{HospitalDischargeYear}. El campo \texttt{TiempoID}, que se encuentra en el destino, fue autogenerado automáticamente al realizar el almacenamiento de los datos.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/109_carga_tiempo.png}
+		\caption{Carga Tiempo}
+		\label{fig:18}
+	\end{figure}
+	
+	\subsection{Carga Priority}
+	
+	Para la \textbf{carga de prioridad} se siguió exactamente el mismo procedimiento utilizado para género y etnia. Se seleccionaron únicamente las distintas prioridades asociadas a los diagnósticos mediante la siguiente consulta:
+	
+	\begin{verbatim} SELECT DISTINCT DiagnosisPriority FROM Diagnosis \end{verbatim}
+	
+	Posteriormente, los valores obtenidos se insertaron en el \textbf{Data Warehouse (DW)}.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/111_carga_priority.png}
+		\caption{Carga Priority}
+		\label{fig:20}
+	\end{figure}
+	
+	\subsection{Carga Tipo}
+	
+	\subsection{Carga RouteAdmin}
+	
+	\subsection{Carga Hospital}
+	
+	Para la \textbf{carga de hospital}, se utilizó como origen la tabla \texttt{Hospital} de la base de datos \textbf{eICU}. Posteriormente, se realizó una conversión del atributo \texttt{Region} de la tabla \texttt{Hospital}, transformándolo a una cadena (\texttt{DT\_STR}) con una longitud de 64 caracteres. 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/105_cargahospital.png}
+		\caption{Carga Hospital}
+		\label{fig:16}
+	\end{figure}
+	
+	Esta transformación fue necesaria para realizar un \textit{join} mediante un elemento \textit{lookup} de \textbf{SQL Integration Services}, cuyo objetivo fue buscar las tuplas que coincidieran en región y, a partir de ahí, obtener el correspondiente \texttt{regionID} \ref{fig:22}.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/105_cargahospital_lookup.png}
+		\caption{Busqueda\_regiones\_en\_DW}
+		\label{fig:22}
+	\end{figure}
+	
+	Finalmente, se almacenaron los siguientes campos en el destino\ref{fig:23}:
+	
+	\begin{itemize}
+		\item \texttt{HospitalID} del \textbf{eICU}, renombrado como \texttt{hospitalID\_og}, para permitir que \texttt{IngresoUCI} herede la nueva clave \texttt{HospitalID} generada en nuestro \textbf{DW}.
+		\item \texttt{regionID}, como clave foránea heredada de la tabla \texttt{Region}.
+	\end{itemize}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/105_cargahospital_destino.png}
+		\caption{Hospital\_en\_DW}
+		\label{fig:23}
+	\end{figure}
+	
+	\subsection{Carga Paciente}
+	
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/108_carga_paciente.png}
+		\caption{Carga Paciente}
+		\label{fig:17}
+	\end{figure}
+	
+	Para la \textbf{carga de paciente}, se utilizó como origen la tabla \texttt{Patient} de la base de datos \textbf{eICU}. En este proceso, se seleccionaron los atributos especificados en la Figura \ref{fig:24}.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/108_carga_paciente_origen.png}
+		\caption{Origen del flujo}
+		\label{fig:24}
+	\end{figure}
+	
+	Posteriormente, se realizará un \textit{lookup} para efectuar un \textit{join} entre los campos \texttt{Ethnicity} y \texttt{Gender} de la base de datos \textbf{eICU}, y los campos \texttt{ethnicityString} y \texttt{genderString} obtenidos a partir de la siguiente consulta sobre nuestro \textbf{DW}(ver Figura \ref{fig:25}):
+	
+	\begin{verbatim}
+		SELECT * FROM Ethnicity, Gender
+	\end{verbatim}
+	
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/108_carga_paciente_lookup.png}
+		\caption{Busqueda\_por\_etnia\_y\_genero}
+		\label{fig:25}
+	\end{figure}
+	
+	Por último, se insertarán los siguientes atributos en el destino (ver Figura \ref{fig:27}):
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/108_carga_paciente_destino.png}
+		\caption{\texttt{Pacientes\_a\_DW}}
+		\label{fig:27}
+	\end{figure}
+	
+	Además, se incluirá el atributo \texttt{UniquePID}, ya que es necesario para permitir que \texttt{IngresoUCI} herede la clave foránea (\texttt{FK}) de \texttt{Paciente}.
+	
+	\subsection{Carga IngresoUCI}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/110_carga_ingreso.png}
+		\caption{Carga IngresoUCI}
+		\label{fig:19}
+	\end{figure}
+	
+	Para la carga de \texttt{IngresoUCI}, se utilizó como origen la siguiente consulta, mostrada en la Figura \ref{fig:26}:
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/110_carga_ingreso_origen.png}
+		\caption{Paciente\_en\_BD}
+		\label{fig:26}
+	\end{figure}
+	
+	\textbf{Nota:} Cuando se menciona \texttt{prueba.dbo}, nos referimos a nuestra nueva base de datos/DW, ya que así la hemos denominado.
+	
+	La consulta selecciona varios atributos de la base de datos \textbf{eICU Collaborative Research Database} y los combina con datos de nuestro \textbf{Data Warehouse (DW)}, específicamente de las tablas \texttt{Paciente}, \texttt{Hospital}, y \texttt{Tiempo}, utilizando \textit{joins} (uniones).
+	
+	\textbf{Descripción de la consulta:}
+	
+	\begin{itemize} \item \textbf{Campos seleccionados:} 
+		\begin{itemize} 
+			\item \texttt{TiempoID}: Proviene de la tabla \texttt{Tiempo}, representando el identificador del tiempo del paciente. \item \texttt{UniquePID}: Es el identificador único del paciente, que se obtiene de la tabla \texttt{Paciente}. \item \texttt{HospitalID}: Representa el identificador del hospital, proveniente de la tabla \texttt{Hospital}. \item \texttt{HospitalDischargeOffset}: Muestra el tiempo que ha pasado desde que el paciente fue dado de alta del hospital. \item \texttt{PatientHealthSystemStayID}: Identificador de la estancia del paciente en el sistema de salud. \item \texttt{PatientUnitStayID}: Identificador de la unidad en la que el paciente estuvo durante su estancia. 
+		\end{itemize}
+		
+		\item \textbf{Proceso de unión (joins):}
+		La consulta usa \textbf{LEFT JOIN} para combinar las tablas, lo que significa que se toman todos los registros de la tabla de la izquierda (de la base de datos \texttt{eICU}) y los registros coincidentes de las tablas de la derecha (de nuestro DW). Si no hay coincidencia, los valores de las tablas del DW serán \texttt{NULL}.
+		
+		\begin{itemize}
+			\item \textbf{Primer JOIN:} Se une la tabla \texttt{Patient} de \texttt{eICU} (aliased como \texttt{I}) con la tabla \texttt{Paciente} de nuestro DW (aliased como \texttt{P}), usando el campo \texttt{uniquePID} de ambas tablas. Aquí, se mapea el \texttt{uniquePID} de \texttt{eICU} al campo \texttt{uniquePID\_og} de \texttt{Paciente} en el DW.
+			
+			\item \textbf{Segundo JOIN:} Se une la tabla \texttt{Patient} de \texttt{eICU} con la tabla \texttt{Hospital} en nuestro DW (aliased como \texttt{H}), usando el campo \texttt{HospitalID}. Se compara \texttt{HospitalID} de \texttt{eICU} con \texttt{hospitalID\_og} en \texttt{Hospital} en el DW.
+			
+			\item \textbf{Tercer JOIN:} Se une la tabla \texttt{Patient} de \texttt{eICU} con la tabla \texttt{Tiempo} en el DW (aliased como \texttt{T}), utilizando los campos \texttt{HospitalDischargeYear} y \texttt{HospitalDischargeTime24} de \texttt{eICU} y comparándolos con los mismos campos en la tabla \texttt{Tiempo} de nuestro DW.
+		\end{itemize}
+		
+		\item \textbf{Resultado final:} La consulta extrae los datos de \texttt{eICU} y los enlaza con la información relevante de nuestro DW, lo que permite que los registros en la tabla \texttt{IngresoUCI} contengan las claves correctas de las tablas de nuestro DW (como \texttt{Paciente}, \texttt{Hospital}, y \texttt{Tiempo}).
+	\end{itemize}
+	
+	Por último, se insertaron los datos en IngresoUCI de nuestro DW:
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/110_carga_ingreso_destino.png}
+		\caption{Ingreso\_UCI\_DW}
+		\label{fig:28}
+	\end{figure}
+	
+	\subsection{Carga Diagnosis}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/112_carga_diagnosis.png}
+		\caption{Carga Diagnosis}
+		\label{fig:21}
+	\end{figure}
+	
+	Para la carga de \texttt{Diagnosis}, se tomó como origen la tabla \texttt{Diagnosis} del \textbf{eICU}. Posteriormente, se realizó una conversión del atributo \texttt{DiagnosisPriority} a tipo cadena \texttt{[DT\_STR]} con longitud 10.
+	
+	A continuación, se realizará un \textit{join} entre \texttt{Copy of DiagnosisPriority} y \texttt{priorityString} de la tabla \texttt{Priority} de nuestra base de datos/DW, y se seleccionará el \texttt{priorityID} para que pueda ser heredado por \texttt{Diagnosis} en nuestro \textbf{DW} (ver Figura \ref{fig:29}).
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/112_carga_diagnosis_lookup.png}
+		\caption{Buscar\_por\_prioridad\_DW}
+		\label{fig:29}
+	\end{figure}
+	
+	Estos serán los atributos de \texttt{Diagnosis} en nuestro \textbf{DW}:
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/112_carga_diagnosis_destino.png}
+		\caption{Diagnosis\_DW}
+		\label{fig:30}
+	\end{figure}
 
 	% Sections
 	\section{Dificultades encontradas}
