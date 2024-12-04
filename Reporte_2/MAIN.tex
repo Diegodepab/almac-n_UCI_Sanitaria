@@ -134,7 +134,51 @@
 	\section{ETL del almacén de datos NorthwindDW}
 	
 	Sección de muestre la imagen de la carga completa de NorthwindDW, con todos los "ticks" en verde. 
-	No sé si destacarás algo más o mencionarás algunas dificultades
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/flujo_north_1.png}
+		\caption{Flujo ETL Nortwind PT1}
+		\label{fig:5}
+	\end{figure}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/flujo_north_2.png}
+		\caption{Flujo ETL Nortwind PT2}
+		\label{fig:6}
+	\end{figure}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/flujo_north_3.png}
+		\caption{Flujo ETL Nortwind PT3}
+		\label{fig:7}
+	\end{figure}
+	
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\textwidth]{image/flujo_north_completo.png}
+		\caption{Flujo ETL Nortwind completo}
+		\label{fig:8}
+	\end{figure}
+	
+	\vspace{3cm}
+	
+	\subsection{Dificultades en Northwind}
+	
+	Debido a que el archivo original, Time.xls, estaba en un formato antiguo, fue necesario transformarlo a Time.xlsx. Aunque se intentó especificar el origen como "Excel 1997", no fue posible reconocer la columna correctamente. Tras realizar la conversión al formato Excel 2007-2010, el sistema logró identificar sin problemas la columna Feuil.
+	
+	Otra dificultad que enfrentamos fue durante el vaciado del almacén de datos, específicamente con las claves foráneas (FK). El problema surgía porque, en algunos casos, se eliminaban primero los registros asociados a la clave primaria (PK), lo que generaba conflictos con las claves foráneas dependientes. Para resolver este inconveniente, decidimos deshabilitar temporalmente las restricciones de las claves foráneas antes de realizar el vaciado del almacén y, una vez completado, las volvimos a habilitar.
+	
+	-- Desactivar las restricciones de clave foránea temporalmente
+	EXEC sp\_MSForEachTable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL';
+	
+	-- Reactivar las restricciones de clave foránea
+	EXEC sp\_MSForEachTable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT ALL';
+	
+	\vspace{4cm}
 	
 	\section{ETL del almacén de datos de pacientes con patologías respiratorias}
 	
