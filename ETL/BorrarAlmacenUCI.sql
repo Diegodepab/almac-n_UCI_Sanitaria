@@ -26,7 +26,7 @@ BEGIN
     DELETE FROM Priority;
     DELETE FROM Diagnosis;
     DELETE FROM Tipo;
-	  DELETE FROM Tiempo;
+    DELETE FROM Tiempo;
     DELETE FROM AdmissionDx;
     DELETE FROM Allergy;
     DELETE FROM ApacheApsVar;
