@@ -88,8 +88,15 @@
 	\subsection{Paciente}
 	La tabla \textbf{Paciente}, cuyo identificador único (\texttt{PK}) es el campo \texttt{uniquePID}. Además de este identificador, se incluyeron atributos relevantes como la \texttt{edad}. También se estableció una jerarquía paralela para \textbf{género} y \textbf{etnia}, lo que permitió organizar estos atributos de forma más estructurada y lógica.
 	
-	\subsection{Supreción de Respiratory Charting}
+	\subsection{Supresión de Respiratory Charting}
 	La tabla \textbf{Respiratory Charting}, fue eliminada al trabajar más detenidamente en ella se observó múltiples inconsistencias como es la baja cantidad de datos en comparación a otros datos, cierto parentesco para algunas métricas que ya se calculaban en \textit{ApacheApsVar} y que dependiendo del paciente se le hacía una métrica especifica, lo cual terminaba siendo rellenado con cierta cantidad de errores. En búsqueda de mantener un almacén más claro y simple se elimina esta tabla del DDL.
+	
+	\subsection{Almacenamiento del identificador del paciente de la base de datos original}
+	
+	El proceso ETL es complejo y puede generar dependencias para mantener la coherencia de las relaciones entre las tablas. En el caso de los datos de eICU, existen múltiples tablas con relaciones de tipo M:N con el hecho principal, lo que requiere la creación de tablas intermedias en el almacén de datos. Para establecer estas relaciones, es necesario incluir un atributo que vincule las tablas de forma adecuada. Por esta razón, se creó el atributo \textit{PatientUnitStayID\_OG}, que almacena el identificador del paciente original de la base de datos eICU. Este identificador es esencial, ya que al migrar los datos al nuevo almacén, se utilizará para vincular las nuevas claves autogeneradas. 
+	
+	Un ejemplo de este proceso es la tabla de alergias, que, además de almacenar el nombre de la alergia y si está relacionada con un fármaco, incluye el identificador de los ingresos asociados a dicha alergia. Esto es necesario porque, en este proyecto, las claves originales fueron reemplazadas por valores autogenerados.
+	
 	
 	\subsection{Relaciones entre Tablas}
 	A continuación se describen las relaciones establecidas entre las tablas del almacén de datos, modificadas para garantizar un diseño coherente y funcional:
@@ -127,6 +134,9 @@
 		\textit{Relación: 1-n} \\
 		Cada hospital puede tener múltiples ingresos a la UCI. Los ingresos se asocian exclusivamente a un hospital, dependiendo del centro de atención en el que se encuentre la unidad.
 	\end{enumerate}
+
+	
+
 	
 	Los cambios en las relaciones entre tablas buscan optimizar el diseño del almacén de datos, adaptándolo a las necesidades específicas del análisis clínico de los pacientes con patologías respiratorias. Estas modificaciones garantizan la integridad de los datos y la flexibilidad para realizar análisis detallados en contextos hospitalarios. 
 	
