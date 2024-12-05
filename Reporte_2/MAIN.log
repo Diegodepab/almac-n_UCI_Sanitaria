@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  5 DEC 2024 01:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  5 DEC 2024 12:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -847,56 +847,50 @@ File: image/flujo_north_1.png Graphic file (type png)
 Package pdftex.def Info: image/flujo_north_1.png  used on input line 140.
 (pdftex.def)             Requested size: 426.79135pt x 134.08548pt.
 
+Underfull \vbox (badness 4132) has occurred while \output is active []
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<image/flujo_north_2.png, id=200, 669.09975pt x 279.444pt>
+
+[6]
+<image/flujo_north_2.png, id=210, 669.09975pt x 279.444pt>
 File: image/flujo_north_2.png Graphic file (type png)
 <use image/flujo_north_2.png>
 Package pdftex.def Info: image/flujo_north_2.png  used on input line 147.
 (pdftex.def)             Requested size: 426.79135pt x 178.24658pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<image/flujo_north_3.png, id=201, 732.336pt x 213.79875pt>
+<image/flujo_north_3.png, id=211, 732.336pt x 213.79875pt>
 File: image/flujo_north_3.png Graphic file (type png)
 <use image/flujo_north_3.png>
 Package pdftex.def Info: image/flujo_north_3.png  used on input line 154.
 (pdftex.def)             Requested size: 426.79135pt x 124.60036pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<image/flujo_north_completo.png, id=202, 318.59026pt x 279.444pt>
+<image/flujo_north_completo.png, id=212, 318.59026pt x 279.444pt>
 File: image/flujo_north_completo.png Graphic file (type png)
 <use image/flujo_north_completo.png>
 Package pdftex.def Info: image/flujo_north_completo.png  used on input line 162
 .
 (pdftex.def)             Requested size: 426.79135pt x 374.38052pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-
-[6]
 
 [7
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.174 	
+l.166 	
        
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.174 	
+l.166 	
        
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.174 	
+l.166 	
         <./image/flujo_north_1.png> <./image/flujo_north_2.png> <./image/flujo_
 north_3.png>]
 Overfull \hbox (38.7645pt too wide) in paragraph at lines 175--177
@@ -905,352 +899,325 @@ po-ral-mente EXEC sp[]MSForEachTable
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [8
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.183 	\section
-               {ETL del almacén de datos de pacientes con patologías respi...
- <./image/flujo_north_completo.png>]
+l.186 	
+        <./image/flujo_north_completo.png>]
 <image/100_ETL_ejecutandose.png, id=232, 488.42474pt x 364.36125pt>
 File: image/100_ETL_ejecutandose.png Graphic file (type png)
 <use image/100_ETL_ejecutandose.png>
-Package pdftex.def Info: image/100_ETL_ejecutandose.png  used on input line 194
+Package pdftex.def Info: image/100_ETL_ejecutandose.png  used on input line 202
 .
 (pdftex.def)             Requested size: 426.79135pt x 318.39276pt.
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[9
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
-s been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.202 
-       <./image/100_ETL_ejecutandose.png>]
-<image/101_BorrarAlmacenUCI.png, id=242, 454.69875pt x 380.622pt>
+
+
+[9]
+<image/101_BorrarAlmacenUCI.png, id=241, 454.69875pt x 380.622pt>
 File: image/101_BorrarAlmacenUCI.png Graphic file (type png)
 <use image/101_BorrarAlmacenUCI.png>
-Package pdftex.def Info: image/101_BorrarAlmacenUCI.png  used on input line 205
+Package pdftex.def Info: image/101_BorrarAlmacenUCI.png  used on input line 213
 .
 (pdftex.def)             Requested size: 426.79135pt x 357.2678pt.
-<image/103_region.png, id=244, 142.73325pt x 73.4745pt>
-File: image/103_region.png Graphic file (type png)
-<use image/103_region.png>
-Package pdftex.def Info: image/103_region.png  used on input line 219.
-(pdftex.def)             Requested size: 149.37958pt x 76.90271pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 [10
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.217 	
+        <./image/100_ETL_ejecutandose.png>]
+<image/103_region.png, id=250, 142.73325pt x 73.4745pt>
+File: image/103_region.png Graphic file (type png)
+<use image/103_region.png>
+Package pdftex.def Info: image/103_region.png  used on input line 227.
+(pdftex.def)             Requested size: 149.37958pt x 76.90271pt.
+
+
+[11
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.222 	\end{figure}
-                    <./image/101_BorrarAlmacenUCI.png>]
-<image/106_carga_generos.png, id=253, 274.02374pt x 73.4745pt>
-File: image/106_carga_generos.png Graphic file (type png)
-<use image/106_carga_generos.png>
-Package pdftex.def Info: image/106_carga_generos.png  used on input line 239.
-(pdftex.def)             Requested size: 426.79135pt x 114.44595pt.
-<image/107_carga_etnia.png, id=254, 265.59225pt x 76.48575pt>
-File: image/107_carga_etnia.png Graphic file (type png)
-<use image/107_carga_etnia.png>
-Package pdftex.def Info: image/107_carga_etnia.png  used on input line 248.
-(pdftex.def)             Requested size: 426.79135pt x 122.92117pt.
+l.237 	P
+        ara la \textbf{carga de género} (ver Figura \ref{fig:10}), se utili...
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-
-[11
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.257 	
-       
+l.237 	P
+        ara la \textbf{carga de género} (ver Figura \ref{fig:10}), se utili...
+ <./image/101_BorrarAlmacenUCI.png> <./image/103_region.png>]
+<image/106_carga_generos.png, id=259, 274.02374pt x 73.4745pt>
+File: image/106_carga_generos.png Graphic file (type png)
+<use image/106_carga_generos.png>
+Package pdftex.def Info: image/106_carga_generos.png  used on input line 247.
+(pdftex.def)             Requested size: 426.79135pt x 114.44595pt.
+<image/107_carga_etnia.png, id=260, 265.59225pt x 76.48575pt>
+File: image/107_carga_etnia.png Graphic file (type png)
+<use image/107_carga_etnia.png>
+Package pdftex.def Info: image/107_carga_etnia.png  used on input line 256.
+(pdftex.def)             Requested size: 426.79135pt x 122.92117pt.
+
+
+[12
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.257 	
-        <./image/103_region.png> <./image/106_carga_generos.png>]
-<image/109_carga_tiempo.png, id=264, 124.0635pt x 86.12175pt>
+l.265 	
+       
+pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.265 	
+        <./image/106_carga_generos.png> <./image/107_carga_etnia.png>]
+<image/109_carga_tiempo.png, id=271, 124.0635pt x 86.12175pt>
 File: image/109_carga_tiempo.png Graphic file (type png)
 <use image/109_carga_tiempo.png>
-Package pdftex.def Info: image/109_carga_tiempo.png  used on input line 260.
+Package pdftex.def Info: image/109_carga_tiempo.png  used on input line 268.
 (pdftex.def)             Requested size: 426.79135pt x 296.2688pt.
+<image/111_carga_priority.png, id=272, 123.46124pt x 85.5195pt>
+File: image/111_carga_priority.png Graphic file (type png)
+<use image/111_carga_priority.png>
+Package pdftex.def Info: image/111_carga_priority.png  used on input line 283.
+(pdftex.def)             Requested size: 426.79135pt x 295.68715pt.
+
+Underfull \vbox (badness 4291) has occurred while \output is active []
+
+
+
+[13
+pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.287 	
+        <./image/109_carga_tiempo.png>]
+<image/105_cargahospital.png, id=279, 295.70474pt x 119.2455pt>
+File: image/105_cargahospital.png Graphic file (type png)
+<use image/105_cargahospital.png>
+Package pdftex.def Info: image/105_cargahospital.png  used on input line 298.
+(pdftex.def)             Requested size: 426.79135pt x 172.11548pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[12
-pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) h
-as been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.268 	
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) h
-as been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.268 	
-        <./image/107_carga_etnia.png> <./image/109_carga_tiempo.png>]
-<image/111_carga_priority.png, id=274, 123.46124pt x 85.5195pt>
-File: image/111_carga_priority.png Graphic file (type png)
-<use image/111_carga_priority.png>
-Package pdftex.def Info: image/111_carga_priority.png  used on input line 275.
-(pdftex.def)             Requested size: 426.79135pt x 295.68715pt.
-<image/105_cargahospital.png, id=275, 295.70474pt x 119.2455pt>
-File: image/105_cargahospital.png Graphic file (type png)
-<use image/105_cargahospital.png>
-Package pdftex.def Info: image/105_cargahospital.png  used on input line 290.
-(pdftex.def)             Requested size: 426.79135pt x 172.11548pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<image/105_cargahospital_lookup.png, id=277, 407.121pt x 234.27525pt>
-File: image/105_cargahospital_lookup.png Graphic file (type png)
-<use image/105_cargahospital_lookup.png>
-Package pdftex.def Info: image/105_cargahospital_lookup.png  used on input line
- 299.
-(pdftex.def)             Requested size: 426.79135pt x 245.61018pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-
-[13
+[14
 pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.308 		\item \texttt
-                     {HospitalID} del \textbf{eICU}, renombrado como \texttt...
- <./image/111_carga_priority.png>]
-<image/105_cargahospital_destino.png, id=286, 404.10976pt x 263.7855pt>
+l.302 	
+        <./image/111_carga_priority.png>]
+<image/105_cargahospital_lookup.png, id=287, 407.121pt x 234.27525pt>
+File: image/105_cargahospital_lookup.png Graphic file (type png)
+<use image/105_cargahospital_lookup.png>
+Package pdftex.def Info: image/105_cargahospital_lookup.png  used on input line
+ 307.
+(pdftex.def)             Requested size: 426.79135pt x 245.61018pt.
+<image/105_cargahospital_destino.png, id=289, 404.10976pt x 263.7855pt>
 File: image/105_cargahospital_destino.png Graphic file (type png)
 <use image/105_cargahospital_destino.png>
 Package pdftex.def Info: image/105_cargahospital_destino.png  used on input lin
-e 314.
+e 322.
 (pdftex.def)             Requested size: 426.79135pt x 278.60101pt.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<image/108_carga_paciente.png, id=287, 287.27325pt x 92.14426pt>
-File: image/108_carga_paciente.png Graphic file (type png)
-<use image/108_carga_paciente.png>
-Package pdftex.def Info: image/108_carga_paciente.png  used on input line 325.
-(pdftex.def)             Requested size: 426.79135pt x 136.90561pt.
-
-Underfull \vbox (badness 1019) has occurred while \output is active []
-
-
-
-[14
+[15
 pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.328 	\end{figure}
-                   
+l.326 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.328 	\end{figure}
-                    <./image/105_cargahospital.png> <./image/105_cargahospital_
-lookup.png>]
-<image/108_carga_paciente_origen.png, id=297, 402.90524pt x 296.307pt>
+l.326 
+       <./image/105_cargahospital.png> <./image/105_cargahospital_lookup.png>]
+<image/108_carga_paciente.png, id=299, 287.27325pt x 92.14426pt>
+File: image/108_carga_paciente.png Graphic file (type png)
+<use image/108_carga_paciente.png>
+Package pdftex.def Info: image/108_carga_paciente.png  used on input line 332.
+(pdftex.def)             Requested size: 426.79135pt x 136.90561pt.
+<image/108_carga_paciente_origen.png, id=301, 402.90524pt x 296.307pt>
 File: image/108_carga_paciente_origen.png Graphic file (type png)
 <use image/108_carga_paciente_origen.png>
 Package pdftex.def Info: image/108_carga_paciente_origen.png  used on input lin
-e 336.
+e 342.
 (pdftex.def)             Requested size: 426.79135pt x 313.89403pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[15
+[16
 pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.339 	\end{figure}
-                   
+l.346 	
+       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.339 	\end{figure}
-                    <./image/105_cargahospital_destino.png> <./image/108_carga_
-paciente.png>]
-<image/108_carga_paciente_lookup.png, id=307, 404.712pt x 249.3315pt>
+l.346 	
+        <./image/105_cargahospital_destino.png> <./image/108_carga_paciente.png
+>]
+<image/108_carga_paciente_lookup.png, id=311, 404.712pt x 249.3315pt>
 File: image/108_carga_paciente_lookup.png Graphic file (type png)
 <use image/108_carga_paciente_lookup.png>
 Package pdftex.def Info: image/108_carga_paciente_lookup.png  used on input lin
-e 350.
+e 356.
 (pdftex.def)             Requested size: 426.79135pt x 262.94713pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<image/108_carga_paciente_destino.png, id=309, 403.5075pt x 306.54526pt>
-File: image/108_carga_paciente_destino.png Graphic file (type png)
-<use image/108_carga_paciente_destino.png>
-Package pdftex.def Info: image/108_carga_paciente_destino.png  used on input li
-ne 360.
-(pdftex.def)             Requested size: 341.43437pt x 259.39063pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[16
+[17
 pdfTeX warning (ext4): destination with the same identifier (name{figure.17}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.363 	\end{figure}
-                    <./image/108_carga_paciente_origen.png>]
-<image/110_carga_ingreso.png, id=316, 115.632pt x 78.89474pt>
+l.360 
+       <./image/108_carga_paciente_origen.png>]
+<image/108_carga_paciente_destino.png, id=319, 403.5075pt x 306.54526pt>
+File: image/108_carga_paciente_destino.png Graphic file (type png)
+<use image/108_carga_paciente_destino.png>
+Package pdftex.def Info: image/108_carga_paciente_destino.png  used on input li
+ne 366.
+(pdftex.def)             Requested size: 341.43437pt x 259.39063pt.
+<image/110_carga_ingreso.png, id=320, 115.632pt x 78.89474pt>
 File: image/110_carga_ingreso.png Graphic file (type png)
 <use image/110_carga_ingreso.png>
-Package pdftex.def Info: image/110_carga_ingreso.png  used on input line 372.
+Package pdftex.def Info: image/110_carga_ingreso.png  used on input line 378.
 (pdftex.def)             Requested size: 426.79135pt x 291.2125pt.
 
-Underfull \vbox (badness 1259) has occurred while \output is active []
 
-
-
-[17
+[18
 pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.375 	\end{figure}
-                   
+l.382 	
+       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.375 	\end{figure}
-                    <./image/108_carga_paciente_lookup.png> <./image/108_carga_
-paciente_destino.png>]
-Overfull \hbox (7.06871pt too wide) in paragraph at lines 377--378
-[]\OT1/cmr/m/n/12 Para la carga de \OT1/cmtt/m/n/12 IngresoUCI\OT1/cmr/m/n/12 ,
- se uti-liz^^So como ori-gen la sigu-iente con-sulta, mostrada
- []
-
-<image/110_carga_ingreso_origen.png, id=325, 483.0045pt x 294.50024pt>
+l.382 	
+        <./image/108_carga_paciente_lookup.png> <./image/108_carga_paciente_des
+tino.png>]
+<image/110_carga_ingreso_origen.png, id=330, 483.0045pt x 294.50024pt>
 File: image/110_carga_ingreso_origen.png Graphic file (type png)
 <use image/110_carga_ingreso_origen.png>
 Package pdftex.def Info: image/110_carga_ingreso_origen.png  used on input line
- 381.
+ 387.
 (pdftex.def)             Requested size: 341.43437pt x 208.1799pt.
 
 
-[18
+[19
 pdfTeX warning (ext4): destination with the same identifier (name{figure.20}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.389 	
+l.395 	
        
 pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.389 	
+l.395 	
         <./image/110_carga_ingreso.png> <./image/110_carga_ingreso_origen.png>]
-<image/110_carga_ingreso_destino.png, id=335, 405.31425pt x 337.26pt>
+<image/110_carga_ingreso_destino.png, id=339, 405.31425pt x 337.26pt>
 File: image/110_carga_ingreso_destino.png Graphic file (type png)
 <use image/110_carga_ingreso_destino.png>
 Package pdftex.def Info: image/110_carga_ingreso_destino.png  used on input lin
-e 415.
+e 421.
 (pdftex.def)             Requested size: 426.79135pt x 355.12665pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<image/112_carga_diagnosis.png, id=336, 266.1945pt x 117.43875pt>
+[20]
+<image/112_carga_diagnosis.png, id=344, 266.1945pt x 117.43875pt>
 File: image/112_carga_diagnosis.png Graphic file (type png)
 <use image/112_carga_diagnosis.png>
-Package pdftex.def Info: image/112_carga_diagnosis.png  used on input line 425.
+Package pdftex.def Info: image/112_carga_diagnosis.png  used on input line 430.
 
 (pdftex.def)             Requested size: 426.79135pt x 188.29466pt.
 
 
-[19]
-
-[20
+[21
 pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.431 	
+l.436 	
        
 pdfTeX warning (ext4): destination with the same identifier (name{figure.23}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.431 	
+l.436 	
         <./image/110_carga_ingreso_destino.png> <./image/112_carga_diagnosis.pn
 g>]
-Overfull \hbox (51.60887pt too wide) in paragraph at lines 432--433
+Overfull \hbox (51.60887pt too wide) in paragraph at lines 437--438
 []\OT1/cmr/m/n/12 A con-tin-uaci^^Son, se re-alizar^^Sa un \OT1/cmr/m/it/12 joi
 n \OT1/cmr/m/n/12 en-tre \OT1/cmtt/m/n/12 Copy of DiagnosisPriority \OT1/cmr/m/
 n/12 y \OT1/cmtt/m/n/12 priorityString
  []
 
-<image/112_carga_diagnosis_lookup.png, id=350, 407.72325pt x 238.491pt>
+<image/112_carga_diagnosis_lookup.png, id=354, 407.72325pt x 238.491pt>
 File: image/112_carga_diagnosis_lookup.png Graphic file (type png)
 <use image/112_carga_diagnosis_lookup.png>
 Package pdftex.def Info: image/112_carga_diagnosis_lookup.png  used on input li
-ne 436.
+ne 441.
 (pdftex.def)             Requested size: 426.79135pt x 249.64417pt.
-<image/112_carga_diagnosis_destino.png, id=351, 407.72325pt x 281.853pt>
+<image/112_carga_diagnosis_destino.png, id=355, 407.72325pt x 281.853pt>
 File: image/112_carga_diagnosis_destino.png Graphic file (type png)
 <use image/112_carga_diagnosis_destino.png>
 Package pdftex.def Info: image/112_carga_diagnosis_destino.png  used on input l
-ine 445.
+ine 450.
 (pdftex.def)             Requested size: 341.43437pt x 236.02808pt.
 
 
-[21
+[22
 pdfTeX warning (ext4): destination with the same identifier (name{figure.24}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.455 	
+l.460 	
        
 pdfTeX warning (ext4): destination with the same identifier (name{figure.25}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.455 	
+l.460 	
         <./image/112_carga_diagnosis_lookup.png> <./image/112_carga_diagnosis_d
 estino.png>]
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=365, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=369, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 471.
+Package pdftex.def Info: backcover.pdf  used on input line 476.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1258,7 +1225,7 @@ pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 471.
+Package pdftex.def Info: backcover.pdf  used on input line 476.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1268,29 +1235,29 @@ ersion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=368, page=1, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=372, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 471.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 476.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
-[22]
+[23]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 471.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 476.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 471.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 476.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 471.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 476.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-[23
+[24
 
  <./backcover.pdf>] (MAIN.aux)
  ***********
@@ -1304,10 +1271,10 @@ Package logreq Info: Writing requests to 'MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19515 strings out of 473681
- 344340 string characters out of 5718718
- 958910 words of memory out of 5000000
- 42315 multiletter control sequences out of 15000+600000
+ 19517 strings out of 473681
+ 344357 string characters out of 5718718
+ 957911 words of memory out of 5000000
+ 42316 multiletter control sequences out of 15000+600000
  563477 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,81p,1905b,1291s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1318,9 +1285,9 @@ ublic/amsfonts/cm/cmcsc10.pfb><C:/Users/jismbs/AppData/Local/Programs/MiKTeX/fo
 nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jismbs/AppData/Local/Programs/
 MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/jismbs/AppData/Local
 /Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (24 pages, 1135054 bytes).
+Output written on MAIN.pdf (25 pages, 1137731 bytes).
 PDF statistics:
- 442 PDF objects out of 1000 (max. 8388607)
- 85 named destinations out of 1000 (max. 500000)
+ 447 PDF objects out of 1000 (max. 8388607)
+ 86 named destinations out of 1000 (max. 500000)
  378 words of extra memory for PDF output out of 10000 (max. 10000000)
 

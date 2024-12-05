@@ -135,21 +135,21 @@
 	
 	Sección de muestre la imagen de la carga completa de NorthwindDW, con todos los "ticks" en verde. 
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/flujo_north_1.png}
 		\caption{Flujo ETL Nortwind PT1}
 		\label{fig:5}
 	\end{figure}
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/flujo_north_2.png}
 		\caption{Flujo ETL Nortwind PT2}
 		\label{fig:6}
 	\end{figure}
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/flujo_north_3.png}
 		\caption{Flujo ETL Nortwind PT3}
@@ -157,14 +157,14 @@
 	\end{figure}
 	
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/flujo_north_completo.png}
 		\caption{Flujo ETL Nortwind completo}
 		\label{fig:8}
 	\end{figure}
 	
-	\vspace{3cm}
+
 	
 	\subsection{Dificultades en Northwind}
 	
@@ -178,18 +178,26 @@
 	-- Reactivar las restricciones de clave foránea
 	EXEC sp\_MSForEachTable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT ALL';
 	
-	\vspace{4cm}
 	
 	\section{ETL del almacén de datos de pacientes con patologías respiratorias}
 	
 	\textbf{Aquí creo que sería bueno aclarar lo de las claves del hecho y sobre porque se guardo el atributo PatientOG}
+	Antes de realizar el proceso ETL, es necesario dejar claras algunas decisiones tomadas en el llenado del \textbf{Data Warehouse (DW)}, específicamente en relación con el hecho. Según la teoría, las claves foráneas de un hecho deben ser las claves primarias de las tablas relacionadas. Sin embargo, en nuestro caso, hemos optado por una solución que permite evitar trabajo extra al llenar las tablas intermedias, sin perder información. En lugar de utilizar tres claves foráneas diferentes, hemos creado una clave autogenerada como clave primaria (PK) que sea única para cada combinación de \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID}. De esta forma, mantenemos la eficacia de acceder a las claves foráneas \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID} desde otras tablas, pero sin la necesidad de escribir tres claves diferentes.
+	
+	Otra decisión importante fue almacenar ciertas claves antiguas en algunas tablas para facilitar la herencia de claves foráneas. Por ejemplo, en el hecho hemos almacenado la clave antigua del paciente, \texttt{patientUnitStayID\_og}, con el objetivo de facilitar la herencia de la clave primaria del hecho \texttt{IngresoUCI}.
+	
+	El resto de claves en las tablas serán autogeneradas. Un ejemplo de esto es el siguiente código para la tabla \texttt{Ethnicity}:
+	
+	\begin{verbatim} ALTER TABLE Ethnicity ADD ethnicityID INT IDENTITY(1,1) PRIMARY KEY; 
+	\end{verbatim}
+	
 	
 	Así mismo en este apartado se explicará más detenidamente todo el proceso de carga aplicado para este proyecto, partiendo desde el uso de \textit{Microsoft SQL Server Management Studio} para restaurar las bases de datos, tanto la fuente de datos correspondiente a La base de datos de investigación colaborativa, \textit{eICU Collaborative Research Database}, disponible en este \href{https://uma365-my.sharepoint.com/:u:/g/personal/rmluque_uma_es/EebuEtDjp8VImt-_PhweiZMBu1_7XkPqZHkD74iGgg0fXQ?e=lOivcI}{enlace}. Además del \textit{DDL} creado específicamente para esta actividad, accesible en el repositorio de GitHub a través de este \href{https://github.com/Diegodepab/almacen_UCI_Sanitaria/blob/main/ETL/base_de_datos.ddl}{enlace}. A partir de un enfoque para pacientes con patología respiratorias 
 	
 	Una vez restaurada las bases de datos y preparadas sus conexiones para el repositorio de \textit{Visual Studio, SQL Server Integration Services Project}, se podrá empezar el proceso de ETL a nuestro nuevo Data Warehouse (DW), como se observa en la figura \ref{fig:2} al contar con gran cantidad de tablas en el modelo copo de nieve resultará bastantes flujos de datos en nuestro repositorio.
 	
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/100_ETL_ejecutandose.png}
 		\caption{Flujo de control una vez acabado el ETL}
@@ -200,7 +208,7 @@
 	
 	La primera actividad por excelencia en cualquier proyecto de integración de servicios es \textbf{BorrarAlmacenUCI}, para evitar duplicar datos al crear la carga de datos, como se observa en la figura \ref{fig:3} se aplica una \textit{Tarea Ejecutar SQL}, indicando el \textit{SQLStatment y IsQueryStoredProcedure}, para este punto se debe volver a \textit{SQL Server Management} para crear un procedimiento almacenado (en la database, la carpeta \textit{Programmability y StoredProcedures}), el cual se encargará de deshabilitar las restricciones de claves foráneas (útil para esta ocasión donde se desea eliminar todas las tablas para preparar el ETL y evitar errores por borrar tablas en un orden equivocado) se elimina los registros de cada tabla y por último habilita nuevamente las restricciones de claves foráneas, a través de este \href{https://github.com/Diegodepab/almacen_UCI_Sanitaria/blob/main/ETL/BorrarAlmacenUCI.sql}{enlace podrá ver el código detalladamente}.
 
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/101_BorrarAlmacenUCI.png}
 		\caption{Ventana de información de BorrarAlmacenUCI, ya configurada}
@@ -214,7 +222,7 @@
 	
 	En el caso de \textbf{Carga Region} se puede las tareas que se realizan en el flujo de datos en la figura \ref{fig:4}, en esta misma 
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.35\textwidth]{image/103_region.png}
 		\caption{Carga de las distintas regiones para los hospitales de la base de datos elCU}
@@ -234,7 +242,7 @@
 	
 	Adicionalmente, se realizó una conversión de datos, ya que en el almacén de destino el campo \texttt{genderString} está definido como una cadena Unicode (\texttt{DT\_WSTR}) con una longitud de 25 caracteres. Finalmente, se almacenaron los géneros distintos en el destino, y la clave \texttt{genderID} fue autogenerada en la nueva base de datos.
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/106_carga_generos.png}
 		\caption{Carga géneros}
@@ -243,7 +251,7 @@
 	
 	En la \textbf{carga de etnia} se siguió la misma lógica utilizada para la carga de géneros. Se realizó una conversión de datos para ajustar el campo \texttt{Ethnicity} del origen al campo \texttt{ethnicityString} del destino. Finalmente, los valores procesados se almacenaron en la nueva base de datos.
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/107_carga_etnia.png}
 		\caption{Carga etnia}
@@ -255,7 +263,7 @@
 	
 	Para la \textbf{carga de la tabla tiempo \ref{fig:18}}, únicamente se trasladaron las tuplas de la tabla \texttt{Paciente} de la base de datos del eICU, específicamente los campos \texttt{HospitalDischargeTime24} y \texttt{HospitalDischargeYear}. El campo \texttt{TiempoID}, que se encuentra en el destino, fue autogenerado automáticamente al realizar el almacenamiento de los datos.
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/109_carga_tiempo.png}
 		\caption{Carga Tiempo}
@@ -270,7 +278,7 @@
 	
 	Posteriormente, los valores obtenidos se insertaron en el \textbf{Data Warehouse (DW)}.
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/111_carga_priority.png}
 		\caption{Carga Priority}
@@ -285,7 +293,7 @@
 	
 	Para la \textbf{carga de hospital}, se utilizó como origen la tabla \texttt{Hospital} de la base de datos \textbf{eICU}. Posteriormente, se realizó una conversión del atributo \texttt{Region} de la tabla \texttt{Hospital}, transformándolo a una cadena (\texttt{DT\_STR}) con una longitud de 64 caracteres. 
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/105_cargahospital.png}
 		\caption{Carga Hospital}
@@ -294,13 +302,13 @@
 	
 	Esta transformación fue necesaria para realizar un \textit{join} mediante un elemento \textit{lookup} de \textbf{SQL Integration Services}, cuyo objetivo fue buscar las tuplas que coincidieran en región y, a partir de ahí, obtener el correspondiente \texttt{regionID} \ref{fig:22}.
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/105_cargahospital_lookup.png}
 		\caption{Busqueda\_regiones\_en\_DW}
 		\label{fig:22}
 	\end{figure}
-	\vspace{1cm}
+
 	
 	Finalmente, se almacenaron los siguientes campos en el destino\ref{fig:23}:
 	
@@ -309,18 +317,17 @@
 		\item \texttt{regionID}, como clave foránea heredada de la tabla \texttt{Region}.
 	\end{itemize}
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/105_cargahospital_destino.png}
 		\caption{Hospital\_en\_DW}
 		\label{fig:23}
 	\end{figure}
-	\vspace{1cm}
+
 	
 	\subsection{Carga Paciente}
-	\vspace{1cm}
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/108_carga_paciente.png}
 		\caption{Carga Paciente}
@@ -329,9 +336,8 @@
 	
 	Para la \textbf{carga de paciente}, se utilizó como origen la tabla \texttt{Patient} de la base de datos \textbf{eICU}. En este proceso, se seleccionaron los atributos especificados en la Figura \ref{fig:24}.
 	
-	\vspace{3cm}
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/108_carga_paciente_origen.png}
 		\caption{Origen del flujo}
@@ -345,17 +351,17 @@
 	\end{verbatim}
 	
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/108_carga_paciente_lookup.png}
 		\caption{Busqueda\_por\_etnia\_y\_genero}
 		\label{fig:25}
 	\end{figure}
-	\vspace{8.5cm}
+
 	
 	Por último, se insertarán los siguientes atributos en el destino (ver Figura \ref{fig:27}):
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\textwidth]{image/108_carga_paciente_destino.png}
 		\caption{Pacientes\_a\_DW}
@@ -367,7 +373,7 @@
 	
 	\subsection{Carga IngresoUCI}
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/110_carga_ingreso.png}
 		\caption{Carga IngresoUCI}
@@ -376,7 +382,7 @@
 	
 	Para la carga de \texttt{IngresoUCI}, se utilizó como origen la siguiente consulta, mostrada en la Figura \ref{fig:26}:
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\textwidth]{image/110_carga_ingreso_origen.png}
 		\caption{Paciente\_en\_BD}
@@ -410,17 +416,16 @@
 	
 	Por último, se insertaron los datos en IngresoUCI de nuestro DW:
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/110_carga_ingreso_destino.png}
 		\caption{Ingreso\_UCI\_DW}
 		\label{fig:28}
 	\end{figure}
-	\vspace{2cm}
 	
 	\subsection{Carga Diagnosis}
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/112_carga_diagnosis.png}
 		\caption{Carga Diagnosis}
@@ -431,7 +436,7 @@
 	
 	A continuación, se realizará un \textit{join} entre \texttt{Copy of DiagnosisPriority} y \texttt{priorityString} de la tabla \texttt{Priority} de nuestra base de datos/DW, y se seleccionará el \texttt{priorityID} para que pueda ser heredado por \texttt{Diagnosis} en nuestro \textbf{DW} (ver Figura \ref{fig:29}).
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/112_carga_diagnosis_lookup.png}
 		\caption{Buscar\_por\_prioridad\_DW}
@@ -440,7 +445,7 @@
 	
 	Estos serán los atributos de \texttt{Diagnosis} en nuestro \textbf{DW}:
 	
-	\begin{figure}[h!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\textwidth]{image/112_carga_diagnosis_destino.png}
 		\caption{Diagnosis\_DW}
