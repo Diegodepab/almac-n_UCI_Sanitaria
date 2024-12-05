@@ -300,6 +300,7 @@
 		\caption{Busqueda\_regiones\_en\_DW}
 		\label{fig:22}
 	\end{figure}
+	\vspace{1cm}
 	
 	Finalmente, se almacenaron los siguientes campos en el destino\ref{fig:23}:
 	
@@ -314,9 +315,10 @@
 		\caption{Hospital\_en\_DW}
 		\label{fig:23}
 	\end{figure}
+	\vspace{1cm}
 	
 	\subsection{Carga Paciente}
-	
+	\vspace{1cm}
 	
 	\begin{figure}[h!]
 		\centering
@@ -326,6 +328,8 @@
 	\end{figure}
 	
 	Para la \textbf{carga de paciente}, se utilizó como origen la tabla \texttt{Patient} de la base de datos \textbf{eICU}. En este proceso, se seleccionaron los atributos especificados en la Figura \ref{fig:24}.
+	
+	\vspace{3cm}
 	
 	\begin{figure}[h!]
 		\centering
@@ -347,15 +351,17 @@
 		\caption{Busqueda\_por\_etnia\_y\_genero}
 		\label{fig:25}
 	\end{figure}
+	\vspace{8.5cm}
 	
 	Por último, se insertarán los siguientes atributos en el destino (ver Figura \ref{fig:27}):
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=1\textwidth]{image/108_carga_paciente_destino.png}
-		\caption{\texttt{Pacientes\_a\_DW}}
+		\includegraphics[width=0.8\textwidth]{image/108_carga_paciente_destino.png}
+		\caption{Pacientes\_a\_DW}
 		\label{fig:27}
 	\end{figure}
+
 	
 	Además, se incluirá el atributo \texttt{UniquePID}, ya que es necesario para permitir que \texttt{IngresoUCI} herede la clave foránea (\texttt{FK}) de \texttt{Paciente}.
 	
@@ -372,7 +378,7 @@
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=1\textwidth]{image/110_carga_ingreso_origen.png}
+		\includegraphics[width=0.8\textwidth]{image/110_carga_ingreso_origen.png}
 		\caption{Paciente\_en\_BD}
 		\label{fig:26}
 	\end{figure}
@@ -410,6 +416,7 @@
 		\caption{Ingreso\_UCI\_DW}
 		\label{fig:28}
 	\end{figure}
+	\vspace{2cm}
 	
 	\subsection{Carga Diagnosis}
 	
@@ -435,7 +442,7 @@
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=1\textwidth]{image/112_carga_diagnosis_destino.png}
+		\includegraphics[width=0.8\textwidth]{image/112_carga_diagnosis_destino.png}
 		\caption{Diagnosis\_DW}
 		\label{fig:30}
 	\end{figure}
