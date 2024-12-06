@@ -549,13 +549,71 @@
 	
 	\subsection{Carga UCI Diagnosis}
 	
-	En este caso se necesita tener cargada la tabla Hospital, Paciente y tiempo (ver secciones 6.4, 6.8 y 6.9), y su flujo es el de la figura \ref{fig:19}
+	En el caso de \texttt{UCI Diagnosis}, esta tabla corresponde a la relación \textbf{M:N} de dos tablas. Las tablas intermedias fueron nombradas con un prefijo \texttt{UCI} al principio, para destacarlas como tablas diferentes. En esta tabla se almacenan únicamente el \texttt{PatientUnitStayID} y el \texttt{DiagnosisID}, ambas claves \textbf{autogeneradas} y \textbf{originales del DW}. El flujo correspondiente a este proceso se muestra en la figura \ref{fig:40}.
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/113_carga_UCI_Diagnosis.png}
+		\caption{Carga UCI Diagnosis}
+		\label{fig:40}
+	\end{figure}
+	
+	Esta carga es relativamente simple, con la diferencia de que no se utilizan datos externos. En su lugar, se obtienen los ingresos del \textbf{DW} y, mediante un bloque de búsqueda, se filtra por el \texttt{PatientUnitStayID\_OG}, relacionando los ingresos que tienen un \texttt{Diagnosis}. Estos se vinculan en el \textbf{DW}, donde solo se almacenan las claves de la tabla \texttt{IngresoUCI} (\texttt{PatientUnitStayID}) y la tabla \texttt{Diagnosis} (\texttt{DiagnosisID}).
+	
 	
 	\subsection{Carga Alergia}
 	
+	Esta carga es la continuación de la carga tipo (sección 6.6), una vez compilado esa carga se procede a este flujo de datos (mirar figura \ref{fig:36})
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/115_carga_alergia.png}
+		\caption{Carga Alergia}
+		\label{fig:36}
+	\end{figure}
+	
+	Al igual que en los casos anteriores, se obtiene la tabla \texttt{Alergia} de la base de datos \textbf{ElCU}. El atributo \texttt{AllergyType} se somete a un proceso de conversión debido a que no corresponde correctamente al formato del \textbf{DW}. A continuación, se utiliza un bloque de búsqueda para vincularla con la tabla \texttt{Tipos}, para finalmente guardar los datos en el \textbf{DW}.
+	
+	
 	\subsection{Carga UCI Alergia}
 	
+	Siendo nuevamente una tabla de relación M:N, necesita la carga de Alergia e IngresoUCI para empezar. Su flujo es el siguiente (ver figura  \ref{fig:37}).
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/116_UCI_alergia.png}
+		\caption{Carga  UCI Alergia}
+		\label{fig:37}
+	\end{figure}
+	
+	Donde se obtienen los ingresos del DW y se conectan mediante un bloque de Búsqueda a la tabla alergia, usando el \texttt{PatientUnitStayID\_OG} para hacer la conexión. 
 	\subsection{Carga Medicacion}
+	
+	En el caso de medicacion es la continuacion de carga RouteAdmin (Seccion 6.7) , el flujo de datos es la figura \ref{fig:38}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/118_Medicacion.png}
+		\caption{Carga Medicacion}
+		\label{fig:38}
+	\end{figure}
+	
+	Al igual que en la carga \texttt{RouteAdmin}, se utilizó un bloque de columna derivada, ya que es igualmente necesario por la misma razón. Al haber convertido todos los valores de \texttt{RouteAdmin} a mayúsculas, actualmente, si intentamos conectar \texttt{RouteAdmin} con \texttt{Medicación}, algunas filas no se vincularán debido a que la ruta "Oral" en el almacén está registrada como "ORAL". De esta manera, se realiza una conversión de datos previa a la búsqueda para evitar errores de tipo de datos en el \texttt{RouteAdmin} recién modificado. Una vez que se conecten los datos de \texttt{Medicación} con la tabla \texttt{RouteAdmin}, estos se almacenarán en el \textbf{almacén}.
+	
+	
+	\subsection{Carga UCI Medicacion}
+	Para finalizar, se carga la última tabla, \texttt{UCI Medicación}, la cual se creó para representar la conexión M:N entre \texttt{Medicacion} e \texttt{IngresoUCI}. El flujo de datos correspondiente se ilustra en la figura \ref{fig:39}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/119_Medicacion.png}
+		\caption{Carga UCI Medicación}
+		\label{fig:39}
+	\end{figure}
+	
+	Al igual que en los otros casos de tablas intermedias, en este proceso se buscan los ingresos desde el almacén y, mediante un bloque de búsqueda, se obtienen las claves conectadas de \texttt{Medicacion} e \texttt{IngresoUCI}.
+	
 	
 	% Sections
 	\section{Dificultades encontradas}
@@ -565,8 +623,15 @@
 	
 	Además el comienzo del trabajo podría ser lo más angustioso, al tener tanta información y opciones llega a ser un poco abrumador, desde la selección de una población concreta y modelar un almacén para dicha población termina dejando muchas dudas sobre cuantas tablas es esperable eliminar, si se esta simplificando de más o se esta tomando una decisión que afectará los siguientes apartados. 
 	
-	\section{Conclusiones}
+	También se tuvo ciertos problemas con la máquina virtual usada al quedarse pillada a la hora de iniciar, se tuvo que reiniciar lo que conllevo a la perdida de datos no guardados en otros medios.
 	
+	\section{Conclusión}
+	
+	El proceso ETL (Extract, Transform, Load) es fundamental en la construcción y mantenimiento de un almacén de datos eficiente. Permite la integración de datos provenientes de diversas fuentes, transformándolos en información útil y cargándolos en una estructura de almacenamiento adecuada. Este proceso no solo garantiza la calidad y coherencia de los datos, sino que también facilita su análisis y explotación posterior, convirtiéndose en una pieza clave para la toma de decisiones en entornos empresariales y científicos.
+	
+	Visual Studio es una herramienta altamente versátil que facilita la creación de procesos ETL complejos mediante bloques de herramientas visuales. Su interfaz intuitiva permite integrar diversas técnicas de procesamiento de datos de manera modular, lo que facilita la búsqueda de soluciones alternativas para abordar cada carga de datos de manera eficiente. Mediante su uso, es posible conectar diferentes fuentes de datos, aplicar transformaciones necesarias y cargar la información en el destino deseado sin la necesidad de escribir extensas líneas de código, lo que reduce el tiempo de desarrollo y mejora la accesibilidad del proceso.
+	
+	Finalmente, este trabajo ha demostrado que, aunque los procesos ETL pueden ser complejos y desafiantes, herramientas como Visual Studio, junto con un enfoque estructurado, pueden simplificar la tarea de integrar datos de diversas fuentes. Además, la implementación adecuada de estas soluciones no solo mejora la calidad de los datos almacenados, sino que también permite una mayor flexibilidad y adaptabilidad frente a futuras modificaciones o expansiones del sistema.
 	
 
 
