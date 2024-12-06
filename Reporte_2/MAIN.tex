@@ -80,7 +80,7 @@
 	\end{figure}
 	
 	\subsection{Ingreso a la UCI}
-	El mayor cambio que hubo es que el hecho Ingreso a la UCI fue separado de la tabla paciente, Además se incorporó el atributo \texttt{hospitalDischargeOffset}, que indica la duración de la estancia del paciente en la UCI, medida en minutos desde el ingreso hasta el alta hospitalaria. Este ajuste fue sugerido para permitir el análisis del tiempo de hospitalización de cada paciente, un factor relevante en los estudios de recuperación y tratamiento de enfermedades respiratorias.
+	El mayor cambio que hubo es que el hecho Ingreso a la UCI fue separado de la tabla paciente, además se incorporó el atributo \texttt{hospitalDischargeOffset}, que indica la duración de la estancia del paciente en la UCI, medida en minutos desde el ingreso hasta el alta hospitalaria. Este ajuste fue sugerido para permitir el análisis del tiempo de hospitalización de cada paciente, un factor relevante en los estudios de recuperación y tratamiento de enfermedades respiratorias.
 	
 	\subsection{Tiempo de Alta}
 	Para estudiar el tiempo en este proyecto se decidió almacenar únicamente los atributos \texttt{hospitalDischargeTime24} y \texttt{hospitalDischargeYear}, ya que la base de datos no contiene un campo \texttt{hospitalAdmitYear}, como se había sugerido originalmente. Esta decisión se tomó con base en la disponibilidad de datos y la coherencia con el diseño del modelo lógico.
@@ -157,9 +157,10 @@
 	
 	\subsection{Dificultades en Northwind}
 	
-	Debido a que el archivo original, Time.xls, estaba en un formato antiguo, fue necesario transformarlo a Time.xlsx. Aunque se intentó especificar el origen como "Excel 1997", no fue posible reconocer la columna correctamente. Tras realizar la conversión al formato Excel 2007-2010, el sistema logró identificar sin problemas la columna Feuil.
+	Debido a que el archivo original, \texttt{Time.xls}, estaba en un formato antiguo, fue necesario transformarlo a \texttt{Time.xlsx}. Aunque se intentó especificar el origen como \textbf{Excel 1997}, no fue posible reconocer la columna correctamente. Tras realizar la conversión al formato \textbf{Excel 2007-2010}, el sistema logró identificar sin problemas la columna \texttt{Feuil}.
 	
-	Otra dificultad que enfrentamos fue durante el vaciado del almacén de datos, específicamente con las claves foráneas (FK). El problema surgía porque, en algunos casos, se eliminaban primero los registros asociados a la clave primaria (PK), lo que generaba conflictos con las claves foráneas dependientes. Para resolver este inconveniente, decidimos deshabilitar temporalmente las restricciones de las claves foráneas antes de realizar el vaciado del almacén y, una vez completado, las volvimos a habilitar.
+	Otra dificultad que enfrentamos fue durante el vaciado del \textbf{almacén de datos}, específicamente con las \textbf{claves foráneas (FK)}. El problema surgía porque, en algunos casos, se eliminaban primero los registros asociados a la \textbf{clave primaria (PK)}, lo que generaba conflictos con las claves foráneas dependientes. Para resolver este inconveniente, decidimos deshabilitar temporalmente las restricciones de las \textbf{claves foráneas} antes de realizar el vaciado del almacén y, una vez completado, las volvimos a habilitar.
+	
 	
 	-- Desactivar las restricciones de clave foránea temporalmente
 	
@@ -171,16 +172,16 @@
 	
 	EXEC sp\_MSForEachTable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT ALL';
 	
+	Algo que también es importante destacar es la \textbf{importancia del material de apoyo}. Al comenzar a usar una herramienta nueva como esta, seguir las instrucciones al pie de la letra puede resultar angustiante, ya que muchas veces se ejecutan los pasos sin una comprensión clara de lo que realmente se está haciendo. Gracias a los \textbf{guiones} y \textbf{videos explicativos}, es posible detenerse y entender las clases a profundidad, lo que permite experimentar por cuenta propia y adquirir un conocimiento real del sistema. Aunque las primeras horas pueden ser confusas, una vez que se construyen varias cargas, ya no es necesario seguir estrictamente el guion, y se gana la libertad de pensar en cómo generar las cargas de manera más creativa y eficiente. Este enfoque es muy apreciado, ya que en otras materias con metodologías más rígidas, esta práctica podría resultar mucho más complicada.
+	
+	
+	
 	\section{ETL del almacén de datos de pacientes con patologías respiratorias}
 	
 	Antes de realizar el proceso ETL, es necesario dejar claras algunas decisiones tomadas en el llenado del \textbf{Data Warehouse (DW)}. Durante el desarrollo del proceso ETL. Aunque las claves foráneas de un hecho deben ser las claves primarias de las tablas relacionadas. Sin embargo, en nuestro caso, hemos optado por una solución que permite evitar trabajo extra al llenar las tablas intermedias, sin perder información. En lugar de utilizar tres claves foráneas diferentes, hemos creado una clave autogenerada como clave primaria (PK) que sea única para cada combinación de \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID}. De esta forma, mantenemos la eficacia de acceder a las claves foráneas \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID} desde otras tablas, pero sin la necesidad de escribir tres claves diferentes.
 	
 	Con esta solución, se logró una estructura más flexible y escalable en la construcción del almacén de datos y facilitar futuras consultas y análisis.
-	
-	\section{ETL del almacén de datos de pacientes con patologías respiratorias}
-	
-	, específicamente en relación con el hecho. Según la teoría, las claves foráneas de un hecho deben ser las claves primarias de las tablas relacionadas. Sin embargo, en nuestro caso, hemos optado por una solución que permite evitar trabajo extra al llenar las tablas intermedias, sin perder información. En lugar de utilizar tres claves foráneas diferentes, hemos creado una clave autogenerada como clave primaria (PK) que sea única para cada combinación de \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID}. De esta forma, mantenemos la eficacia de acceder a las claves foráneas \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID} desde otras tablas, pero sin la necesidad de escribir tres claves diferentes.
-	
+
 	Otra decisión importante fue almacenar ciertas claves antiguas en algunas tablas para facilitar la herencia de claves foráneas. Por ejemplo, en el hecho hemos almacenado la clave antigua del paciente, \texttt{patientUnitStayID\_og}, con el objetivo de facilitar la herencia de la clave primaria del hecho \texttt{IngresoUCI}.
 	
 	El resto de claves en las tablas serán autogeneradas. Un ejemplo de esto es el siguiente código para la tabla \texttt{Ethnicity}:
@@ -201,7 +202,7 @@
 		\label{fig:2}
 	\end{figure}
 	
-	A continuación la explicación tarea por tarea de cada actividad planteada en el flujo de control, es importante destacar que el trabajo sigue cierta secuencialidad en algunas secciones que dependen de fases anteriores, se íntentará destacar la paralelización de tareas y la tarea previa a cada actividad pero es importante seguir las flechas mostradas en la figura \ref{fig:2}. 
+	A continuación la explicación tarea por tarea de cada actividad planteada en el flujo de control, es importante destacar que el trabajo sigue cierta secuencialidad en algunas secciones que dependen de fases anteriores, se íntentará destacar la paralelización de tareas y la tarea previa a cada actividad pero es importante seguir las flechas mostradas en la figura \ref{fig:2}. A sí mismo para cada tabla se le correspondrá un punto para detallar calmadamente el flujo de tarea interno, destacando los aspectos más importantes y las relaciones que tiene con las otras cargas. 
 	
 	\subsection{BorrarAlmacenUCI}	
 		
@@ -627,11 +628,9 @@
 	
 	\section{Conclusión}
 	
-	El proceso ETL (Extract, Transform, Load) es fundamental en la construcción y mantenimiento de un almacén de datos eficiente. Permite la integración de datos provenientes de diversas fuentes, transformándolos en información útil y cargándolos en una estructura de almacenamiento adecuada. Este proceso no solo garantiza la calidad y coherencia de los datos, sino que también facilita su análisis y explotación posterior, convirtiéndose en una pieza clave para la toma de decisiones en entornos empresariales y científicos.
+	El proceso ETL (Extract, Transform, Load) es esencial para la construcción y mantenimiento de un almacén de datos eficiente, ya que permite integrar datos de diversas fuentes, asegurando su calidad y coherencia. Este proceso facilita el análisis posterior y la toma de decisiones en entornos científicos y empresariales. Como afirmó Bill Inmon: \textit{“Un almacén de datos es una colección de datos orientados por temas, integrados, no volátiles y variables en el tiempo en apoyo de la toma de decisiones estratégicas”}.
 	
-	Visual Studio es una herramienta altamente versátil que facilita la creación de procesos ETL complejos mediante bloques de herramientas visuales. Su interfaz intuitiva permite integrar diversas técnicas de procesamiento de datos de manera modular, lo que facilita la búsqueda de soluciones alternativas para abordar cada carga de datos de manera eficiente. Mediante su uso, es posible conectar diferentes fuentes de datos, aplicar transformaciones necesarias y cargar la información en el destino deseado sin la necesidad de escribir extensas líneas de código, lo que reduce el tiempo de desarrollo y mejora la accesibilidad del proceso.
-	
-	Finalmente, este trabajo ha demostrado que, aunque los procesos ETL pueden ser complejos y desafiantes, herramientas como Visual Studio, junto con un enfoque estructurado, pueden simplificar la tarea de integrar datos de diversas fuentes. Además, la implementación adecuada de estas soluciones no solo mejora la calidad de los datos almacenados, sino que también permite una mayor flexibilidad y adaptabilidad frente a futuras modificaciones o expansiones del sistema.
+	Este trabajo ha demostrado que, aunque los procesos ETL pueden ser desafiantes, herramientas como Visual Studio permiten simplificar la integración de datos de manera eficiente. Gracias a su enfoque modular, es posible gestionar múltiples fuentes y transformaciones sin necesidad de código extenso, asegurando flexibilidad y adaptabilidad en futuros desarrollos del sistema.
 	
 
 
