@@ -162,16 +162,24 @@
 	Otra dificultad que enfrentamos fue durante el vaciado del almacén de datos, específicamente con las claves foráneas (FK). El problema surgía porque, en algunos casos, se eliminaban primero los registros asociados a la clave primaria (PK), lo que generaba conflictos con las claves foráneas dependientes. Para resolver este inconveniente, decidimos deshabilitar temporalmente las restricciones de las claves foráneas antes de realizar el vaciado del almacén y, una vez completado, las volvimos a habilitar.
 	
 	-- Desactivar las restricciones de clave foránea temporalmente
+	
+	
 	EXEC sp\_MSForEachTable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL';
 	
 	-- Reactivar las restricciones de clave foránea
-	EXEC sp\_MSForEachTable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT ALL';
 	
+	
+	EXEC sp\_MSForEachTable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT ALL';
 	
 	\section{ETL del almacén de datos de pacientes con patologías respiratorias}
 	
-	\textbf{Aquí creo que sería bueno aclarar lo de las claves del hecho y sobre porque se guardo el atributo PatientOG}
-	Antes de realizar el proceso ETL, es necesario dejar claras algunas decisiones tomadas en el llenado del \textbf{Data Warehouse (DW)}, específicamente en relación con el hecho. Según la teoría, las claves foráneas de un hecho deben ser las claves primarias de las tablas relacionadas. Sin embargo, en nuestro caso, hemos optado por una solución que permite evitar trabajo extra al llenar las tablas intermedias, sin perder información. En lugar de utilizar tres claves foráneas diferentes, hemos creado una clave autogenerada como clave primaria (PK) que sea única para cada combinación de \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID}. De esta forma, mantenemos la eficacia de acceder a las claves foráneas \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID} desde otras tablas, pero sin la necesidad de escribir tres claves diferentes.
+	Antes de realizar el proceso ETL, es necesario dejar claras algunas decisiones tomadas en el llenado del \textbf{Data Warehouse (DW)}. Durante el desarrollo del proceso ETL. Aunque las claves foráneas de un hecho deben ser las claves primarias de las tablas relacionadas. Sin embargo, en nuestro caso, hemos optado por una solución que permite evitar trabajo extra al llenar las tablas intermedias, sin perder información. En lugar de utilizar tres claves foráneas diferentes, hemos creado una clave autogenerada como clave primaria (PK) que sea única para cada combinación de \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID}. De esta forma, mantenemos la eficacia de acceder a las claves foráneas \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID} desde otras tablas, pero sin la necesidad de escribir tres claves diferentes.
+	
+	Con esta solución, se logró una estructura más flexible y escalable en la construcción del almacén de datos y facilitar futuras consultas y análisis.
+	
+	\section{ETL del almacén de datos de pacientes con patologías respiratorias}
+	
+	, específicamente en relación con el hecho. Según la teoría, las claves foráneas de un hecho deben ser las claves primarias de las tablas relacionadas. Sin embargo, en nuestro caso, hemos optado por una solución que permite evitar trabajo extra al llenar las tablas intermedias, sin perder información. En lugar de utilizar tres claves foráneas diferentes, hemos creado una clave autogenerada como clave primaria (PK) que sea única para cada combinación de \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID}. De esta forma, mantenemos la eficacia de acceder a las claves foráneas \texttt{TiempoID}, \texttt{HospitalID} y \texttt{UniquePID} desde otras tablas, pero sin la necesidad de escribir tres claves diferentes.
 	
 	Otra decisión importante fue almacenar ciertas claves antiguas en algunas tablas para facilitar la herencia de claves foráneas. Por ejemplo, en el hecho hemos almacenado la clave antigua del paciente, \texttt{patientUnitStayID\_og}, con el objetivo de facilitar la herencia de la clave primaria del hecho \texttt{IngresoUCI}.
 	
@@ -195,6 +203,8 @@
 	
 	A continuación la explicación tarea por tarea de cada actividad planteada en el flujo de control, es importante destacar que el trabajo sigue cierta secuencialidad en algunas secciones que dependen de fases anteriores, se íntentará destacar la paralelización de tareas y la tarea previa a cada actividad pero es importante seguir las flechas mostradas en la figura \ref{fig:2}. 
 	
+	\subsection{BorrarAlmacenUCI}	
+		
 	La primera actividad por excelencia en cualquier proyecto de integración de servicios es \textbf{BorrarAlmacenUCI}, para evitar duplicar datos al crear la carga de datos, como se observa en la figura \ref{fig:3} se aplica una \textit{Tarea Ejecutar SQL}, indicando el \textit{SQLStatment y IsQueryStoredProcedure}, para este punto se debe volver a \textit{SQL Server Management} para crear un procedimiento almacenado (en la database, la carpeta \textit{Programmability y StoredProcedures}), el cual se encargará de deshabilitar las restricciones de claves foráneas (útil para esta ocasión donde se desea eliminar todas las tablas para preparar el ETL y evitar errores por borrar tablas en un orden equivocado) se elimina los registros de cada tabla y por último habilita nuevamente las restricciones de claves foráneas, a través de este \href{https://github.com/Diegodepab/almacen_UCI_Sanitaria/blob/main/ETL/BorrarAlmacenUCI.sql}{enlace podrá ver el código detalladamente}.
 
 	\begin{figure}[H]
@@ -204,26 +214,17 @@
 		\label{fig:3}
 	\end{figure}
 	
-	Una vez realizado el borrado de las cargas anteriores, se puede proceder con las tareas reales de carga del almacén. Es fundamental evitar la secuencialidad en el trabajo, por lo que los flujos de datos que puedan ejecutarse en paralelo deben iniciarse. Tras ejecutar el proceso \textit{BorrarAlmacenUCI}, se inician inmediatamente los siguientes seis flujos de datos:
+	Una vez realizado el borrado de las cargas anteriores, se puede proceder con las tareas reales de carga del almacén. Es fundamental evitar la secuencialidad en el trabajo, por lo que los flujos de datos que puedan ejecutarse en paralelo deben iniciarse. Tras ejecutar el proceso \textit{BorrarAlmacenUCI} (recomendable ver la figura \ref{fig:2} y a través de las flechas entender el orden de llenado de cargas), se inician inmediatamente los siguientes seis flujos de datos:
 	
 	
-	\subsection{Carga de Región}
-	
-	En el caso de \textbf{Carga Region} se puede las tareas que se realizan en el flujo de datos en la figura \ref{fig:4}, en esta misma 
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.35\textwidth]{image/103_region.png}
-		\caption{Carga de las distintas regiones para los hospitales de la base de datos elCU}
-		\label{fig:4}
-	\end{figure}
+
 	
 	
 	\subsection{Carga de Género y Etnia}
 	
-	Utilizamos un contenedor de secuencias. Se lleva a cabo debido a que género y etnia son jerarquías paralelas y consideramos correcto establecer un orden en sus cargas.
+	 Debido a que género y etnia son jerarquícamente paralelas es decir que es deseable que se carguen a la vez y una vez ambas finalicen se usen para cargar la tabla paciente, para ello se usará un contenedor de secuencias.
 	
-	Para la \textbf{carga de género} (ver Figura \ref{fig:10}), se utilizó como origen la base de datos \textbf{[eICU Collaborative Research Database]}. En lugar de emplear directamente la tabla de género, se utilizó la siguiente consulta:
+	Para la \textbf{carga de género} (ver Figura \ref{fig:10}), se utilizó como origen la base de datos \textbf{[eICU Collaborative Research Database]}. En lugar de emplear directamente la tabla de Patient, se utilizó la siguiente consulta:
 	
 	\begin{verbatim} SELECT DISTINCT Gender FROM Patient \end{verbatim}
 	
@@ -238,7 +239,13 @@
 		\label{fig:10}
 	\end{figure}
 	
-	En la \textbf{carga de etnia} se siguió la misma lógica utilizada para la carga de géneros. Se realizó una conversión de datos para ajustar el campo \texttt{Ethnicity} del origen al campo \texttt{ethnicityString} del destino. Finalmente, los valores procesados se almacenaron en la nueva base de datos.
+	
+	%\vspace{-3cm}  % Ajusta el valor para reducir el espacio
+	
+	
+	En la \textbf{carga de etnia}, se aplicó la misma lógica utilizada en la carga de géneros. Se llevó a cabo una conversión de los datos para ajustar el campo \texttt{Ethnicity} del origen al campo \texttt{ethnicityString} en el destino. Tras procesar los valores, estos fueron almacenados correctamente en el nuevo almacén de datos.
+	
+	%\vspace{-3cm}  % Ajusta el valor para reducir el espacio
 	
 	\begin{figure}[H]
 		\centering
@@ -248,13 +255,29 @@
 	\end{figure}
 	
 	
-	\subsection{Carga Tiempo}
+	\subsection{Carga de Región}
 	
-	Para la \textbf{carga de la tabla tiempo \ref{fig:18}}, únicamente se trasladaron las tuplas de la tabla \texttt{Paciente} de la base de datos del eICU, específicamente los campos \texttt{HospitalDischargeTime24} y \texttt{HospitalDischargeYear}. El campo \texttt{TiempoID}, que se encuentra en el destino, fue autogenerado automáticamente al realizar el almacenamiento de los datos.
+	En el caso de \textbf{Carga de Región}, el flujo de datos es muy sencillo, como se observa en la figura \ref{fig:4}. Este proceso consta de dos herramientas principales: un origen \textbf{ADO NET}, que accede a la base de datos \texttt{eICU} para consultar las distintas regiones presentes en la tabla \texttt{hospital}, y un destino \textbf{ADO NET}, vinculado a la tabla \texttt{Region} del Data Warehouse. En este flujo, el atributo \texttt{regionString} se utiliza para almacenar el nombre de la región, mientras que el atributo \texttt{regionID} es una clave autogenerada, por lo que no es necesario rellenarla manualmente.
+	
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\textwidth]{image/109_carga_tiempo.png}
+		\includegraphics[width=0.5\textwidth]{image/103_region.png}
+		\caption{Carga de las distintas regiones para los hospitales de la base de datos elCU}
+		\label{fig:4}
+	\end{figure}
+	
+	En este caso, los datos originales de la base de datos \texttt{eICU} contienen únicamente 5 filas correspondientes a \texttt{NULL}, \texttt{Midwest}, \texttt{Northeast}, \texttt{South} y \texttt{West}, que son las cinco posibles regiones asignadas a los hospitales. Durante la carga de las distintas tablas, es posible observar un número diferente de filas, lo cual no debe interpretarse como un error. Esto se debe a que los 186 hospitales de la base de datos están conectados a la tabla \texttt{Region}, donde cada hospital se vincula con su respectiva región.
+	
+	\subsection{Carga Tiempo}
+	
+	Para la \textbf{carga de la tabla tiempo \ref{fig:18}}, únicamente se trasladaron las tuplas de la tabla \texttt{Paciente} de la base de datos del eICU,específicamente los campos:
+	
+	 \texttt{HospitalDischargeTime24} y \texttt{HospitalDischargeYear}. El campo \texttt{TiempoID}, que se encuentra en el destino, fue autogenerado automáticamente al realizar el almacenamiento de los datos.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{image/109_carga_tiempo.png}
 		\caption{Carga Tiempo}
 		\label{fig:18}
 	\end{figure}
@@ -269,16 +292,40 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\textwidth]{image/111_carga_priority.png}
+		\includegraphics[width=0.5\textwidth]{image/111_carga_priority.png}
 		\caption{Carga Priority}
 		\label{fig:20}
 	\end{figure}
 	
 	\subsection{Carga Tipo}
 	
+	Al igual que en anteriores cargas esta viene a ser exactamente el mismo procedimiento obteniendo los datos de ElCU a través de una consulta que otorgue las 3 prioridades posibles y estas se guardan en la tabla tipo.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{image/114_carga_TIPO.png}
+		\caption{Carga Tipo}
+		\label{fig:31}
+	\end{figure}
+	
 	\subsection{Carga RouteAdmin}
 	
+	Este es el último proceso que se realiza paralelamente despúes del uso de la tarea Ejecutar SQL: BorrarAlmacenUCI, como viene siendo sus contrapartes es la carga de una dimensión en este caso para la medicación.
+	
+	En el caso de esta carga la diferencia a destacar es que se uso la herramienta columna derivada para poner en mayúsculas el texto de RouteAdmin, esto sé hizo porque en la base de datos ElCU existen variaciones del mismo termino como puede ser el caso de oral, que indica que un medicamento se toma por esta vía, al existir las variaciones como pueden ser Oral, ORAL y oral, la base de datos estaría identificando como diferente estas 3 palabras, cuando se refieren al mismo método.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{image/117_RouteAdmin.png}
+		\caption{Carga RouteAdmin}
+		\label{fig:32}
+	\end{figure}
+	
+	
 	\subsection{Carga Hospital}
+	
+	
+	Antes de que se llegue a compilar la carga hospital es necesario que la carga de región haya terminado (Observar la sección 6.3), esto se debe a que esta tabla cargara datos del propio almacén buscando conectar los hospitales con las regiones ya almacenadas.
 	
 	Para la \textbf{carga de hospital}, se utilizó como origen la tabla \texttt{Hospital} de la base de datos \textbf{eICU}. Posteriormente, se realizó una conversión del atributo \texttt{Region} de la tabla \texttt{Hospital}, transformándolo a una cadena (\texttt{DT\_STR}) con una longitud de 64 caracteres. 
 	
@@ -289,17 +336,17 @@
 		\label{fig:16}
 	\end{figure}
 	
-	Esta transformación fue necesaria para realizar un \textit{join} mediante un elemento \textit{lookup} de \textbf{SQL Integration Services}, cuyo objetivo fue buscar las tuplas que coincidieran en región y, a partir de ahí, obtener el correspondiente \texttt{regionID} \ref{fig:22}.
+	Esta transformación fue necesaria para realizar un \textit{join} mediante un elemento \textit{lookup} de \textbf{SQL Integration Services}, cuyo objetivo fue buscar las tuplas que coincidieran en región y, a partir de ahí, obtener el correspondiente \texttt{regionID}. (ver figura \ref{fig:22})
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\textwidth]{image/105_cargahospital_lookup.png}
+		\includegraphics[width=0.75\textwidth]{image/105_cargahospital_lookup.png}
 		\caption{Busqueda\_regiones\_en\_DW}
 		\label{fig:22}
 	\end{figure}
 
 	
-	Finalmente, se almacenaron los siguientes campos en el destino\ref{fig:23}:
+	Finalmente, se almacenaron los siguientes campos en el destino (ver figura\ref{fig:23}):
 	
 	\begin{itemize}
 		\item \texttt{HospitalID} del \textbf{eICU}, renombrado como \texttt{hospitalID\_og}, para permitir que \texttt{IngresoUCI} herede la nueva clave \texttt{HospitalID} generada en nuestro \textbf{DW}.
@@ -308,13 +355,15 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\textwidth]{image/105_cargahospital_destino.png}
+		\includegraphics[width=0.75\textwidth]{image/105_cargahospital_destino.png}
 		\caption{Hospital\_en\_DW}
 		\label{fig:23}
 	\end{figure}
 
 	
 	\subsection{Carga Paciente}
+	
+	En el caso de la carga de paciente es necesario que se cargue el contenedor de secuencia que incluye la carga de gender y ethnicity (ver sección 6.2), el flujo de datos es el correspondiente a la figura \ref{fig:17}
 	
 	\begin{figure}[H]
 		\centering
@@ -329,11 +378,11 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/108_carga_paciente_origen.png}
-		\caption{Origen del flujo}
+		\caption{Carga pacientes BD}
 		\label{fig:24}
 	\end{figure}
 	
-	Posteriormente, se realizará un \textit{lookup} para efectuar un \textit{join} entre los campos \texttt{Ethnicity} y \texttt{Gender} de la base de datos \textbf{eICU}, y los campos \texttt{ethnicityString} y \texttt{genderString} obtenidos a partir de la siguiente consulta sobre nuestro \textbf{DW}(ver Figura \ref{fig:25}):
+	Posteriormente, se realizará un \textit{lookup} para efectuar un \textit{join} entre los campos \texttt{Ethnicity} y \texttt{Gender} de la base de datos \textbf{eICU}, y los campos \texttt{ethnicityString} y \texttt{genderString} obtenidos a partir de la siguiente consulta sobre nuestro \textbf{DW} (ver Figura \ref{fig:25}):
 	
 	\begin{verbatim}
 		SELECT * FROM Ethnicity, Gender
@@ -362,6 +411,8 @@
 	
 	\subsection{Carga IngresoUCI}
 	
+	En este caso se necesita tener cargada la tabla Hospital, Paciente y tiempo (ver secciones 6.4, 6.8 y 6.9), y su flujo es el de la figura \ref{fig:19}
+	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{image/110_carga_ingreso.png}
@@ -369,7 +420,7 @@
 		\label{fig:19}
 	\end{figure}
 	
-	Para la carga de \texttt{IngresoUCI}, se utilizó como origen la siguiente consulta, mostrada en la Figura \ref{fig:26}:
+	Para la carga de \texttt{IngresoUCI} aunque parezca muy simple, es debido al uso de consulta que interconectará todas las tablas como podrías, se utilizó como origen la siguiente consulta, mostrada en la Figura \ref{fig:26}:
 	
 	\begin{figure}[H]
 		\centering
@@ -407,16 +458,69 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\textwidth]{image/110_carga_ingreso_destino.png}
+		\includegraphics[width=0.7\textwidth]{image/110_carga_ingreso_destino.png}
 		\caption{Ingreso\_UCI\_DW}
 		\label{fig:28}
 	\end{figure}
 	
-	\subsection{Carga Diagnosis}
+	Es importante destacar que la Carga IngresoUCI es de las tareas que más conexiones tiene debido a su importancia para mantener una lógica y conectividad clara en el trabajo.
+	
+	\subsection{Carga ApacheApsVar}
+	
+	Para el caso de la carga ApacheApsVar es necesaria que la carga IngresoUCI haya finalizado, esto debido a que será necesaria para que los datos obtenidos de la BD esten relacionados con el ingreso actual, para esto se usa el identificador de la base de datos original de diversas maneras para conectar la ApacheApsVar correspondiente al ingreso correcto. (ver figura \ref{fig:33})
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\textwidth]{image/112_carga_diagnosis.png}
+		\includegraphics[width=0.71\textwidth]{image/120_ApacheApsVar.png}
+		\caption{Carga ApsVar}
+		\label{fig:33}
+	\end{figure}
+	
+	Es importante destacar que este es un trabajo de índole \textbf{educativo}, por lo que se propusieron diversas maneras de obtener la \textbf{información de interés} a través del uso de varias \textbf{herramientas} en la carga. En esta ocasión, se realizó de manera similar a la carga de \texttt{ingresoUCI}, utilizando un \texttt{JOIN} para relacionar la información de dos tablas. Sin embargo, en lugar de usar consultas \texttt{SQL}, se conectaron la tabla \texttt{IngresoUCI} del \textbf{DW} y la tabla \texttt{ApacheApsVar} de la base de datos. Ambas se ordenaron según el identificador original de la base de datos (\texttt{patentUnitStayID\_OG}), y los ingresos que fueron conectados con sus respectivos \texttt{apachesApsVar} se guardaron en el \textbf{DW} con el identificador actual (el autogenerado en la tabla \texttt{IngresoUCI}).
+	
+	Cabe destacar que el \textbf{resultado} es correcto y fue comprobado: las \textbf{18,993 filas} corresponden a todos los ingresos que se vincularon con un \texttt{ApacheApsVar}, mientras que las restantes, que no fueron almacenadas, son ingresos sin información asociada a este campo.
+	
+	
+	
+	\subsection{Carga AdmissionDX}
+	
+	Parecido al caso de ApacheApsVar, trabaja de manera similar es un flujo de datos que se compila una vez se completa el ingresoUCI puede observar a detalle en la figura \ref{fig:34}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{image/121_AdmissionDx.png}
+		\caption{Carga AdmissionDx}
+		\label{fig:34}
+	\end{figure}
+	
+	Como se mencionó anteriormente, la intención de este trabajo es probar y llegar a soluciones a través de las diversas \textbf{herramientas} dadas. Aunque este caso podría ser exactamente igual al de \texttt{ApacheApsVar}, en este caso se utiliza únicamente la tabla \texttt{ingresoUCI}, de modo que mediante el bloque de búsqueda se guarden todas las filas de \texttt{admissionDX} de la base de datos \textbf{ElCU}. De manera similar a lo anterior, se usa la clave original (\texttt{patentUnitStayID\_OG}) para vincular las admisiones con su respectivo ingreso. Finalmente, se guarda el identificador del ingreso (actual) de la base de datos, un identificador \textbf{autogenerado} para \texttt{AdmissionDX} y los atributos de interés de la base de datos (\texttt{AdmitDxEnteredOffset} y \texttt{AdmitDxName}). 
+	
+	Además, se puede observar el listado de \textbf{5,170 ingresos} que no tienen datos de admisión, los cuales fueron guardados en un archivo de texto plano para su posterior verificación.
+	
+	
+	\subsection{Carga RespiratoryCare}
+	
+	Siguiento los inicios anteriores para empezar esta carga es necesario que la carga ingresoUCI finalice. Puede observar en la figura \ref{fig:35} el flujo de datos.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/122_RespiratoryCare.png}
+		\caption{Carga RespiratoryCare}
+		\label{fig:35}
+	\end{figure}
+	
+	Este proceso es similar al de \texttt{ApacheApsVar}, pero cuenta con una ventaja visual al utilizar como origen la tabla \texttt{respiratoryCare} de la base de datos. Se obtienen \textbf{5,436 filas}, las cuales pasan por un bloque de búsqueda que se encarga de vincularlas con el ingreso mediante la clave \texttt{patentUnitStayID\_OG}. Los datos resultantes se almacenan en el Data Warehouse, incluyendo el \texttt{PatientUnitStayID} (ID actual de ingreso), \texttt{VenStartOffSet}, \texttt{VentEndOffset}, \texttt{LowExhMVlimit} y \texttt{HiExhMVLimit}. Como es habitual, se generó de manera automática la clave \texttt{RespCareID}.
+	
+	Es importante destacar que las cargas de \texttt{ApacheApsVar} (6.11), \texttt{Admission} (6.12) y \texttt{RespiratoryCare} (6.13) son procesos muy similares. Si adaptáramos cualquiera de estos tres flujos de datos para cada una de las respectivas cargas, se guardarían los mismos datos en el \textbf{DW}, lo que demuestra la gran versatilidad y flexibilidad que ofrece el proceso de \textbf{ETL}.
+	
+	
+	\subsection{Carga Diagnosis}
+	
+	En el caso de diagnosis es la continuacion de carga Priority vista en la sección 6.5, el flujo de datos es la figura \ref{fig:21}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/112_carga_diagnosis.png}
 		\caption{Carga Diagnosis}
 		\label{fig:21}
 	\end{figure}
@@ -440,7 +544,19 @@
 		\caption{Diagnosis\_DW}
 		\label{fig:30}
 	\end{figure}
-
+	
+	
+	
+	\subsection{Carga UCI Diagnosis}
+	
+	En este caso se necesita tener cargada la tabla Hospital, Paciente y tiempo (ver secciones 6.4, 6.8 y 6.9), y su flujo es el de la figura \ref{fig:19}
+	
+	\subsection{Carga Alergia}
+	
+	\subsection{Carga UCI Alergia}
+	
+	\subsection{Carga Medicacion}
+	
 	% Sections
 	\section{Dificultades encontradas}
 	
