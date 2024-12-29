@@ -72,24 +72,90 @@
 	
 	\section{Modificación del almacén de datos}
 	
-	Eliminamos Age y PatientUnitStayID de paciente
-	Cogemos los Pacientes únicos quedándonos con su primera aparición en la base de datos
-	Antes nos daba 1849 y ahora después del cambio mencionado en la segunda línea nos salen 1841 como debe ser
-	El tiempo seleccionarlo con distinct y diagnosis coger el primer string del DiagnosisString (la primera dimension)
-	Corregimos la creación de las tablas intermedias para las relaciones NxM
-	
-	
-	
-		- En caso de que se haya tenido que modificar el almacén y el ETL, se ha incluido una sección que indica brevemente las modificaciones realizadas y por qué ha sido necesario acometerlas.
+	\begin{itemize}
+		\item Se eliminaron las columnas `Age` y `PatientUnitStayID` de la tabla de pacientes.
+		\item Se seleccionaron únicamente los pacientes únicos, conservando solo su primera aparición en la base de datos. Anteriormente, el número total de pacientes era 1849, pero después de aplicar esta modificación, el total es de 1841, lo que es correcto.
+		\item Para el tiempo, se utilizó la cláusula `DISTINCT` y, para la información de diagnóstico, se extrajo el primer valor de la columna `DiagnosisString` (primera dimensión). La consulta SQL utilizada para obtener los datos de diagnóstico de la base de datos fue la siguiente:
+		\begin{verbatim}
+			SELECT 
+			DiagnosisID,
+			PatientUnitStayID,
+			ActiveUponDischarge,
+			DiagnosisOffset,
+			ICD9Code,
+			DiagnosisPriority,
+			SUBSTRING(DiagnosisString, 1, CHARINDEX('|'
+			, DiagnosisString + '|') - 1) AS FirstDiagnosis
+			FROM Diagnosis;
+		\end{verbatim}
+		\item Se corrigió la creación de las tablas intermedias para las relaciones `NxM`. Anteriormente, se utilizaba como origen de datos la tabla `Diagnosis` de la base de datos en lugar de la del `Data Warehouse`. Posteriormente, se realizaba un `lookup` con `IngresoUCI` utilizando el `patientID\_og`.
+		\item Se realizó una transformación en la columna `Age`, cambiando su tipo de dato de `string` a `integer` para permitir su uso en consultas. Durante este proceso, se transformó el valor `'> 89'` a `90` por defecto. La consulta SQL utilizada para obtener los datos de la tabla `Patient` en la base de datos fue la siguiente:
+		\begin{verbatim}
+			SELECT 
+			T.TiempoID,
+			P.UniquePID,
+			H.HospitalID,
+			I.HospitalDischargeOffset,
+			I.PatientHealthSystemStayID,
+			I.PatientUnitStayID,
+			CASE 
+			WHEN I.Age = '> 89' THEN 90                      
+			-- Cambiar "> 89" por 90
+			WHEN ISNUMERIC(I.Age) = 1 THEN CAST(I.Age AS INT) 
+			-- Convertir valores numéricos a INT
+			ELSE NULL                                       
+			-- Manejar otros casos como NULL
+			END AS AgeInt
+			FROM [eICU Collaborative Research Database].dbo.Patient I
+			LEFT JOIN prueba.dbo.Paciente P ON I.uniquePID = P.uniquePID_og
+			LEFT JOIN prueba.dbo.Hospital H ON I.HospitalID = H.hospitalID_og
+			LEFT JOIN prueba.dbo.Tiempo T 
+			ON I.HospitalDischargeYear = T.HospitalDischargeYear 
+			AND I.HospitalDischargeTime24 = T.HospitalDischargeTime24;
+		\end{verbatim}
+	\end{itemize}
+		
+		
 	
 	\section{Creación del cubo}
 	
-	  - Una sección que describa, a modo de tutorial, el proceso para la creación del cubo de vuestro proyecto. 
-	  
-	  
-	  	- La memoria es descriptiva y completa, describiendo correctamente, a modo de tutorial, los pasos para la creación del cubo multidimensional.
-	  
-	  - Existe un conjunto de instrucciones para desplegar el proyecto en el equipo y es posible su implementación siguiéndolas. 
+	Para la creación del cubo, iniciaremos el proceso estableciendo la conexión con nuestra base de datos:
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{image/origenDatos}
+		\caption{Origen de datos}
+		\label{fig:1}
+	\end{figure}
+	
+	A continuación, procederemos a establecer la conexión con la base de datos, donde especificaremos el proveedor a utilizar, como se muestra en la Figura \ref{fig:2}. Dado que nuestro servidor se encuentra en el entorno local, se debe indicar únicamente . como la dirección del servidor. Es crucial, \textbf{y se debe prestar especial atención}, que la autenticación se configure utilizando SQL Server Authentication. Esto permitirá especificar el nombre de usuario como sa y la contraseña asociada, que en este caso será Almacenes. Finalmente, seleccionaremos la base de datos correspondiente, que en este escenario es prueba, como se ilustra en la Figura \ref{fig:2}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{image/conexion}
+		\caption{Conexión de datos}
+		\label{fig:2}
+	\end{figure}
+	
+	Llegados a este punto daremos click derecho en vistas del origen de datos. 
+	
+	
+	 \subsection{Instrucciones para desplegar el proyecto en el equipo}
+	 
+	 Para ejecutar la tarea, será suficiente con descomprimir el archivo. A continuación, se deberá hacer clic derecho sobre el proyecto multidimensional y seleccionar la opción ``Propiedades''. Una vez en el apartado de propiedades, se procederá a acceder a la sección de implementación, donde se deberá seleccionar el servidor correspondiente. En este caso, se podrá elegir como servidor `localhost` o bien `localhost\textbackslash nuestroServidorSQL`. En mi situación particular, dado que disponía de dos instancias de `MSSQLSERVER`, fue necesario especificar que se utilizaría la instancia `MSSQLSERVER2`, que es la que posee la funcionalidad multidimensional.
+	 
+	 \begin{figure}[H]
+	 	\centering
+	 	\includegraphics[width=1\textwidth]{image/despliegue}
+	 	\caption{Configuración de despliegue}
+	 	\label{fig:3}
+	 \end{figure}
+	 
+	 Una vez configurado todo correctamente, se procederá a hacer clic en ``Iniciar'' y el proceso se completará de manera satisfactoria. 
+	 
+	Posteriormente, iniciaremos los servicios de Análisis (Analysis Services) en SQL Server Management Studio y verificaremos que tanto el proyecto \textit{ProyectoMultidimensional5} como el cubo se han desplegado correctamente.
+	
+	 
 	
 	\section{Consultas en MDX}
 	- Una sección con las consultas en MDX y una captura con el resultado de cada una de ellas (la imagen capturada no tiene por qué mostrar todas las tuplas resultantes). 

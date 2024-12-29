@@ -1,9 +1,10 @@
 \contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
 \contentsline {section}{\numberline {2}Objetivos}{3}{section.2}%
 \contentsline {section}{\numberline {3}Modificación del almacén de datos}{3}{section.3}%
-\contentsline {section}{\numberline {4}Creación del cubo}{4}{section.4}%
-\contentsline {section}{\numberline {5}Consultas en MDX}{4}{section.5}%
-\contentsline {section}{\numberline {6}Instrucciones para ejecutar las consultas.}{4}{section.6}%
-\contentsline {section}{\numberline {7}Problemas encontrados}{4}{section.7}%
-\contentsline {section}{\numberline {8}Conclusión}{5}{section.8}%
-\contentsline {section}{\numberline {9}Github y conjunto de instrucciones para su correcto despliegue en SQL Server.}{5}{section.9}%
+\contentsline {section}{\numberline {4}Creación del cubo}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Instrucciones para desplegar el proyecto en el equipo}{5}{subsection.4.1}%
+\contentsline {section}{\numberline {5}Consultas en MDX}{6}{section.5}%
+\contentsline {section}{\numberline {6}Instrucciones para ejecutar las consultas.}{6}{section.6}%
+\contentsline {section}{\numberline {7}Problemas encontrados}{7}{section.7}%
+\contentsline {section}{\numberline {8}Conclusión}{7}{section.8}%
+\contentsline {section}{\numberline {9}Github y conjunto de instrucciones para su correcto despliegue en SQL Server.}{7}{section.9}%
