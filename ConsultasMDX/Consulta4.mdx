@@ -1,0 +1,54 @@
+-- Consulta 4:
+-- Cálculo de Porcentaje Acumulado de Ingresos UCI por Región Hospitalaria
+WITH 
+-- Total acumulado hasta el miembro actual
+MEMBER [Measures].[Total Acumulado] AS
+    SUM(
+        {NULL:[Hospital].[Region ID].CURRENTMEMBER}, 
+        [Measures].[Recuento Ingreso UCI]
+    )
+-- Total global de la jerarquía
+MEMBER [Measures].[Total Global] AS
+    SUM(
+        [Hospital].[Region ID].[All], 
+        [Measures].[Recuento Ingreso UCI]
+    )
+-- Porcentaje acumulado con formato ajustado
+MEMBER [Measures].[Porcentaje Acumulado] AS
+    [Measures].[Total Acumulado] / [Measures].[Total Global],
+    FORMAT_STRING = "0.00" -- Formato para mostrar 2 decimales
+SELECT 
+    NON EMPTY {[Measures].[Recuento Ingreso UCI], [Measures].[Total Acumulado], [Measures].[Porcentaje Acumulado]} ON COLUMNS,
+    [Hospital].[Region ID].CHILDREN ON ROWS
+FROM [PruebaDefinitiva]
+
+
+-- otra version usando filter para eliminar Unknown
+WITH 
+-- Total acumulado hasta el miembro actual
+MEMBER [Measures].[Total Acumulado] AS
+    SUM(
+        {NULL:[Hospital].[Region ID].CURRENTMEMBER}, 
+        [Measures].[Recuento Ingreso UCI]
+    )
+-- Total global de la jerarquía
+MEMBER [Measures].[Total Global] AS
+    SUM(
+        [Hospital].[Region ID].[All], 
+        [Measures].[Recuento Ingreso UCI]
+    )
+-- Porcentaje acumulado con formato ajustado
+MEMBER [Measures].[Porcentaje Acumulado] AS
+    [Measures].[Total Acumulado] / [Measures].[Total Global],
+    FORMAT_STRING = "0.00" -- Formato para mostrar 2 decimales
+SELECT 
+    NON EMPTY {[Measures].[Recuento Ingreso UCI], [Measures].[Total Acumulado], [Measures].[Porcentaje Acumulado]} ON COLUMNS,
+    FILTER(
+        [Hospital].[Region ID].CHILDREN,
+        [Hospital].[Region ID].CURRENTMEMBER.NAME <> "Unknown" AND 
+        NOT ISNULL([Measures].[Recuento Ingreso UCI])
+    ) ON ROWS
+FROM [PruebaDefinitiva]
+
+
+

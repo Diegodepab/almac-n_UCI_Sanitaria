@@ -1,0 +1,29 @@
+-- Consulta 2: 
+--Etnia de Pacientes con Mayor Uso de Medicamentos por Region de Hospital
+WITH 
+    MEMBER [Measures].[TotalMedicamentos] AS
+        [Measures].[Recuento UCI Medicacion],
+        FORMAT_STRING = "##"
+SELECT
+    NON EMPTY 
+    {[Measures].[TotalMedicamentos]} ON COLUMNS,
+    NON EMPTY [Hospital].[Region].[Region ID] 
+	* [Paciente].[Etnia].[Ethnicity ID] ON ROWS
+FROM 
+    [PruebaDefinitiva]
+
+-- INTENTO ANTERIOR PERO CON ALL
+WITH 
+    MEMBER [Measures].[TotalMedicamentos] AS
+        [Measures].[Recuento UCI Medicacion],
+        FORMAT_STRING = "##"
+SELECT
+    NON EMPTY 
+    {[Measures].[TotalMedicamentos]} ON COLUMNS,
+    NON EMPTY [Hospital].[Region ID].MEMBERS 
+	* [Paciente].[Ethnicity ID].MEMBERS ON ROWS
+FROM 
+    [PruebaDefinitiva]
+
+
+

@@ -1,0 +1,32 @@
+
+--Consulta 7:
+-- Consulta de Recuento UCI y Tasa Respiratoria Media por Edad, Tipo de Alergia y Diagnóstico para Pacientes Hispanos en 2015
+WITH 
+    MEMBER [Measures].[MediaRespiratoryRate] AS
+        [Measures].[Respiratory Rate] / [Measures].[Recuento UCI Alergia],
+        FORMAT_STRING = "##.00"
+SELECT 
+    -- En las columnas se muestran las medidas Recuento UCI Alergia, Recuento UCI Diagnosis y Recuento Ingreso UCI
+    { 
+        [Measures].[Recuento UCI Alergia],
+		[Measures].[MediaRespiratoryRate]
+    } ON COLUMNS,
+    
+    -- En las filas se cruzan varias dimensiones: Edad, Alergia y Diagnóstico
+    NON EMPTY 
+    CROSSJOIN(
+        CROSSJOIN(
+            [Ingreso UCI].[agePatient].[Age].MEMBERS, -- Edad de pacientes (15-90 años)
+            [Allergy].[TipoAlergia].[Tipo ID].MEMBERS -- Tipo de Alergia (Drug/Non Drug)
+        ),
+        [Diagnosis].[PriorityDiag].[Priority ID].MEMBERS -- Tipo de Diagnóstico (Major/Primary/Other)
+    ) ON ROWS
+    
+FROM 
+    [PruebaDefinitiva]
+    
+WHERE 
+    -- Se filtra por el año 2015 y pacientes hispanos 
+    ([Tiempo].[Tiempo].[Hospital Discharge Year].[2015], 
+     [Paciente].[Etnia].[Ethnicity ID].Hispanic)
+

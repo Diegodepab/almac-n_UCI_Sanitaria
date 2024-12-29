@@ -1,0 +1,14 @@
+-- Consulta 1: 
+-- El total de los pacientes ingresados en un hospital del este (west) junto a informaciónd de su edad según su genero
+WITH 
+    MEMBER [Measures].[MediaEdadUCI] AS
+        [Measures].[AgeTotal] / [Measures].[Recuento Ingreso UCI],
+        FORMAT_STRING = "##.00"
+SELECT 
+    NON EMPTY {[Measures].[Recuento Ingreso UCI], [Measures].[AgeMaximo], [Measures].[AgeMenor], [Measures].[MediaEdadUCI]} ON COLUMNS, 
+    NON EMPTY [Paciente].[Gender ID].MEMBERS ON ROWS
+FROM 
+    PruebaDefinitiva
+WHERE 
+	[Hospital].[Region].[Region ID].West
+	

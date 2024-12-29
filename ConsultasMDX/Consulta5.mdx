@@ -1,0 +1,12 @@
+--Consulta 5 
+-- Recuento de Ingresos a UCI por Hora y Total Anual
+-- Recuento de ingresos del nivel padre (año)
+WITH 
+MEMBER [Measures].[Recuento Anual] AS
+    ([Tiempo].[Tiempo].CURRENTMEMBER.PARENT, [Measures].[Recuento Ingreso UCI])
+SELECT 
+    {[Measures].[Recuento Ingreso UCI], [Measures].[Recuento Anual]} ON COLUMNS,
+    [Tiempo].[Tiempo].[Hospital Discharge Time24].MEMBERS ON ROWS
+FROM [PruebaDefinitiva]
+
+

@@ -1,0 +1,31 @@
+-- Consulta 3: 
+--Promedio de PaO2, FiO2 y Frecuencia Respiratoria por Región Hospitalaria y etnia para Pacientes de 20 a 30 Años en UCI
+WITH 
+    MEMBER [Measures].[Total Pacientes] AS
+        [Measures].[Recuento Apache Aps Var]
+    MEMBER [Measures].[MediaPaO2] AS
+        [Measures].[Pa O2] / [Measures].[Recuento Apache Aps Var],
+        FORMAT_STRING = "##.00"
+    MEMBER [Measures].[MediaFi O2] AS
+        [Measures].[Fi O2] / [Measures].[Recuento Apache Aps Var],
+        FORMAT_STRING = "##.00"
+    MEMBER [Measures].[MediaRespiratoryRate] AS
+        [Measures].[Respiratory Rate] / [Measures].[Recuento Apache Aps Var],
+        FORMAT_STRING = "##.00"
+SELECT
+    NON EMPTY 
+    {[Measures].[MediaPaO2], 
+     [Measures].[MediaFi O2],
+     [Measures].[MediaRespiratoryRate],
+     [Measures].[Total Pacientes]} ON COLUMNS,
+    NON EMPTY 
+    CROSSJOIN(
+        [Hospital].[Region].[Region ID], 
+        [Paciente].[Etnia].[Ethnicity ID]
+    ) ON ROWS
+FROM 
+    [PruebaDefinitiva]
+WHERE
+    ([Ingreso UCI].[agePatient].[Age].&[20] : [Ingreso UCI].[agePatient].[Age].&[30])
+
+
