@@ -75,7 +75,8 @@
 	\begin{itemize}
 		\item Se eliminaron las columnas `Age` y `PatientUnitStayID` de la tabla de pacientes.
 		\item Se seleccionaron únicamente los pacientes únicos, conservando solo su primera aparición en la base de datos. Anteriormente, el número total de pacientes era 1849, pero después de aplicar esta modificación, el total es de 1841, lo que es correcto.
-		\item Para el tiempo, se utilizó la cláusula `DISTINCT` y, para la información de diagnóstico, se extrajo el primer valor de la columna `DiagnosisString` (primera dimensión). La consulta SQL utilizada para obtener los datos de diagnóstico de la base de datos fue la siguiente:
+		\item Para el tiempo, se utilizó la cláusula `DISTINCT`, para evitar fechas duplicadas en el ingreso.
+		\item Para la información de diagnóstico, se extrajo el primer valor de la columna `DiagnosisString` (primera dimensión). La consulta SQL utilizada para obtener los datos de diagnóstico de la base de datos fue la siguiente:
 		\begin{verbatim}
 			SELECT 
 			DiagnosisID,
@@ -117,28 +118,127 @@
 		
 		
 	
-	\section{Creación del cubo}
-	
-	Para la creación del cubo, iniciaremos el proceso estableciendo la conexión con nuestra base de datos:
-	
+\section{Creación del cubo}
+
+\subsection{Orígenes de datos}
+
+Para la creación del cubo, iniciaremos el proceso estableciendo la conexión con nuestra base de datos:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{image/origenDatos}
+	\caption{Origen de datos}
+	\label{fig:1}
+\end{figure}
+
+A continuación, procederemos a establecer la conexión con la base de datos, donde especificaremos el proveedor a utilizar, como se muestra en la Figura \ref{fig:2}. Dado que nuestro servidor se encuentra en el entorno local, se debe indicar únicamente `.` como la dirección del servidor. Es crucial, \textbf{y se debe prestar especial atención}, que la autenticación se configure utilizando SQL Server Authentication. Esto permitirá especificar el nombre de usuario como `sa` y la contraseña asociada, que en este caso será `Almacenes`. Finalmente, seleccionaremos la base de datos correspondiente, que en este escenario es `prueba`, como se ilustra en la Figura \ref{fig:2}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{image/conexion}
+	\caption{Conexión de datos}
+	\label{fig:2}
+\end{figure}
+
+Una vez realizados los pasos anteriores, procederemos a hacer clic derecho sobre las vistas del origen de datos y seleccionaremos la opción "Nueva Vista". Esto nos mostrará todos los orígenes de datos disponibles, siendo en este caso solo la base de datos "Prueba", como se muestra en la Figura \ref{fig:4}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{image/vistaOrigenConexion}
+	\caption{Vista origen conexión de datos}
+	\label{fig:4}
+\end{figure}
+
+A continuación, haremos clic en "Next".
+
+En la siguiente pantalla que aparecerá, como se muestra en la Figura \ref{fig:5}, seleccionaremos el botón señalado en rojo. Esto nos permitirá incluir todas las tablas en la vista para garantizar que el almacén de datos esté completo. Luego, seleccionaremos "Next".
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{image/seleccionTablas}
+	\caption{Selección de tablas}
+	\label{fig:5}
+\end{figure}
+
+Posteriormente, aparecerá una nueva pantalla donde podremos visualizar lo que contendrá la vista y, por ende, con qué elementos podremos operar en el cubo, como se muestra en la Figura \ref{fig:6}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{image/asistenteVista}
+	\caption{Vista finalización}
+	\label{fig:6}
+\end{figure}
+
+Una vez revisado todo, seleccionaremos "Finalizar" como se muestra en la Figura \ref{fig:6}.
+
+Al hacer doble clic en la vista recién creada, podremos ver que contiene todas las tablas que teníamos en nuestro diagrama de SQL Server Management, como se ilustra en la Figura \ref{fig:7}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{image/vista_origenes_datos}
+	\caption{Vista}
+	\label{fig:7}
+\end{figure}
+
+\subsection{Creación del cubo}
+
+	Una vez que la vista esté configurada, podemos proceder a crear el cubo. Para ello, haremos clic derecho sobre el proyecto y seleccionaremos "Nuevo Cubo". En la ventana emergente, elegiremos la opción "Usar tablas existentes", tal como se muestra en la Figura \ref{fig:9}.
+
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.5\textwidth]{image/origenDatos}
-		\caption{Origen de datos}
-		\label{fig:1}
+		\includegraphics[width=1\textwidth]{image/crearCubo}
+		\caption{Vista}
+		\label{fig:9}
 	\end{figure}
-	
-	A continuación, procederemos a establecer la conexión con la base de datos, donde especificaremos el proveedor a utilizar, como se muestra en la Figura \ref{fig:2}. Dado que nuestro servidor se encuentra en el entorno local, se debe indicar únicamente . como la dirección del servidor. Es crucial, \textbf{y se debe prestar especial atención}, que la autenticación se configure utilizando SQL Server Authentication. Esto permitirá especificar el nombre de usuario como sa y la contraseña asociada, que en este caso será Almacenes. Finalmente, seleccionaremos la base de datos correspondiente, que en este escenario es prueba, como se ilustra en la Figura \ref{fig:2}.
-	
+
+	Luego, haremos clic en "Next" y aparecerá una pantalla como la que se muestra en la Figura \ref{fig:10}.
+
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.7\textwidth]{image/conexion}
-		\caption{Conexión de datos}
-		\label{fig:2}
+		\includegraphics[width=1\textwidth]{image/seleccionTablasCubo}
+		\caption{Selección tablas del Cubo}
+		\label{fig:10}
 	\end{figure}
+
+	En esta pantalla, seleccionaremos únicamente aquellas tablas que tengan una relación de tipo 1 a N con la tabla de hechos, donde N representa las tablas relacionadas y 1 es la tabla de hechos. Esto incluye las tablas \textit{AdmissionDx}, \textit{ApacheApsVar}, \textit{RespiratoryCare}, así como las tablas intermedias (\textit{UCI\_Medicacion}, \textit{UCI\_Diagnosis} y \textit{UCI\_Alergia}) resultantes de las relaciones NxM entre las tablas \textit{Medication}, \textit{Diagnosis} y \textit{Allergy}.
+
+	Si hemos seguido correctamente los pasos anteriores, el resultado será similar al mostrado en la Figura \ref{fig:8}.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{image/loquellevamos}
+		\caption{Proyecto Multidimensional}
+		\label{fig:8}
+	\end{figure}
+
+	\textbf{Cabe destacar que las dimensiones se generan automáticamente a partir de la creación del cubo.}
 	
-	Llegados a este punto daremos click derecho en vistas del origen de datos. 
-	
+\subsection{Modificación de las dimensiones}
+
+	Ahora procederemos con la modificación de las dimensiones para su uso correcto en el cubo.
+
+	Si damos doble clic en la dimensión `Paciente` y nos vamos al apartado de "Estructura de dimensión", veremos en la columna de atributos las claves almacenadas en `Paciente`, como se muestra en la Figura \ref{fig:11}. Ahora, lo que haremos será crear jerarquías para utilizarlas posteriormente en las consultas.
+
+	En el caso de `Paciente`, teníamos una doble jerarquía. Por un lado, era el género y por otro, la etnia. Para crear estas jerarquías, arrastraremos la clave de la jerarquía que queramos empezar, ya sea `GenderID` o `EthnicityID`, al área donde aparece "Jerarquías". Luego, arrastraremos la clave `UniquePID`. Esto dará lugar a dos jerarquías similares a las mostradas en la Figura \ref{fig:11}.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{image/dimPaciente}
+		\caption{Dimensión Paciente}
+		\label{fig:11}
+	\end{figure}
+
+	Posteriormente, para que las jerarquías se entiendan correctamente y no se utilicen solo ID's, será necesario hacer los siguientes cambios.
+
+	Daremos doble clic en `EthnicityID` y en el recuadro inferior derecho nos aparecerán las propiedades de dicho atributo, como se muestra en la Figura \ref{fig:12}.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{image/EthnicityID}
+		\caption{EthnicityID}
+		\label{fig:12}
+	\end{figure}
+
 	
 	 \subsection{Instrucciones para desplegar el proyecto en el equipo}
 	 
@@ -181,18 +281,13 @@
 
 	\section{Problemas encontrados}
 
-
-	Maldita maquina virtual
-
-
-
-
-	- Una sección "problemas encontrados" que explique con cierto detalle los problemas que se han encontrado durante la realización de la práctica. Se permite que la información incluida en esta sección se encuentre dividida o dispersada a lo largo del documento. 
-
-	- La sección de "problemas encontrados” (o similar) es coherente y explica con cierto detalle los problemas que se han encontrado durante la realización de la práctica (ojo, no tienen por qué haber sido resueltos). Se permite que la información incluida en esta sección se encuentre dividida o dispersada a lo largo del documento.
+	Entre los principales problemas que encontramos, destaca la conexión con la base de datos, la cual generaba errores de manera constante debido a que el método de autenticación no era configurado para utilizar \textit{SQL Authentication}.
 	
-
-	- Calificación final.
+	Adicionalmente, surgieron problemas derivados de un proceso de ETL incorrectamente implementado, lo que resultó en la presencia de múltiples tuplas con valores duplicados, como ocurrió en la tabla \textit{ingresoUCI} inicialmente.
+	
+	Aunque no se considera un problema en sentido estricto, decidimos modificar el atributo \textit{age}, cambiando su tipo de dato a \textit{int} para facilitar su utilización en las consultas, dado que este atributo es de gran utilidad.
+	
+	Finalmente, también se presentaron inconvenientes durante el proceso de despliegue, ya que se nos pasaba por alto que, con cada cambio realizado, era necesario procesar y actualizar el cubo.
 	
 
 	\section{Conclusión}
