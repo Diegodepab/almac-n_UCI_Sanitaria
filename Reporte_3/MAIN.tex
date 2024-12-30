@@ -440,9 +440,33 @@ Procedemos a darle a aceptar, y con ello habremos construido una jerarquía corr
 
 \subsection{Modificaciones del cubo}
 
-Antes de desplegar el cubo 
+Antes de desplegar el cubo, tendremos hacer unos cambios en los grupos de medida para que las tablas NxM funcionen correctamente. 
 
-	 \subsection{Instrucciones para desplegar el proyecto en el equipo}
+El principal cambio es el que se ve en la Figura \ref{fig:30}. En la que tendremos que poner en Ingreso UCI y en las filas Allergy, Diagnosis y Medication sus correspondientes tablas intermedias para que se relacionen esas tablas con el hecho con relación varios a varios. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{image/gruposMedida}
+	\caption{Grupos de Medida}
+	\label{fig:30}
+\end{figure}
+
+Con el resto de tablas, Allergy, Diagnosis y Medication, no tienen relación por lo que se pueden quedar vacías. ç
+
+Además también habrá que poner Allergy ID como atributo de granularidad entre las tablas Allergy y UCI\_Alergia (Tendremos que hacer lo mismo para el resto de tablas intermedias).
+
+\subsubsection{Despliegue del cubo}
+
+Una vez hayamos realizado todos estos pasos podremos desplegar el cubo. Bastará con darle al botón de iniciar. Y si lo hemos hecho bien saldrá un check en verde \ref{fig:31}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{image/checkVerde}
+	\caption{Check Verde}
+	\label{fig:31}
+\end{figure}
+
+\subsection{Instrucciones para desplegar el proyecto en el equipo}
 	 
 	 Para ejecutar la tarea, será suficiente con descomprimir el archivo. A continuación, se deberá hacer clic derecho sobre el proyecto multidimensional y seleccionar la opción ``Propiedades''. Una vez en el apartado de propiedades, se procederá a acceder a la sección de implementación, donde se deberá seleccionar el servidor correspondiente. En este caso, se podrá elegir como servidor `localhost` o bien `localhost\textbackslash nuestroServidorSQL`. En mi situación particular, dado que disponía de dos instancias de `MSSQLSERVER`, fue necesario especificar que se utilizaría la instancia `MSSQLSERVER2`, que es la que posee la funcionalidad multidimensional.
 	 
