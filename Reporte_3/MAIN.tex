@@ -135,27 +135,29 @@ A continuación, procederemos a \textbf{establecer la conexión con la base de d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{image/conexion}
+	\includegraphics[width=0.8\textwidth]{image/conexion}
 	\caption{\textbf{Conexión de datos}}
 	\label{fig:2}
 \end{figure}
+
+Cabe destacar que en la creación de un cubo se puede seleccionar mejores nombre que "prueba", pero por simplicidad y facilitar el seguimiento de este tutorial, en caso de crear una base de datos se recomendaría usar un nombre más coherente con los datos trabajados, pero al igual que muchos lenguajes de programación se le puede asignar el nombre deseado mientras se mantenga la lógica y la correcta llamada de la misma.
 
 Una vez realizados los pasos anteriores, procederemos a hacer clic derecho sobre las \textbf{vistas del origen de datos} y seleccionaremos la opción "Nueva Vista". Esto nos mostrará todos los orígenes de datos disponibles, siendo en este caso solo la base de datos "Prueba", como se muestra en la Figura \ref{fig:4}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{image/vistaOrigenConexion}
+	\includegraphics[width=1\textwidth]{image/vistaOrigenConexion}
 	\caption{\textbf{Vista origen conexión de datos}}
 	\label{fig:4}
 \end{figure}
 
-A continuación, haremos clic en "Next".
+A continuación, procederemos a hacer clic en el botón "Next".
 
-En la siguiente pantalla que aparecerá, como se muestra en la Figura \ref{fig:5}, seleccionaremos el \textbf{botón señalado en rojo}. Esto nos permitirá incluir \textbf{todas las tablas en la vista} para garantizar que el almacén de datos esté completo. Luego, seleccionaremos "Next".
+En la pantalla siguiente, tal como se muestra en la Figura \ref{fig:5}, seleccionaremos el \textbf{botón resaltado en rojo}. Esta acción nos permitirá agregar \textbf{todas las tablas a la vista}, lo que es fundamental para asegurar que el almacén de datos incluya toda la información necesaria para la correcta construcción del cubo. Una vez seleccionadas todas las tablas, continuaremos haciendo clic en "Next" para avanzar al siguiente paso del proceso.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{image/seleccionTablas}
+	\includegraphics[width=1\textwidth]{image/seleccionTablas}
 	\caption{\textbf{Selección de tablas}}
 	\label{fig:5}
 \end{figure}
@@ -186,8 +188,8 @@ Una vez que la \textbf{vista esté configurada}, podemos proceder a \textbf{crea
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{image/crearCubo}
-	\caption{\textbf{Vista}}
+	\includegraphics[width=0.75\textwidth]{image/crearCubo}
+	\caption{\textbf{Creación de nuevo cubo}}
 	\label{fig:9}
 \end{figure}
 
@@ -268,11 +270,13 @@ Haremos exactamente el mismo proceso para el resto de tablas, \textbf{exceptuand
 	\label{fig:14}
 \end{figure}
 
-Seleccionamos \texttt{genderString}.
+Seleccionamos \texttt{genderString}. Al igual que antes esto es un paso "opcional" pero que mejora la calidad de nuestro cubo, si se ha probado desplegar el cubo sin cambiar estos puntos, dará resultados y se podrá hacer consultas, el problema es que estas serán más confusas, donde en lugar de hacer consultas con una etiqueta como podría ser ".male" sería correspondiente al id autogenerado para male, que vendría a ser un número que no refleja correctamente su uso.
 
 \subsubsection{Hospital}
 
-\textbf{Jerarquía:}
+En el caso del hospital al ser parecido al caso anterior se empezará a obviar pasos para evitar redundancia, siendo las principales selecciones:
+
+\textbf{Jerarquía:} Se asigna que los hospitales tengan otro nivel donde se puedan organizar según la región del hospital.
 
 \begin{figure}[H]
 	\centering
@@ -281,7 +285,7 @@ Seleccionamos \texttt{genderString}.
 	\label{fig:15}
 \end{figure}
 
-\textbf{ValueColumn} y \textbf{NameColumn}:
+\textbf{ValueColumn} y \textbf{NameColumn} son cambiados por su versión en string que de mayor contexto.
 
 \begin{figure}[H]
 	\centering
@@ -290,7 +294,7 @@ Seleccionamos \texttt{genderString}.
 	\label{fig:16}
 \end{figure}
 
-Seleccionamos \texttt{regionString}. Como no teníamos ningún nombre de hospital, lo que tendremos serán las regiones y todos los IDs de los hospitales asociados a esa región.
+En otras bases de datos el nivel más bajo de granularidad probablemente cuente con su respectivo String, como puede ser en los almacenes de comercio donde los productos, empresas, tiendas, etc. Tienen sus nombres. En el caso de la salud contamos con el inconveniente de la sensibilidad de los datos, llegando a tener el RegionString que indica la zona del hospital, pero de los hospitales solo se cuenta con los IDs asociados, que vendrían a ser un número autogenerado, al no contar con sus nombres solo se podrá cambiar los nombres del nivel de región.
 
 \subsubsection{IngresoUCI}
 
@@ -298,10 +302,12 @@ Seleccionamos \texttt{regionString}. Como no teníamos ningún nombre de hospita
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{image/JIngresoUCI}
+	\includegraphics[width=0.65\textwidth]{image/JIngresoUCI}
 	\caption{Jerarquía de IngresoUCI}
 	\label{fig:17}
 \end{figure}
+
+En este nivel se tomo la decisión de tomar la edad como medidas y como dimensión para dar mayor fácilidad a la hora de hacer consultas demográficas.
 
 \subsubsection{Allergy}
 
@@ -309,7 +315,7 @@ Seleccionamos \texttt{regionString}. Como no teníamos ningún nombre de hospita
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{image/JAlergia}
+	\includegraphics[width=0.65\textwidth]{image/JAlergia}
 	\caption{Jerarquía de Alergia}
 	\label{fig:18}
 \end{figure}
@@ -353,7 +359,7 @@ Seleccionamos \texttt{DiagnosisString}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{image/JMedication}
+	\includegraphics[width=0.55\textwidth]{image/JMedication}
 	\caption{Jerarquía de Hospital}
 	\label{fig:22}
 \end{figure}
@@ -362,7 +368,7 @@ Seleccionamos \texttt{DiagnosisString}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{image/routeAdmin}
+	\includegraphics[width=0.88\textwidth]{image/routeAdmin}
 	\caption{RouteAdminID}
 	\label{fig:23}
 \end{figure}
@@ -453,7 +459,7 @@ El ajuste principal se ilustra en la Figura \ref{fig:30}, en la cual será neces
 
 \textbf{Allergy}, \textbf{Diagnosis} y \textbf{Medication} no tienen relaciones con el resto de tablas, por lo que el resto de columnas que no sean IngresoUCI o las tablas intermedias, deberán quedar vacías.
 
-Adicionalmente, será necesario asignar \textbf{Allergy ID} como atributo de granularidad entre las tablas \textbf{Allergy} y \textbf{UCI\_Alergia}. Este mismo procedimiento deberá aplicarse a todas las demás tablas intermedias.
+Adicionalmente, será necesario asignar \textbf{Allergy ID} como atributo de granularidad entre las tablas \textbf{Allergy} y \textbf{UCI\_Alergia}. Este mismo procedimiento deberá aplicarse a todas las demás tablas intermedias (UCI Diagnosis y UCI Medication en este ejemplo).
 
 \subsubsection{Nuevas medidas}
 
@@ -466,11 +472,13 @@ Finalmente, procederemos a la incorporación de nuevas medidas, específicamente
 	\label{fig:32}
 \end{figure}
 
+En este apartado se opto por usar el valor edad para probar los distintos usos que se pueden llegar a hacer en las medidas, se invita al lector a usar más de estas pues mucho tutoriales se quedan solamente con el uso de recuento cuando son herramientas que bajo ciertos contexto pueden ser útiles y fácilitar tanto la consulta o proporcionar nueva información que de otro modo llega a ser ignorada.
 
 \subsubsection{Despliegue del cubo}
 
 Una vez realizados todos los ajustes necesarios, el cubo estará listo para ser desplegado. El proceso se inicia pulsando el botón correspondiente, y si todos los pasos han sido ejecutados correctamente, el sistema mostrará un \textbf{check verde}, tal como se ilustra en la Figura \ref{fig:31}.
 
+Esta medida puede proporcionar ciertos problemas al haber conexiones entre la base de datos y este archivo, un error muy común puede ser que dentro de las propiedades del proyecto en implementación este asignado el servidor localhost, esto se detallará más en el punto 4.5 a continuación.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{image/checkVerde}
@@ -481,11 +489,11 @@ Una vez realizados todos los ajustes necesarios, el cubo estará listo para ser 
 
 \subsection{Instrucciones para desplegar el proyecto en el equipo}
 	 
-	 Para ejecutar la tarea, será suficiente con descomprimir el archivo. A continuación, se deberá hacer clic derecho sobre el proyecto multidimensional y seleccionar la opción ``Propiedades''. Una vez en el apartado de propiedades, se procederá a acceder a la sección de implementación, donde se deberá seleccionar el servidor correspondiente. En este caso, se podrá elegir como servidor `localhost` o bien `localhost\textbackslash nuestroServidorSQL`. En mi situación particular, dado que disponía de dos instancias de `MSSQLSERVER`, fue necesario especificar que se utilizaría la instancia `MSSQLSERVER2`, que es la que posee la funcionalidad multidimensional.
+	 Para ejecutar la tarea, será suficiente con descomprimir el archivo. A continuación, se deberá hacer clic derecho sobre el proyecto multidimensional y seleccionar la opción ``Propiedades''. Una vez en el apartado de propiedades, se procederá a acceder a la sección de implementación, donde se deberá seleccionar el servidor correspondiente. En este caso, se podrá elegir como servidor `localhost` o bien `localhost\textbackslash nuestroServidorSQL`. En este caso particular, dado que disponía de dos instancias de `MSSQLSERVER`, fue necesario especificar que se utilizaría la instancia `MSSQLSERVER2`, que es la que posee la funcionalidad multidimensional.
 	 
 	 \begin{figure}[H]
 	 	\centering
-	 	\includegraphics[width=1\textwidth]{image/despliegue}
+	 	\includegraphics[width=0.75\textwidth]{image/despliegue}
 	 	\caption{Configuración de despliegue}
 	 	\label{fig:3}
 	 \end{figure}
@@ -522,7 +530,7 @@ Una vez realizados todos los ajustes necesarios, el cubo estará listo para ser 
 	En la consulta anterior, se define la medida calculada \texttt{[Measures].[MediaEdadUCI]} para obtener el promedio de la edad de los pacientes ingresados en la UCI. Se realiza una agregación de las dimensiones de género, y se filtra por los hospitales ubicados en la región oeste (\texttt{[Hospital].[Region].[Region ID].West}). La salida de esta consulta puede apreciarse en la figura \ref{fig:consulta1}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\textwidth]{image/consulta1.png}
+		\includegraphics[width=1\textwidth]{image/consulta1.png}
 		\caption{Resultado de la  \textbf{consulta 1:}  Total de pacientes ingresados en la UCI por género en hospitales de la región oeste.}
 		\label{fig:consulta1}
 	\end{figure}
@@ -701,7 +709,7 @@ Una vez realizados todos los ajustes necesarios, el cubo estará listo para ser 
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.43\textwidth]{image/consulta6.png}
+		\includegraphics[width=0.7\textwidth]{image/consulta6.png}
 		\caption{Resultado de la \textbf{consulta 6:}  Recuento de diagnósticos por edad y diagnóstico en un intervalo de tiempo específico (00:00:00 a 12:00:00 del 2014).}
 		\label{fig:consulta6}
 	\end{figure}
@@ -810,38 +818,52 @@ Estas consultas resultan muy útiles en el ámbito médico, particularmente en e
 No obstante, una posible mejora sería la incorporación de datos más específicos sobre las patologías respiratorias. A pesar de que se ha realizado una transformación ETL de los datos, los valores extremos de las tasas respiratorias y de frecuencia cardíaca en la base ElCU podrían no reflejar adecuadamente las condiciones reales de los pacientes, ya que es poco probable que tantos pacientes presenten una tasa respiratoria de alrededor de 60 en situaciones de hiperventilación. Contrastar estos datos con fuentes adicionales podría proporcionar un análisis más preciso y representativo.
 	
 	
-	\section{Instrucciones para ejecutar las consultas.}
-	- Una sección con las instrucciones detalladas para que un evaluador pueda ejecutar las consultas en su máquina. 
+	\section{Instrucciones para ejecutar las consultas MDX}
+	
+	Para ejecutar las consultas MDX, asegúrese de que el fichero \texttt{.bak} con el almacén de datos (resultado de la tarea de ETL) y el proyecto de Analysis Services, que genera el cubo multidimensional, hayan sido desplegados correctamente siguiendo las instrucciones de los apartados anteriores.
+	
+	\subsection{Acceso al servidor de Analysis Services}
+	Abra SQL Server Management Studio y conéctese nuevamente a la base de datos. Esta vez, seleccione el tipo de servidor como \textit{Analysis Services}. Ingrese sus credenciales como lo hizo anteriormente. Una vez conectado, expanda las bases de datos disponibles y localice la base de datos llamada \texttt{ProyectoMultidimensional5}.
+	
+	\subsection{Ejecución de consultas MDX}
+	Para ejecutar las consultas use el botón derecho sobre el proyecto, seleccione la opción \textit{New Query} y elija \textit{MDX}. Esto le permitirá acceder al cubo \texttt{PruebaDefinitiva}. En este entorno, similar al de consultas SQL, podrá escribir y ejecutar consultas en lenguaje MDX.
+	
+	\subsection{Recomendaciones para la ejecución de consultas}
+	Debido a la naturaleza del entorno de ejecución, solo es posible realizar una consulta por vez. Por lo tanto, se recomienda ejecutar cada consulta por separado. Si desea ejecutar varias consultas de manera consecutiva, puede cargar el archivo que contenga todas las consultas MDX. Asegúrese de seleccionar el código correspondiente a la consulta que desea ejecutar y luego presione el botón \textit{Execute} (puede ver el ejemplo en la figura \ref{fig:final}).
 	
 	
-		- Para cada consulta MDX, se muestra, además del enunciado de la consulta en sí, la consulta realizada en MDX y una captura del resultado generado.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{image/final.png}
+		\caption{Captura de pantalla al seleccionar una consulta juntoa l botón Execute arriba a la izquierda}
+		\label{fig:final}
+	\end{figure}
+		
 	
-	- Indica el número de consultas MDX que se han intentando, es decir, que se ha escrito código MDX y se ha mostrado el resultado de la misma, independientemente de si son correctas o no:
-	
-	(***) 8 o más.
-	
-	
-	- Según tu experiencia, valora cómo están realizadas las consultas en MDX, seleccionando la opción más adecuada:
-	
-	(****) Todas las consultas parecen ser correctas, teniendo sentido la salida de cada una de ellas. 
-	
-	
-	- En algunas consultas se han usado funciones más avanzada de MDX, que impliquen el uso de métodos para recorrer una jerarquía (PREVMEMBER, CURRENTMEMBER, PARENT, etc.). 
-
 	\section{Problemas encontrados}
 
-	Entre los principales problemas que encontramos, destaca la conexión con la base de datos, la cual generaba errores de manera constante debido a que el método de autenticación no era configurado para utilizar \textit{SQL Authentication}.
+	Entre los principales problemas que encontramos, destaca la conexión con la base de datos, la cual generaba errores de manera constante debido a que el método de autenticación no estaba configurado para utilizar \textit{SQL Authentication}.
 	
 	Adicionalmente, surgieron problemas derivados de un proceso de ETL incorrectamente implementado, lo que resultó en la presencia de múltiples tuplas con valores duplicados, como ocurrió en la tabla \textit{ingresoUCI} inicialmente.
 	
 	Aunque no se considera un problema en sentido estricto, decidimos modificar el atributo \textit{age}, cambiando su tipo de dato a \textit{int} para facilitar su utilización en las consultas, dado que este atributo es de gran utilidad.
 	
-	Finalmente, también se presentaron inconvenientes durante el proceso de despliegue, ya que se nos pasaba por alto que, con cada cambio realizado, era necesario procesar y actualizar el cubo.
+	La protección de datos también llega a ser un obstáculo en la comprensión y corroboración de que todo esté en orden, ya que, al contar solamente con identificadores autogenerados en la granularidad más baja, muchas veces no se podía comprobar que todo estuviera en orden a simple vista.
+	
+	Finalmente, destaca lo caótico que puede llegar a ser entender los errores de los programas usados, ya que contienen una gran cantidad de texto y no queda un mensaje claro sobre cuál puede ser el error. Además, se presentaron problemas con Visual Studio, que recomendaba desinstalar la extensión en casos de errores que bloqueaban la aplicación. Esto, sumado al hecho de que, en las máquinas virtuales, el servidor proxy rechazaba las conexiones, incrementó el tiempo requerido, ya que tuvimos que descargar y acceder a internet desde nuestros propios equipos.
 	
 
-	\section{Conclusión}
+	\section{Conclusiones}
 	
-	XD
+	En esta fase del proyecto, se logró con éxito la creación de un cubo multidimensional adaptado para el análisis de pacientes con patologías respiratorias. Este cubo permite realizar consultas avanzadas que facilitan la extracción de información relevante para el ámbito hospitalario, mejorando así el análisis de datos clínicos complejos de manera eficiente.
+	
+	A lo largo del desarrollo, se enfrentaron varios desafíos, entre ellos, se experimento lo importante que es el proceso ETL, y como es un proceso vital que será muy útil considerar una segunda corrección una vez se empieza a desplegar el cubo y se llega a observar mejoras y necesidades en nuestro almacén, como fue el caso de la transformación del atributo \textit{Age} y la eliminación de registros duplicados. Estos ajustes permitieron desarrollar nuevas consultas en \textit{MDX} que no fueron tomadas en cuenta desde un inicio.
+	
+	También destacamos como una base de datos transaccional y un almacén de datos se diferencian principalmente en su propósito y estructura. Mientras que las bases de datos están diseñadas para gestionar las operaciones diarias y registrar datos de forma eficiente, un almacén de datos está optimizado para el análisis histórico y la toma de decisiones estratégicas. Un cubo multidimensional, como el implementado en este proyecto, permite la organización de datos en múltiples dimensiones, facilitando el análisis desde diferentes perspectivas, lo cual sería complejo con estructuras relacionales tradicionales. Las consultas MDX ofrecen ventajas significativas frente a SQL, al estar diseñadas específicamente para navegar y extraer información de cubos a través de varias dimensiones, permitiendo cálculos complejos y agregaciones dinámicas, algo que SQL no puede realizar de manera eficiente ni intuitiva en este tipo de estructuras, en este ejemplo de pequeña escala se puede llegar a ver, pero en caso de haber usado todo ElCU, el uso del cubo multidimensional sería aún más importante.
+	
+	
+	Finalmente, este trabajo sienta lo aprendido y abre nuevos horizontes en cuanto a desafíos a la hora de implementar un almacén y como superarlos. 
+	
 
 
 	\section{Github y conjunto de instrucciones para su correcto despliegue en SQL Server.}
