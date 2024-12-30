@@ -497,7 +497,317 @@ Una vez realizados todos los ajustes necesarios, el cubo estará listo para ser 
 	 
 	
 	\section{Consultas en MDX}
-	- Una sección con las consultas en MDX y una captura con el resultado de cada una de ellas (la imagen capturada no tiene por qué mostrar todas las tuplas resultantes). 
+	
+	A continuación, se presentan varias consultas realizadas sobre el \textit{cubo multidimensional} que contiene información hospitalaria. Se han desarrollado un \textbf{total de 8 consultas}, cuidadosamente seleccionadas para abarcar resultados de interés que respondan a preguntas clave del análisis de los datos. Estas consultas no solo utilizan \textit{funciones básicas de  MDX}, sino que también incorporan técnicas avanzadas, como medidas calculadas, filtros y agregaciones. Además, se ha hecho uso de funciones avanzadas de \textit{navegación relativa}, como \textit{PREVMEMBER, CURRENTMEMBER y PARENT}, que permiten recorrer jerarquías y explorar las relaciones entre diferentes niveles de los datos, logrando una mayor profundidad en el análisis.
+	
+	Cabe destacar que el cubo cuenta con el nombre \textit{PruebaDefinitiva} por practicidad, al ser un cubo desplegado a través de los datos suministrados en esta tarea comprobando su funcionamiento sin necesidad de contar con las partes anteriores, esto se resaltará más detenidamente en la siguiente sección.
+	
+	\subsection{Consulta 1: Total de pacientes ingresados en hospital del oeste por género y edad}
+	La siguiente consulta calcula el total de pacientes ingresados en hospitales de la región oeste, mostrando además información sobre la edad media, máxima y mínima de los pacientes, agrupados por su género. Se define una medida calculada para obtener la edad media de los pacientes ingresados en la UCI.
+	
+	\begin{verbatim}
+		WITH 
+		MEMBER [Measures].[MediaEdadUCI] AS
+		[Measures].[AgeTotal] / [Measures].[Recuento Ingreso UCI],
+		FORMAT_STRING = "##.00"
+		SELECT 
+		NON EMPTY {[Measures].[Recuento Ingreso UCI], [Measures].[AgeMaximo],
+			[Measures].[AgeMenor], [Measures].[MediaEdadUCI]} ON COLUMNS, 
+		NON EMPTY [Paciente].[Gender ID].MEMBERS ON ROWS
+		FROM 
+		PruebaDefinitiva
+		WHERE 
+		[Hospital].[Region].[Region ID].West
+	\end{verbatim}
+	En la consulta anterior, se define la medida calculada \texttt{[Measures].[MediaEdadUCI]} para obtener el promedio de la edad de los pacientes ingresados en la UCI. Se realiza una agregación de las dimensiones de género, y se filtra por los hospitales ubicados en la región oeste (\texttt{[Hospital].[Region].[Region ID].West}). La salida de esta consulta puede apreciarse en la figura \ref{fig:consulta1}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/consulta1.png}
+		\caption{Resultado de la  \textbf{consulta 1:}  Total de pacientes ingresados en la UCI por género en hospitales de la región oeste.}
+		\label{fig:consulta1}
+	\end{figure}
+	
+	Como se puede obserar en esta región hay 606 ingresos, de los cuales podemos destacar que la mayoría son de personas masculinas, en el proceso de ETL se trato para que la edad fuera un valor \textit{int} y así poder manejarlo como una medida, en este proceso la edad correspondiente a los valores mayor que 89 fue catalogado como 90 por efectos prácticos, teniendo bastante sentido que de esta consulta tan amplia coincidan las edades máximas como mínimas. 
+	
+	\subsection{Consulta 2: Número de medicamentos usados por cada etnia y región de hospital.}
+	
+	La siguiente consulta calcula el número total de medicamentos administrados a los pacientes ingresados en la UCI, mostrando la distribución por etnia de los pacientes y la región del hospital. Se utiliza una medida calculada para nombrar con más claridad.
+	
+	\begin{verbatim}
+		WITH 
+		MEMBER [Measures].[TotalMedicamentos] AS
+		[Measures].[Recuento UCI Medicacion],
+		FORMAT_STRING = "##"
+		SELECT
+		NON EMPTY 
+		{[Measures].[TotalMedicamentos]} ON COLUMNS,
+		NON EMPTY [Hospital].[Region ID].MEMBERS 
+		* [Paciente].[Ethnicity ID].MEMBERS ON ROWS
+		FROM 
+		[PruebaDefinitiva]
+	\end{verbatim}
+	
+	En esta consulta se define la medida calculada \texttt{[Measures].[TotalMedicamentos]} para obtener el total de medicamentos administrados en la UCI. La consulta genera una tabla cruzada que combina las dimensiones de región del hospital y etnia del paciente, proporcionando un desglose detallado del uso de medicamentos por cada combinación de región y etnia. La figura \ref{fig:consulta2} muestra el resultado de esta consulta.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.65\textwidth]{image/consulta2.png}
+		\caption{Resultado de la \textbf{consulta 2:}  Número de medicamentos usados por cada etnia y región de hospital.}
+		\label{fig:consulta2}
+	\end{figure}
+	
+	Es importante señalar que en esta versión de la consulta, se incluyen los grupos \texttt{ALL}, que representan todos los valores para las dimensiones de región y etnia. En el repositorio de GitHub se puede encontrar una versión alternativa de esta consulta, en la cual se excluyen los grupos \texttt{ALL}, proporcionando una versión donde se omiten las agregaciones globales.
+	
+	\subsection{Consulta 3: Promedio de PaO2, FiO2 y Frecuencia Respiratoria por Región Hospitalaria y Etnia para Pacientes de 20 a 30 Años en UCI}
+	
+	La siguiente consulta calcula el promedio de PaO2, FiO2 y frecuencia respiratoria de los pacientes ingresados en la UCI, filtrando por aquellos que tienen entre 20 y 30 años. Los resultados están desglosados por región del hospital y etnia. Además, se define una medida calculada para sumar el total de pacientes considerados.
+	
+	El código de la consulta 3:
+	
+	\begin{verbatim}
+		WITH 
+		MEMBER [Measures].[Total Pacientes] AS
+		[Measures].[Recuento Apache Aps Var]
+		MEMBER [Measures].[MediaPaO2] AS
+		[Measures].[Pa O2] / [Measures].[Recuento Apache Aps Var],
+		FORMAT_STRING = "##.00"
+		MEMBER [Measures].[MediaFi O2] AS
+		[Measures].[Fi O2] / [Measures].[Recuento Apache Aps Var],
+		FORMAT_STRING = "##.00"
+		MEMBER [Measures].[MediaRespiratoryRate] AS
+		[Measures].[Respiratory Rate] / [Measures].[Recuento Apache Aps Var],
+		FORMAT_STRING = "##.00"
+		SELECT
+		NON EMPTY 
+		{[Measures].[MediaPaO2], 
+			[Measures].[MediaFi O2],
+			[Measures].[MediaRespiratoryRate],
+			[Measures].[Total Pacientes]} ON COLUMNS,
+		NON EMPTY 
+		CROSSJOIN(
+		[Hospital].[Region].[Region ID], 
+		[Paciente].[Etnia].[Ethnicity ID]
+		) ON ROWS
+		FROM 
+		[PruebaDefinitiva]
+		WHERE
+		([Ingreso UCI].[agePatient].[Age].&[20] : 
+		[Ingreso UCI].[agePatient].[Age].&[30])
+	\end{verbatim}
+	
+	En esta consulta se definen varias medidas calculadas, incluyendo \texttt{[Measures].[MediaPaO2]}, \texttt{[Measures].[MediaFi O2]} y \texttt{[Measures].[MediaRespiratoryRate]}, que calculan los promedios respectivos de PaO2, FiO2 y la frecuencia respiratoria. Los resultados están agrupados por región del hospital y etnia, y solo se consideran pacientes en el rango de edad de 20 a 30 años (Mediante el where). La figura \ref{fig:consulta3} muestra los resultados obtenidos.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/consulta3.png}
+		\caption{Resultado de la  \textbf{consulta 3:} Promedio de PaO2, FiO2 y frecuencia respiratoria por región hospitalaria y etnia para pacientes de 20 a 30 años en UCI.}
+		\label{fig:consulta3}
+	\end{figure}
+	
+	Es importante destacar que en la base de datos existen valores de \texttt{-1} que podrían indicar la ausencia de información sobre PaO2. Sin embargo, al haber valores nulos en algunas tuplas, se decidió mantener la base de datos lo más fiel posible al sistema original, ElCU, considerando que algunos médicos podrían haber registrado estos valores intencionalmente.
+	
+	Además, se ha observado que en algunas regiones, todos los pacientes de origen hispano y afroamericano tienen valores de PaO2 y FiO2 de \texttt{-1}, lo que no ocurre con los pacientes de origen nativo americano y la mayoría de los pacientes caucásicos. Esto podría reflejar diferencias en la calidad o disponibilidad de los registros médicos entre distintos grupos étnicos.
+	
+	\subsection{Consulta 4: Cálculo de Porcentaje Acumulado de Ingresos UCI por Región Hospitalaria}
+	
+	La siguiente consulta calcula el porcentaje acumulado de ingresos en UCI por cada región hospitalaria, excluyendo la etiqueta "Unknown" de las regiones que no contienen valores de ingresos (Esto se logra mediante Filter). Se utilizan medidas calculadas para sumar los ingresos acumulados por región y el total global de ingresos.
+	
+	\begin{verbatim}
+		WITH 
+		MEMBER [Measures].[Total Acumulado] AS
+		SUM(
+		{NULL:[Hospital].[Region ID].CURRENTMEMBER}, 
+		[Measures].[Recuento Ingreso UCI]
+		)
+		MEMBER [Measures].[Total Global] AS
+		SUM(
+		[Hospital].[Region ID].[All], 
+		[Measures].[Recuento Ingreso UCI]
+		)
+		MEMBER [Measures].[Porcentaje Acumulado] AS
+		[Measures].[Total Acumulado] / [Measures].[Total Global],
+		FORMAT_STRING = "0.00" 
+		SELECT 
+		NON EMPTY {[Measures].[Recuento Ingreso UCI], 
+			[Measures].[Total Acumulado], 
+			[Measures].[Porcentaje Acumulado]} ON COLUMNS,
+		FILTER(
+		[Hospital].[Region ID].CHILDREN,
+		[Hospital].[Region ID].CURRENTMEMBER.NAME <> "Unknown" AND 
+		NOT ISNULL([Measures].[Recuento Ingreso UCI])
+		) ON ROWS
+		FROM [PruebaDefinitiva]
+	\end{verbatim}
+	
+	En esta consulta se definen varias medidas calculadas, incluyendo \texttt{[Measures].[Total Acumulado]} para sumar los ingresos en UCI por región hospitalaria, y \texttt{[Measures].[Porcentaje Acumulado]}, que calcula el porcentaje acumulado respecto al total global de ingresos en todas las regiones. Además, como se comento se uso un filtro para excluir la región "Unknown" y aquellas filas donde no existen ingresos registrados. La figura \ref{fig:consulta4} muestra el resultado de la consulta.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/consulta4.png}
+		\caption{Resultado de la consulta 4: Cálculo de porcentaje acumulado de ingresos UCI por región hospitalaria (sin Unknown).}
+		\label{fig:consulta4}
+	\end{figure}
+	
+	Como se puede observar estamos tratando con los 2520 ingresos de la base de datos ElCU, se puede ver como se va pasando desde aquellos hospitales que no tienen una ragión asignada, a \textit{Midwest, Northeast, South} y finalmente \textit{West}. Hasta conseguir el 1 que representa el 100\% de los ingresos.
+	
+	\subsection{Consulta 5: Recuento de Ingresos a UCI por Hora y Total Anual}
+	
+	La siguiente consulta calcula el recuento de ingresos a la UCI por hora y el total anual utilizando navegación relativa dentro de la dimensión temporal. Se utiliza la función \texttt{.PARENT} para obtener los ingresos del nivel superior (año) desde el nivel más granular (hora de alta hospitalaria).
+	
+	\begin{verbatim}
+		WITH 
+		MEMBER [Measures].[Recuento Anual] AS
+		([Tiempo].[Tiempo].CURRENTMEMBER.PARENT, 
+		[Measures].[Recuento Ingreso UCI])
+		SELECT 
+		{[Measures].[Recuento Ingreso UCI], 
+			[Measures].[Recuento Anual]} ON COLUMNS,
+		[Tiempo].[Tiempo].[Hospital Discharge Time24].MEMBERS ON ROWS
+		FROM [PruebaDefinitiva]
+	\end{verbatim}
+	
+	En esta consulta, la medida calculada \texttt{[Measures].[Recuento Anual]} emplea la función \texttt{.PARENT} para navegar desde el nivel de la hora de alta hospitalaria al nivel padre correspondiente, que en este caso es el año. La consulta proporciona los ingresos en UCI por hora junto con el total anual de ingresos. La figura \ref{fig:consulta5} ilustra el resultado de esta consulta.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/consulta5.png}
+		\caption{Resultado de la \textbf{consulta 5:} Recuento de ingresos a UCI por hora y total anual.}
+		\label{fig:consulta5}
+	\end{figure}
+	
+	El uso de la función \texttt{.PARENT} permite obtener fácilmente las medidas de un nivel superior de la jerarquía temporal, lo que es útil para calcular el total anual de ingresos en UCI mientras se observa el comportamiento a nivel de hora, esta función tiene más sentido en aquellos casos donde existen muchos niveles de granularidad como los vistos en clase.
+	
+	
+	\subsection{Consulta 6: Recuento de Diagnósticos por Edad y prioridad en un Intervalo de Tiempo Específico (00:00:00 a 12:00:00 del 2014)}
+	
+	Esta consulta calcula el recuento de diagnósticos de la UCI, es decir la cantidad de diagnósticos en un intervalo de tiempo específico, entre las 00:00:00 y las 12:00:00 para el año 2014. Utiliza las dimensiones de edad y diagnóstico para obtener un desglose detallado por grupo de edad y prioridad de diagnóstico.
+	
+	\begin{verbatim}
+		SELECT 
+		{ [Measures].[Recuento UCI Diagnosis] } ON COLUMNS,
+		NON EMPTY 
+		CROSSJOIN(
+		[Ingreso UCI].[Age].MEMBERS,
+		[Diagnosis].[PriorityDiag].[Priority ID].MEMBERS
+		) ON ROWS
+		FROM 
+		[PruebaDefinitiva]
+		WHERE
+		([Tiempo].[Tiempo].[Hospital Discharge Time24].&[00:00:00]&[2014] : 
+		[Tiempo].[Tiempo].[Hospital Discharge Time24].&[11:40:00]&[2014])
+	\end{verbatim}
+	
+	En esta consulta, se realiza un cruce entre las dimensiones de edad de los pacientes y las prioridades de diagnóstico, y se calcula el número de diagnósticos registrados en el intervalo de tiempo especificado. La figura \ref{fig:consulta6} muestra el resultado de esta consulta.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.43\textwidth]{image/consulta6.png}
+		\caption{Resultado de la \textbf{consulta 6:}  Recuento de diagnósticos por edad y diagnóstico en un intervalo de tiempo específico (00:00:00 a 12:00:00 del 2014).}
+		\label{fig:consulta6}
+	\end{figure}
+	
+	Es importante destacar que aunque parezcan muchos diagnósticos, se están buscando todos los diagnósticos realizados desde las 00:00 hasta las 12:00 en todo el año 2014, dando 3195 de los 24978 diagnósticos de la base de datos ElCU, donde hay ingresos sin diagnósticos como ingresos con más de un diagnóstico.
+	
+	\subsection{Consulta 7: Cantidad de alergias, para los pacientes ingresados y Tasa Respiratoria Media por Edad, Tipo de Alergia y Diagnóstico para Pacientes Hispanos en 2015}
+	
+	Esta consulta calcula alergias de los pacientes ingresados junto a  la tasa respiratoria media para pacientes hispanos en el año 2015, desglosado por edad, tipo de alergia y diagnóstico. Se utiliza una medida calculada para obtener la tasa respiratoria media, dividiendo la tasa respiratoria por el recuento de ingresos a la UCI.
+	
+	\begin{verbatim}
+WITH 
+MEMBER [Measures].[MediaRespiratoryRate] AS
+[Measures].[Respiratory Rate] / [Measures].[Recuento Ingreso UCI],
+FORMAT_STRING = "##.00"
+SELECT 
+{ 
+	[Measures].[Recuento UCI Alergia],
+	[Measures].[Recuento Ingreso UCI],
+	[Measures].[MediaRespiratoryRate]
+} ON COLUMNS,
+
+NON EMPTY 
+CROSSJOIN(
+CROSSJOIN(
+[Ingreso UCI].[agePatient].[Age].MEMBERS, 
+[Allergy].[TipoAlergia].[Tipo ID].MEMBERS
+),
+[Diagnosis].[PriorityDiag].[Priority ID].MEMBERS 
+) ON ROWS
+
+FROM 
+[PruebaDefinitiva]
+
+WHERE 
+-- Se filtra por el año 2015 y pacientes hispanos 
+([Tiempo].[Tiempo].[Hospital Discharge Year].[2015], 
+[Paciente].[Etnia].[Ethnicity ID].Hispanic)
+
+	\end{verbatim}
+	
+	En esta consulta se emplean los elementos vistos anteriormente intentando obtener mayor provecho de la multidimensionalidad de los cubos, accediendo a la mayoría de tablas en una sola consulta relativamente sencilla. La figura \ref{fig:consulta7} muestra el resultado de esta consulta.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/consulta7.png}
+		\caption{Resultado de la \textbf{consulta 7:} Recuento UCI y tasa respiratoria media por edad, tipo de alergia y diagnóstico para pacientes hispanos en 2015.}
+		\label{fig:consulta7}
+	\end{figure}
+	
+	La combinación de las dimensiones \texttt{Edad}, \texttt{Tipo de Alergia} y \texttt{Diagnóstico} permite un análisis exhaustivo de los ingresos.
+	
+	\subsection{Consulta 8: Análisis de Medicación y Parámetros Respiratorios por Género y Año, Excluyendo Pacientes de Etnia Hispánica y con Ventilación Distinta de Cero}
+	
+	Esta consulta realiza un análisis de medicación y parámetros respiratorios, como la media de PaO2 y FiO2, por género y año, excluyendo a los pacientes de etnia hispánica y aquellos con ventilación distinta de cero. Además, se usa la mediaPaO2 y MediaFiO2.
+	
+	\begin{verbatim}
+		WITH 
+		MEMBER [Measures].[MediaPaO2] AS
+		[Measures].[Pa O2] / [Measures].[Measures].[Recuento Ingreso UCI],
+		FORMAT_STRING = "##.00"
+		
+		MEMBER [Measures].[MediaFiO2] AS
+		[Measures].[Fi O2] / [Measures].[Measures].[Recuento Ingreso UCI],
+		FORMAT_STRING = "##.00"
+		
+		SELECT 
+		{ 
+			[Measures].[Recuento UCI Medicacion],
+			[Measures].[MediaPaO2],
+			[Measures].[MediaFiO2]
+		} ON COLUMNS,
+		
+		NON EMPTY 
+		FILTER(
+		CROSSJOIN(
+		[Paciente].[Gender ID].MEMBERS,
+		[Tiempo].[Tiempo].[Hospital Discharge Year].MEMBERS 
+		),
+		[Measures].[Vent] <> 0
+		) ON ROWS
+		FROM 
+		[PruebaDefinitiva]
+		
+		WHERE 
+		EXCEPT(
+		[Paciente].[Etnia].[Ethnicity ID].MEMBERS,
+		{[Paciente].[Etnia].[Ethnicity ID].[Hispanic]}
+		)
+	\end{verbatim}
+	
+	Lo más destacable en esta función es el uso de EXCEPT que sirve para excluir a los hispanos de la búsqueda, el resto de herramientas reutilizan los visto en las demás consultas o en clase.
+	
+	La figura \ref{fig:consulta8} muestra el resultado de esta consulta.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{image/consulta8.png}
+		\caption{Resultado de la \textbf{consulta 8:} Análisis de medicación y parámetros respiratorios por género y año, excluyendo pacientes de etnia hispánica y con ventilación distinta de cero.}
+		\label{fig:consulta8}
+	\end{figure}
+	
+	
+Estas consultas resultan muy útiles en el ámbito médico, particularmente en el análisis de pacientes en unidades de cuidados intensivos (UCI) con patologías respiratorias. Ofrecen información detallada sobre parámetros clínicos como ingresos a la UCI, tasas respiratorias, medicación administrada y características demográficas, lo que permite identificar patrones y realizar comparaciones entre grupos de pacientes mediante filtros y cálculos específicos, como el porcentaje acumulado de ingresos por región o el análisis de parámetros respiratorios por género.
+
+No obstante, una posible mejora sería la incorporación de datos más específicos sobre las patologías respiratorias. A pesar de que se ha realizado una transformación ETL de los datos, los valores extremos de las tasas respiratorias y de frecuencia cardíaca en la base ElCU podrían no reflejar adecuadamente las condiciones reales de los pacientes, ya que es poco probable que tantos pacientes presenten una tasa respiratoria de alrededor de 60 en situaciones de hiperventilación. Contrastar estos datos con fuentes adicionales podría proporcionar un análisis más preciso y representativo.
 	
 	
 	\section{Instrucciones para ejecutar las consultas.}

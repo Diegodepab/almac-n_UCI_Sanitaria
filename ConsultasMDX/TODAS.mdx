@@ -1,19 +1,21 @@
 -- Consulta 1: 
--- El total de los pacientes ingresados en un hospital del este (west) junto a informaciónd de su edad según su genero
+-- El total de los pacientes ingresados en un hospital del Oeste (west) junto a informaciónd de su edad según su genero
 WITH 
     MEMBER [Measures].[MediaEdadUCI] AS
         [Measures].[AgeTotal] / [Measures].[Recuento Ingreso UCI],
         FORMAT_STRING = "##.00"
 SELECT 
-    NON EMPTY {[Measures].[Recuento Ingreso UCI], [Measures].[AgeMaximo], [Measures].[AgeMenor], [Measures].[MediaEdadUCI]} ON COLUMNS, 
+    NON EMPTY {[Measures].[Recuento Ingreso UCI], [Measures].[AgeMaximo],
+	[Measures].[AgeMenor], [Measures].[MediaEdadUCI]} ON COLUMNS, 
     NON EMPTY [Paciente].[Gender ID].MEMBERS ON ROWS
 FROM 
     PruebaDefinitiva
 WHERE 
 	[Hospital].[Region].[Region ID].West
 	
+
 -- Consulta 2: 
---Etnia de Pacientes con Mayor Uso de Medicamentos por Region de Hospital
+-- Número de medicamentos usados por cada etnia y región de hospital.
 WITH 
     MEMBER [Measures].[TotalMedicamentos] AS
         [Measures].[Recuento UCI Medicacion],
@@ -38,7 +40,6 @@ SELECT
 	* [Paciente].[Ethnicity ID].MEMBERS ON ROWS
 FROM 
     [PruebaDefinitiva]
-
 
 
 -- Consulta 3: 
@@ -69,54 +70,53 @@ SELECT
 FROM 
     [PruebaDefinitiva]
 WHERE
-    ([Ingreso UCI].[agePatient].[Age].&[20] : [Ingreso UCI].[agePatient].[Age].&[30])
+    ([Ingreso UCI].[agePatient].[Age].&[20] : 
+	[Ingreso UCI].[agePatient].[Age].&[30])
 
 
 -- Consulta 4:
 -- Cálculo de Porcentaje Acumulado de Ingresos UCI por Región Hospitalaria
 WITH 
--- Total acumulado hasta el miembro actual
 MEMBER [Measures].[Total Acumulado] AS
     SUM(
         {NULL:[Hospital].[Region ID].CURRENTMEMBER}, 
         [Measures].[Recuento Ingreso UCI]
     )
--- Total global de la jerarquía
 MEMBER [Measures].[Total Global] AS
     SUM(
         [Hospital].[Region ID].[All], 
         [Measures].[Recuento Ingreso UCI]
     )
--- Porcentaje acumulado con formato ajustado
 MEMBER [Measures].[Porcentaje Acumulado] AS
     [Measures].[Total Acumulado] / [Measures].[Total Global],
-    FORMAT_STRING = "0.00" -- Formato para mostrar 2 decimales
+    FORMAT_STRING = "0.00" 
 SELECT 
-    NON EMPTY {[Measures].[Recuento Ingreso UCI], [Measures].[Total Acumulado], [Measures].[Porcentaje Acumulado]} ON COLUMNS,
+    NON EMPTY {[Measures].[Recuento Ingreso UCI], 
+	[Measures].[Total Acumulado], 
+	[Measures].[Porcentaje Acumulado]} ON COLUMNS,
     [Hospital].[Region ID].CHILDREN ON ROWS
 FROM [PruebaDefinitiva]
 
 
--- otra version usando filter para eliminar Unknown
+-- Cálculo de Porcentaje Acumulado de Ingresos UCI por Región Hospitalaria (sin Unknown)
 WITH 
--- Total acumulado hasta el miembro actual
 MEMBER [Measures].[Total Acumulado] AS
     SUM(
         {NULL:[Hospital].[Region ID].CURRENTMEMBER}, 
         [Measures].[Recuento Ingreso UCI]
     )
--- Total global de la jerarquía
 MEMBER [Measures].[Total Global] AS
     SUM(
         [Hospital].[Region ID].[All], 
         [Measures].[Recuento Ingreso UCI]
     )
--- Porcentaje acumulado con formato ajustado
 MEMBER [Measures].[Porcentaje Acumulado] AS
     [Measures].[Total Acumulado] / [Measures].[Total Global],
-    FORMAT_STRING = "0.00" -- Formato para mostrar 2 decimales
+    FORMAT_STRING = "0.00" 
 SELECT 
-    NON EMPTY {[Measures].[Recuento Ingreso UCI], [Measures].[Total Acumulado], [Measures].[Porcentaje Acumulado]} ON COLUMNS,
+    NON EMPTY {[Measures].[Recuento Ingreso UCI], 
+	[Measures].[Total Acumulado], 
+	[Measures].[Porcentaje Acumulado]} ON COLUMNS,
     FILTER(
         [Hospital].[Region ID].CHILDREN,
         [Hospital].[Region ID].CURRENTMEMBER.NAME <> "Unknown" AND 
@@ -125,21 +125,22 @@ SELECT
 FROM [PruebaDefinitiva]
 
 
-
 --Consulta 5 
 -- Recuento de Ingresos a UCI por Hora y Total Anual
--- Recuento de ingresos del nivel padre (año)
+-- USAR .PARENT 
 WITH 
 MEMBER [Measures].[Recuento Anual] AS
-    ([Tiempo].[Tiempo].CURRENTMEMBER.PARENT, [Measures].[Recuento Ingreso UCI])
+    ([Tiempo].[Tiempo].CURRENTMEMBER.PARENT, 
+	[Measures].[Recuento Ingreso UCI])
 SELECT 
-    {[Measures].[Recuento Ingreso UCI], [Measures].[Recuento Anual]} ON COLUMNS,
+    {[Measures].[Recuento Ingreso UCI], 
+	[Measures].[Recuento Anual]} ON COLUMNS,
     [Tiempo].[Tiempo].[Hospital Discharge Time24].MEMBERS ON ROWS
 FROM [PruebaDefinitiva]
 
 
 -- Consulta 6: 
--- Recuento de Diagnósticos por Edad y Diagnóstico en un Intervalo de Tiempo Específico (00:00:00 a 12:00:00 del 2014)
+-- Recuento de Diagnósticos por Edad y prioridad en un Intervalo de Tiempo Específico (00:00:00 a 12:00:00 del 2014)
 SELECT 
     { [Measures].[Recuento UCI Diagnosis] } ON COLUMNS,
     NON EMPTY 
@@ -150,31 +151,30 @@ SELECT
 FROM 
     [PruebaDefinitiva]
 WHERE
-    ([Tiempo].[Tiempo].[Hospital Discharge Time24].&[00:00:00]&[2014] : [Tiempo].[Tiempo].[Hospital Discharge Time24].&[11:40:00]&[2014])
-
+    ([Tiempo].[Tiempo].[Hospital Discharge Time24].&[00:00:00]&[2014] : 
+	[Tiempo].[Tiempo].[Hospital Discharge Time24].&[11:40:00]&[2014])
 
 
 --Consulta 7:
 -- Consulta de Recuento UCI y Tasa Respiratoria Media por Edad, Tipo de Alergia y Diagnóstico para Pacientes Hispanos en 2015
 WITH 
     MEMBER [Measures].[MediaRespiratoryRate] AS
-        [Measures].[Respiratory Rate] / [Measures].[Recuento UCI Alergia],
+        [Measures].[Respiratory Rate] / [Measures].[Recuento Ingreso UCI],
         FORMAT_STRING = "##.00"
 SELECT 
-    -- En las columnas se muestran las medidas Recuento UCI Alergia, Recuento UCI Diagnosis y Recuento Ingreso UCI
     { 
         [Measures].[Recuento UCI Alergia],
+		[Measures].[Recuento Ingreso UCI],
 		[Measures].[MediaRespiratoryRate]
     } ON COLUMNS,
     
-    -- En las filas se cruzan varias dimensiones: Edad, Alergia y Diagnóstico
     NON EMPTY 
     CROSSJOIN(
         CROSSJOIN(
-            [Ingreso UCI].[agePatient].[Age].MEMBERS, -- Edad de pacientes (15-90 años)
-            [Allergy].[TipoAlergia].[Tipo ID].MEMBERS -- Tipo de Alergia (Drug/Non Drug)
+            [Ingreso UCI].[agePatient].[Age].MEMBERS, 
+            [Allergy].[TipoAlergia].[Tipo ID].MEMBERS
         ),
-        [Diagnosis].[PriorityDiag].[Priority ID].MEMBERS -- Tipo de Diagnóstico (Major/Primary/Other)
+        [Diagnosis].[PriorityDiag].[Priority ID].MEMBERS 
     ) ON ROWS
     
 FROM 
@@ -186,14 +186,9 @@ WHERE
      [Paciente].[Etnia].[Ethnicity ID].Hispanic)
 
 
-
-
-
-
 -- Consulta: 8
---  Análisis de Medicación y Parámetros Respiratorios Excluyendo Pacientes de Etnia Hispánica
+--  Análisis de Medicación y Parámetros Respiratorios por Género y Año, Excluyendo Pacientes de Etnia Hispánica y con Ventilación Distinta de Cero
 WITH 
-    -- Miembros calculados para la media de PaO2 y FiO2
     MEMBER [Measures].[MediaPaO2] AS
         [Measures].[Pa O2] / [Measures].[Measures].[Recuento Ingreso UCI],
         FORMAT_STRING = "##.00"
@@ -203,25 +198,26 @@ WITH
         FORMAT_STRING = "##.00"
 
 SELECT 
-    -- En las columnas se muestran las medidas Recuento Ingreso UCI, MediaPaO2 y MediaFiO2
     { 
         [Measures].[Recuento UCI Medicacion],
         [Measures].[MediaPaO2],
         [Measures].[MediaFiO2]
     } ON COLUMNS,
     
-    -- En las filas se muestran la Ruta de Administración de Medicamentos y el Año de Alta Hospitalaria
     NON EMPTY 
-    CROSSJOIN(
-        [Medication].[RoutaMed].[Route Admin ID].MEMBERS, -- Ruta de Administración de Medicamentos (Arterial, Hemodialysis, I-UTERAL)
-        [Tiempo].[Tiempo].[Hospital Discharge Year].MEMBERS -- Año de Alta Hospitalaria (2015, 2014, etc.)
+    FILTER(
+        CROSSJOIN(
+            [Paciente].[Gender ID].MEMBERS,
+            [Tiempo].[Tiempo].[Hospital Discharge Year].MEMBERS 
+        ),
+        [Measures].[Vent] <> 0
     ) ON ROWS
 FROM 
     [PruebaDefinitiva]
 
 WHERE 
-    -- Todas las etnias menos la hispánica
     EXCEPT(
         [Paciente].[Etnia].[Ethnicity ID].MEMBERS,
         {[Paciente].[Etnia].[Ethnicity ID].[Hispanic]}
     )
+

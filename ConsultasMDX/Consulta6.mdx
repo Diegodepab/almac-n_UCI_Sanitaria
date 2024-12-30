@@ -1,5 +1,5 @@
 -- Consulta 6: 
--- Recuento de Diagnósticos por Edad y Diagnóstico en un Intervalo de Tiempo Específico (00:00:00 a 12:00:00 del 2014)
+-- Recuento de Diagnósticos por Edad y prioridad en un Intervalo de Tiempo Específico (00:00:00 a 12:00:00 del 2014)
 SELECT 
     { [Measures].[Recuento UCI Diagnosis] } ON COLUMNS,
     NON EMPTY 
@@ -10,9 +10,5 @@ SELECT
 FROM 
     [PruebaDefinitiva]
 WHERE
-    ([Tiempo].[Tiempo].[Hospital Discharge Time24].&[00:00:00]&[2014] : [Tiempo].[Tiempo].[Hospital Discharge Time24].&[11:40:00]&[2014])
-
-
-
-
-
+    ([Tiempo].[Tiempo].[Hospital Discharge Time24].&[00:00:00]&[2014] : 
+	[Tiempo].[Tiempo].[Hospital Discharge Time24].&[11:40:00]&[2014])

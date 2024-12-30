@@ -1,5 +1,5 @@
 -- Consulta 2: 
---Etnia de Pacientes con Mayor Uso de Medicamentos por Region de Hospital
+-- Número de medicamentos usados por cada etnia y región de hospital.
 WITH 
     MEMBER [Measures].[TotalMedicamentos] AS
         [Measures].[Recuento UCI Medicacion],
@@ -24,6 +24,3 @@ SELECT
 	* [Paciente].[Ethnicity ID].MEMBERS ON ROWS
 FROM 
     [PruebaDefinitiva]
-
-
-
