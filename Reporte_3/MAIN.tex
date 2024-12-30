@@ -716,52 +716,55 @@ Esta medida puede proporcionar ciertos problemas al haber conexiones entre la ba
 	
 	Es importante destacar que aunque parezcan muchos diagnósticos, se están buscando todos los diagnósticos realizados desde las 00:00 hasta las 12:00 en todo el año 2014, dando 3195 de los 24978 diagnósticos de la base de datos ElCU, donde hay ingresos sin diagnósticos como ingresos con más de un diagnóstico.
 	
-	\subsection{Consulta 7: Cantidad de alergias, para los pacientes ingresados y Tasa Respiratoria Media por Edad, Tipo de Alergia y Diagnóstico para Pacientes Hispanos en 2015}
-	
-	Esta consulta calcula alergias de los pacientes ingresados junto a  la tasa respiratoria media para pacientes hispanos en el año 2015, desglosado por edad, tipo de alergia y diagnóstico. Se utiliza una medida calculada para obtener la tasa respiratoria media, dividiendo la tasa respiratoria por el recuento de ingresos a la UCI.
+	\subsection{Consulta 7: Análisis de Recuento de UCI por Edad, Tipo de Alergia y Etnia con la Media de Alergia por Ingresos Ordenada en Forma Descendente}
+	La consulta 7 tiene como objetivo analizar los ingresos en la UCI agrupados por la edad de los pacientes, el tipo de alergia y su etnia. Además, se calcula una medida denominada \texttt{MediaAlergiaByIngresos}, que representa la media de alergias para los pacientes del determinado grupo. Los resultados se ordenan de manera descendente según este valor, destacando las combinaciones con mayor número de alergia por persona.
+
 	
 	\begin{verbatim}
-WITH 
-MEMBER [Measures].[MediaRespiratoryRate] AS
-[Measures].[Respiratory Rate] / [Measures].[Recuento Ingreso UCI],
-FORMAT_STRING = "##.00"
-SELECT 
-{ 
-	[Measures].[Recuento UCI Alergia],
-	[Measures].[Recuento Ingreso UCI],
-	[Measures].[MediaRespiratoryRate]
-} ON COLUMNS,
-
-NON EMPTY 
-CROSSJOIN(
-CROSSJOIN(
-[Ingreso UCI].[agePatient].[Age].MEMBERS, 
-[Allergy].[TipoAlergia].[Tipo ID].MEMBERS
-),
-[Diagnosis].[PriorityDiag].[Priority ID].MEMBERS 
-) ON ROWS
-
-FROM 
-[PruebaDefinitiva]
-
-WHERE 
--- Se filtra por el año 2015 y pacientes hispanos 
-([Tiempo].[Tiempo].[Hospital Discharge Year].[2015], 
-[Paciente].[Etnia].[Ethnicity ID].Hispanic)
-
+		WITH 
+		MEMBER [Measures].[MediaAlergiaByIngresos] AS 
+		IIF(
+		[Measures].[Recuento Ingreso UCI] > 0, 
+		[Measures].[Recuento UCI Alergia] / [Measures].[Recuento Ingreso UCI], 
+		NULL
+		), 
+		FORMAT_STRING = "#,##0.00" -- Formato a dos decimales
+		SELECT 
+		NON EMPTY 
+		{ 
+			[Measures].[Recuento UCI Alergia],
+			[Measures].[Recuento Ingreso UCI],
+			[Measures].[MediaAlergiaByIngresos]
+		} ON COLUMNS,    
+		NON EMPTY 
+		ORDER(
+		FILTER(
+		CROSSJOIN(
+		CROSSJOIN(
+		[Ingreso UCI].[agePatient].[Age].MEMBERS, 
+		[Allergy].[TipoAlergia].[Tipo ID].MEMBERS
+		), 
+		[Paciente].[Etnia].[Ethnicity ID].MEMBERS
+		),
+		NOT ISEMPTY([Measures].[Recuento Ingreso UCI])
+		),
+		[Measures].[MediaAlergiaByIngresos], BDESC
+		) ON ROWS
+		FROM 
+		[PruebaDefinitiva]
 	\end{verbatim}
 	
-	En esta consulta se emplean los elementos vistos anteriormente intentando obtener mayor provecho de la multidimensionalidad de los cubos, accediendo a la mayoría de tablas en una sola consulta relativamente sencilla. La figura \ref{fig:consulta7} muestra el resultado de esta consulta.
+	En esta consulta, se define la medida calculada \texttt{[Measures].[MediaAlergiaByIngresos]} que evalúa la proporción de casos de alergia en la UCI frente a los ingresos. El uso de \texttt{IIF} permite manejar adecuadamente los casos en los que no hay ingresos, evitando divisiones por cero. Los resultados están organizados jerárquicamente y ordenados de manera descendente (\texttt{BDESC}), mostrando primero las combinaciones con las tasas más altas.
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\textwidth]{image/consulta7.png}
-		\caption{Resultado de la \textbf{consulta 7:} Recuento UCI y tasa respiratoria media por edad, tipo de alergia y diagnóstico para pacientes hispanos en 2015.}
+		\includegraphics[width=1\textwidth]{image/consulta7.png}
+		\caption{Resultado de la \textbf{consulta 7:} Análisis de UCI por edad, tipo de alergia y etnia con la media de alergias por ingresos ordenada en forma descendente.}
 		\label{fig:consulta7}
 	\end{figure}
 	
-	La combinación de las dimensiones \texttt{Edad}, \texttt{Tipo de Alergia} y \texttt{Diagnóstico} permite un análisis exhaustivo de los ingresos.
-	
+	En la figura \ref{fig:consulta7} se pueden observar las combinaciones de edad, tipo de alergia y etnia que presentan los valores más altos de \texttt{MediaAlergiaByIngresos}. Como es el caso de la alergia a los medicamentos por parte de caucásicos de 72 años, siendo una media de 34 medicamentos a los cuales son alérgicos. 
+		
 	\subsection{Consulta 8: Análisis de Medicación y Parámetros Respiratorios por Género y Año, Excluyendo Pacientes de Etnia Hispánica y con Ventilación Distinta de Cero}
 	
 	Esta consulta realiza un análisis de medicación y parámetros respiratorios, como la media de PaO2 y FiO2, por género y año, excluyendo a los pacientes de etnia hispánica y aquellos con ventilación distinta de cero. Además, se usa la mediaPaO2 y MediaFiO2.
@@ -812,7 +815,57 @@ WHERE
 		\label{fig:consulta8}
 	\end{figure}
 	
-	
+Los resultados tienen sentido al contar con un mayor número de pacientes masculinos como se pudo ver en la consulta 1 y en otras donde los hombres representan un grupo mayor.
+
+\subsection{Consulta 9: Análisis del Tiempo Promedio de Alta Hospitalaria por Ruta de Medicación, Género y Diagnóstico en Pacientes de UCI}
+La consulta 9 está diseñada para analizar el tiempo promedio hasta el alta hospitalaria (\texttt{Hospital Discharge Offset}) de los pacientes ingresados en la UCI, segmentado por ruta de administración de medicamentos, género y diagnóstico prioritario. Para ello, se calculan medidas derivadas que expresan este tiempo horas y días. Además, se filtran los datos para incluir solo pacientes mayores de 25 años con más de 100 administraciones de medicamentos en la UCI (al ser los pacientes que más tiempo habrán estado ingresados en la UCI), excluyendo hospitales cuya región no está asignada.
+
+\begin{verbatim}
+	WITH 
+	MEMBER [Measures].[MediaHospitalDischargeOffset] AS
+	[Measures].[Hospital Discharge Offset] / [Measures].[Recuento Ingreso UCI],
+	FORMAT_STRING = "##.00"
+	MEMBER [Measures].[MediaHospitalHORAS] AS
+	([Measures].[MediaHospitalDischargeOffset] / 60),
+	FORMAT_STRING = "##.00"
+	MEMBER [Measures].[MediaHospitalDIAS] AS
+	([Measures].[MediaHospitalHORAS] / 24),
+	FORMAT_STRING = "##.00"
+	SELECT 
+	NON EMPTY { 
+		[Measures].[Recuento Ingreso UCI],
+		[Measures].[Recuento UCI Medicacion],
+		[Measures].[MediaHospitalDischargeOffset],
+		[Measures].[MediaHospitalHORAS], 
+		[Measures].[MediaHospitalDIAS]
+	} ON COLUMNS,
+	NON EMPTY 
+	FILTER(
+	CROSSJOIN(
+	[Medication].[RoutaMed].[Route Admin ID].MEMBERS,
+	[Paciente].[Gender].[Gender ID].MEMBERS,
+	[Diagnosis].[PriorityDiag].[Priority ID].MEMBERS
+	),
+	[Ingreso UCI].[Age].CURRENTMEMBER > 25
+	AND [Measures].[Recuento UCI Medicacion] > 100
+	) ON ROWS
+	FROM 
+	[PruebaDefinitiva]
+	WHERE 
+	EXCEPT(
+	[Hospital].[Region ID].MEMBERS,
+	{[Hospital].[Region ID].&[36]} --Excluyendo pacientes de hospitales cuya Region no esta asignada ""
+	)
+\end{verbatim}
+
+Esta consulta incluye un poco de todo lo visto hasta el momento a excepción del tiempo total del paciente, llegando a ver pacientes con más de 10 días ingresados, como se ve en la figura \ref{fig:consulta9}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{image/consulta9.png}
+	\caption{Resultado de la \textbf{consulta 9:} Análisis del tiempo promedio de alta hospitalaria por ruta de medicación, género y diagnóstico prioritario.}
+	\label{fig:consulta9}
+\end{figure}
+
 Estas consultas resultan muy útiles en el ámbito médico, particularmente en el análisis de pacientes en unidades de cuidados intensivos (UCI) con patologías respiratorias. Ofrecen información detallada sobre parámetros clínicos como ingresos a la UCI, tasas respiratorias, medicación administrada y características demográficas, lo que permite identificar patrones y realizar comparaciones entre grupos de pacientes mediante filtros y cálculos específicos, como el porcentaje acumulado de ingresos por región o el análisis de parámetros respiratorios por género.
 
 No obstante, una posible mejora sería la incorporación de datos más específicos sobre las patologías respiratorias. A pesar de que se ha realizado una transformación ETL de los datos, los valores extremos de las tasas respiratorias y de frecuencia cardíaca en la base ElCU podrían no reflejar adecuadamente las condiciones reales de los pacientes, ya que es poco probable que tantos pacientes presenten una tasa respiratoria de alrededor de 60 en situaciones de hiperventilación. Contrastar estos datos con fuentes adicionales podría proporcionar un análisis más preciso y representativo.

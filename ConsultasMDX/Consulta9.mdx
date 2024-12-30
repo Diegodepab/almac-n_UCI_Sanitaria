@@ -1,0 +1,37 @@
+
+-- Consulta 9
+--Recuento de Ingresos en UCI de grupos que han usado más de 100 medicamentos filtrado por Pacientes Mayores de 25 Años y exluyendo los hospitales sin region especificada y mostrando el tiempo en minutos, horas y días desde la hora de admisión a la unidad hasta que el paciente fue dado de alta del hospital.
+WITH 
+    MEMBER [Measures].[MediaHospitalDischargeOffset] AS
+        [Measures].[Hospital Discharge Offset] / [Measures].[Recuento Ingreso UCI],
+        FORMAT_STRING = "##.00"
+    MEMBER [Measures].[MediaHospitalHORAS] AS
+        ([Measures].[MediaHospitalDischargeOffset] / 60),
+        FORMAT_STRING = "##.00"
+	MEMBER [Measures].[MediaHospitalDIAS] AS
+        ([Measures].[MediaHospitalHORAS] / 24),
+        FORMAT_STRING = "##.00"
+SELECT 
+    NON EMPTY { 
+        [Measures].[Recuento Ingreso UCI],
+        [Measures].[Recuento UCI Medicacion],
+        [Measures].[MediaHospitalDischargeOffset],
+		[Measures].[MediaHospitalHORAS], [Measures].[MediaHospitalDIAS]
+    } ON COLUMNS,
+    NON EMPTY 
+    FILTER(
+        CROSSJOIN(
+            [Medication].[RoutaMed].[Route Admin ID].MEMBERS,
+            [Paciente].[Gender].[Gender ID].MEMBERS,
+			[Diagnosis].[PriorityDiag].[Priority ID].MEMBERS
+        ),
+        [Ingreso UCI].[Age].CURRENTMEMBER > 25
+        AND [Measures].[Recuento UCI Medicacion] > 100
+    ) ON ROWS
+FROM 
+    [PruebaDefinitiva]
+WHERE 
+    EXCEPT(
+        [Hospital].[Region ID].MEMBERS,
+        {[Hospital].[Region ID].&[36]} --Excluyendo pacientes de hospitales cuya Region no esta asignada ""
+    )

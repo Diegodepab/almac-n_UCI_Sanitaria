@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.27)  30 DEC 2024 18:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.27)  30 DEC 2024 19:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -763,7 +763,7 @@ Package biblatex Info: Reference segment=0 on input line 31.
 
 pdfTeX warning: pdflatex.exe (file ./cover.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<cover.pdf, id=143, 597.19112pt x 845.19763pt>
+<cover.pdf, id=147, 597.19112pt x 845.19763pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
 Package pdftex.def Info: cover.pdf  used on input line 34.
@@ -784,7 +784,7 @@ on <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./cover.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<cover.pdf, id=146, page=1, 597.19112pt x 845.19763pt>
+<cover.pdf, id=150, page=1, 597.19112pt x 845.19763pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
 Package pdftex.def Info: cover.pdf , page1 used on input line 34.
@@ -810,7 +810,7 @@ Package pdftex.def Info: cover.pdf , page1 used on input line 34.
 
 pdfTeX warning: pdflatex.exe (file ./title.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<title.pdf, id=167, 597.19112pt x 845.19763pt>
+<title.pdf, id=171, 597.19112pt x 845.19763pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf>
 Package pdftex.def Info: title.pdf  used on input line 39.
@@ -831,7 +831,7 @@ on <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./title.pdf): PDF inclusion: found PDF versi
 on <1.7>, but at most version <1.5> allowed
-<title.pdf, id=170, page=1, 597.19112pt x 845.19763pt>
+<title.pdf, id=174, page=1, 597.19112pt x 845.19763pt>
 File: title.pdf Graphic file (type pdf)
 <use title.pdf, page 1>
 Package pdftex.def Info: title.pdf , page1 used on input line 39.
@@ -895,7 +895,7 @@ Overfull \hbox (22.48355pt too wide) in paragraph at lines 112--112
 italID_og[] 
  []
 
-<image/origenDatos.png, id=250, 170.43675pt x 30.71475pt>
+<image/origenDatos.png, id=256, 170.43675pt x 30.71475pt>
 File: image/origenDatos.png Graphic file (type png)
 <use image/origenDatos.png>
 Package pdftex.def Info: image/origenDatos.png  used on input line 129.
@@ -903,7 +903,7 @@ Package pdftex.def Info: image/origenDatos.png  used on input line 129.
 
 
 [5]
-<image/conexion.png, id=259, 483.0045pt x 484.81125pt>
+<image/conexion.png, id=265, 483.0045pt x 484.81125pt>
 File: image/conexion.png Graphic file (type png)
 <use image/conexion.png>
 Package pdftex.def Info: image/conexion.png  used on input line 138.
@@ -923,13 +923,13 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.144 
        <./image/origenDatos.png> <./image/conexion.png>]
-<image/vistaOrigenConexion.png, id=270, 431.211pt x 326.4195pt>
+<image/vistaOrigenConexion.png, id=276, 431.211pt x 326.4195pt>
 File: image/vistaOrigenConexion.png Graphic file (type png)
 <use image/vistaOrigenConexion.png>
 Package pdftex.def Info: image/vistaOrigenConexion.png  used on input line 149.
 
 (pdftex.def)             Requested size: 426.79135pt x 323.08655pt.
-<image/seleccionTablas.png, id=272, 432.4155pt x 284.262pt>
+<image/seleccionTablas.png, id=278, 432.4155pt x 284.262pt>
 File: image/seleccionTablas.png Graphic file (type png)
 <use image/seleccionTablas.png>
 Package pdftex.def Info: image/seleccionTablas.png  used on input line 160.
@@ -946,7 +946,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.164 
        <./image/vistaOrigenConexion.png>]
-<image/asistenteVista.png, id=281, 431.81325pt x 326.4195pt>
+<image/asistenteVista.png, id=287, 431.81325pt x 326.4195pt>
 File: image/asistenteVista.png Graphic file (type png)
 <use image/asistenteVista.png>
 Package pdftex.def Info: image/asistenteVista.png  used on input line 169.
@@ -966,7 +966,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.177 
        <./image/seleccionTablas.png> <./image/asistenteVista.png>]
-<image/vista_origenes_datos.png, id=291, 350.5095pt x 437.83575pt>
+<image/vista_origenes_datos.png, id=297, 350.5095pt x 437.83575pt>
 File: image/vista_origenes_datos.png Graphic file (type png)
 <use image/vista_origenes_datos.png>
 Package pdftex.def Info: image/vista_origenes_datos.png  used on input line 180
@@ -981,12 +981,12 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.188 
        <./image/vista_origenes_datos.png>]
-<image/crearCubo.png, id=299, 431.211pt x 279.444pt>
+<image/crearCubo.png, id=305, 431.211pt x 279.444pt>
 File: image/crearCubo.png Graphic file (type png)
 <use image/crearCubo.png>
 Package pdftex.def Info: image/crearCubo.png  used on input line 191.
 (pdftex.def)             Requested size: 320.0935pt x 207.44197pt.
-<image/seleccionTablasCubo.png, id=301, 431.81325pt x 295.1025pt>
+<image/seleccionTablasCubo.png, id=307, 431.81325pt x 295.1025pt>
 File: image/seleccionTablasCubo.png Graphic file (type png)
 <use image/seleccionTablasCubo.png>
 Package pdftex.def Info: image/seleccionTablasCubo.png  used on input line 200.
@@ -1014,12 +1014,12 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.206 
        <./image/crearCubo.png> <./image/seleccionTablasCubo.png>]
-<image/loquellevamos.png, id=311, 172.84575pt x 216.81pt>
+<image/loquellevamos.png, id=317, 172.84575pt x 216.81pt>
 File: image/loquellevamos.png Graphic file (type png)
 <use image/loquellevamos.png>
 Package pdftex.def Info: image/loquellevamos.png  used on input line 211.
 (pdftex.def)             Requested size: 213.39568pt x 267.6738pt.
-<image/dimPaciente.png, id=314, 730.52925pt x 315.579pt>
+<image/dimPaciente.png, id=320, 730.52925pt x 315.579pt>
 File: image/dimPaciente.png Graphic file (type png)
 <use image/dimPaciente.png>
 Package pdftex.def Info: image/dimPaciente.png  used on input line 233.
@@ -1033,7 +1033,7 @@ s been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.236 \end{figure}
                    <./image/loquellevamos.png>]
-<image/EthnicityID.png, id=323, 230.0595pt x 154.176pt>
+<image/EthnicityID.png, id=329, 230.0595pt x 154.176pt>
 File: image/EthnicityID.png Graphic file (type png)
 <use image/EthnicityID.png>
 Package pdftex.def Info: image/EthnicityID.png  used on input line 244.
@@ -1053,12 +1053,12 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.250 
        <./image/dimPaciente.png> <./image/EthnicityID.png>]
-<image/EthnicityID2.png, id=333, 381.22424pt x 378.81525pt>
+<image/EthnicityID2.png, id=339, 381.22424pt x 378.81525pt>
 File: image/EthnicityID2.png Graphic file (type png)
 <use image/EthnicityID2.png>
 Package pdftex.def Info: image/EthnicityID2.png  used on input line 253.
 (pdftex.def)             Requested size: 426.79135pt x 424.09677pt.
-<image/GenderID.png, id=334, 383.031pt x 379.4175pt>
+<image/GenderID.png, id=340, 383.031pt x 379.4175pt>
 File: image/GenderID.png Graphic file (type png)
 <use image/GenderID.png>
 Package pdftex.def Info: image/GenderID.png  used on input line 268.
@@ -1072,7 +1072,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.272 
        <./image/EthnicityID2.png>]
-<image/JRegion.png, id=341, 82.50826pt x 59.62276pt>
+<image/JRegion.png, id=347, 82.50826pt x 59.62276pt>
 File: image/JRegion.png Graphic file (type png)
 <use image/JRegion.png>
 Package pdftex.def Info: image/JRegion.png  used on input line 283.
@@ -1089,7 +1089,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.287 
        <./image/GenderID.png>]
-<image/RegionID.png, id=348, 381.22424pt x 375.20175pt>
+<image/RegionID.png, id=354, 381.22424pt x 375.20175pt>
 File: image/RegionID.png Graphic file (type png)
 <use image/RegionID.png>
 Package pdftex.def Info: image/RegionID.png  used on input line 292.
@@ -1109,17 +1109,17 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.298 
        <./image/JRegion.png> <./image/RegionID.png>]
-<image/JIngresoUCI.png, id=357, 112.0185pt x 60.225pt>
+<image/JIngresoUCI.png, id=363, 112.0185pt x 60.225pt>
 File: image/JIngresoUCI.png Graphic file (type png)
 <use image/JIngresoUCI.png>
 Package pdftex.def Info: image/JIngresoUCI.png  used on input line 305.
 (pdftex.def)             Requested size: 277.41176pt x 149.16986pt.
-<image/JAlergia.png, id=358, 81.30376pt x 58.41824pt>
+<image/JAlergia.png, id=364, 81.30376pt x 58.41824pt>
 File: image/JAlergia.png Graphic file (type png)
 <use image/JAlergia.png>
 Package pdftex.def Info: image/JAlergia.png  used on input line 318.
 (pdftex.def)             Requested size: 277.41176pt x 199.37971pt.
-<image/allergyID.png, id=359, 380.01974pt x 378.81525pt>
+<image/allergyID.png, id=365, 380.01974pt x 378.81525pt>
 File: image/allergyID.png Graphic file (type png)
 <use image/allergyID.png>
 Package pdftex.def Info: image/allergyID.png  used on input line 327.
@@ -1139,7 +1139,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.331 
        <./image/JIngresoUCI.png> <./image/JAlergia.png>]
-<image/JDiagnosis.png, id=368, 85.5195pt x 60.82726pt>
+<image/JDiagnosis.png, id=374, 85.5195pt x 60.82726pt>
 File: image/JDiagnosis.png Graphic file (type png)
 <use image/JDiagnosis.png>
 Package pdftex.def Info: image/JDiagnosis.png  used on input line 340.
@@ -1156,7 +1156,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.344 
        <./image/allergyID.png>]
-<image/DiagnosisID.png, id=375, 383.031pt x 380.622pt>
+<image/DiagnosisID.png, id=381, 383.031pt x 380.622pt>
 File: image/DiagnosisID.png Graphic file (type png)
 <use image/DiagnosisID.png>
 Package pdftex.def Info: image/DiagnosisID.png  used on input line 349.
@@ -1177,12 +1177,12 @@ as been already used, duplicate ignored
 l.356 \subsubsection
                     {Medication} <./image/JDiagnosis.png> <./image/DiagnosisID.
 png>]
-<image/JMedication.png, id=385, 98.769pt x 60.225pt>
+<image/JMedication.png, id=391, 98.769pt x 60.225pt>
 File: image/JMedication.png Graphic file (type png)
 <use image/JMedication.png>
 Package pdftex.def Info: image/JMedication.png  used on input line 362.
 (pdftex.def)             Requested size: 234.73654pt x 143.13599pt.
-<image/routeAdmin.png, id=386, 383.031pt x 380.622pt>
+<image/routeAdmin.png, id=392, 383.031pt x 380.622pt>
 File: image/routeAdmin.png Graphic file (type png)
 <use image/routeAdmin.png>
 Package pdftex.def Info: image/routeAdmin.png  used on input line 371.
@@ -1203,7 +1203,7 @@ as been already used, duplicate ignored
 l.378 \textbf{ValueColumn}
                            y \textbf{NameColumn} para \texttt{MedicationID}: <.
 /image/JMedication.png> <./image/routeAdmin.png>]
-<image/MedicationID.png, id=395, 381.22424pt x 377.0085pt>
+<image/MedicationID.png, id=401, 381.22424pt x 377.0085pt>
 File: image/MedicationID.png Graphic file (type png)
 <use image/MedicationID.png>
 Package pdftex.def Info: image/MedicationID.png  used on input line 382.
@@ -1214,7 +1214,7 @@ Overfull \hbox (80.9466pt too wide) in paragraph at lines 391--392
 -trar los atrib-u-tos \OT1/cmtt/m/n/12 HospitalDischargeTime24
  []
 
-<image/JTiempo.png, id=397, 673.91776pt x 272.81924pt>
+<image/JTiempo.png, id=403, 673.91776pt x 272.81924pt>
 File: image/JTiempo.png Graphic file (type png)
 <use image/JTiempo.png>
 Package pdftex.def Info: image/JTiempo.png  used on input line 397.
@@ -1231,7 +1231,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.401 
        <./image/MedicationID.png>]
-<image/tiempoPropiedades.png, id=405, 278.84175pt x 164.41425pt>
+<image/tiempoPropiedades.png, id=411, 278.84175pt x 164.41425pt>
 File: image/tiempoPropiedades.png Graphic file (type png)
 <use image/tiempoPropiedades.png>
 Package pdftex.def Info: image/tiempoPropiedades.png  used on input line 410.
@@ -1242,7 +1242,7 @@ Overfull \hbox (25.75899pt too wide) in paragraph at lines 415--416
 rgeYear \OT1/cmr/m/n/12 y \OT1/cmtt/m/n/12 HospitalDischargeTime24
  []
 
-<image/keyColumnTiempo.png, id=406, 428.19975pt x 357.7365pt>
+<image/keyColumnTiempo.png, id=412, 428.19975pt x 357.7365pt>
 File: image/keyColumnTiempo.png Graphic file (type png)
 <use image/keyColumnTiempo.png>
 Package pdftex.def Info: image/keyColumnTiempo.png  used on input line 421.
@@ -1262,7 +1262,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.425 
        <./image/JTiempo.png> <./image/tiempoPropiedades.png>]
-<image/relacionesTiempoDps1.png, id=414, 317.38576pt x 81.906pt>
+<image/relacionesTiempoDps1.png, id=420, 317.38576pt x 81.906pt>
 File: image/relacionesTiempoDps1.png Graphic file (type png)
 <use image/relacionesTiempoDps1.png>
 Package pdftex.def Info: image/relacionesTiempoDps1.png  used on input line 430
@@ -1274,7 +1274,7 @@ Overfull \hbox (6.85709pt too wide) in paragraph at lines 435--436
 1/cmtt/m/n/12 HospitalDischargeTime24\OT1/cmr/m/n/12 .
  []
 
-<image/relacionesTiempoDps2.png, id=416, 583.58025pt x 320.397pt>
+<image/relacionesTiempoDps2.png, id=422, 583.58025pt x 320.397pt>
 File: image/relacionesTiempoDps2.png Graphic file (type png)
 <use image/relacionesTiempoDps2.png>
 Package pdftex.def Info: image/relacionesTiempoDps2.png  used on input line 439
@@ -1298,7 +1298,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.443 
        <./image/keyColumnTiempo.png> <./image/relacionesTiempoDps1.png>]
-<image/gruposMedida.png, id=427, 774.4935pt x 319.1925pt>
+<image/gruposMedida.png, id=433, 774.4935pt x 319.1925pt>
 File: image/gruposMedida.png Graphic file (type png)
 <use image/gruposMedida.png>
 Package pdftex.def Info: image/gruposMedida.png  used on input line 455.
@@ -1318,12 +1318,12 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.461 
        <./image/relacionesTiempoDps2.png> <./image/gruposMedida.png>]
-<image/medidasNuevas.png, id=436, 155.3805pt x 99.37125pt>
+<image/medidasNuevas.png, id=442, 155.3805pt x 99.37125pt>
 File: image/medidasNuevas.png Graphic file (type png)
 <use image/medidasNuevas.png>
 Package pdftex.def Info: image/medidasNuevas.png  used on input line 470.
 (pdftex.def)             Requested size: 298.75264pt x 191.0681pt.
-<image/checkVerde.png, id=438, 852.786pt x 446.26724pt>
+<image/checkVerde.png, id=444, 852.786pt x 446.26724pt>
 File: image/checkVerde.png Graphic file (type png)
 <use image/checkVerde.png>
 Package pdftex.def Info: image/checkVerde.png  used on input line 484.
@@ -1345,7 +1345,7 @@ File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 492.
-<image/despliegue.png, id=447, 591.4095pt x 374.5995pt>
+<image/despliegue.png, id=453, 591.4095pt x 374.5995pt>
 File: image/despliegue.png Graphic file (type png)
 <use image/despliegue.png>
 Package pdftex.def Info: image/despliegue.png  used on input line 496.
@@ -1372,7 +1372,7 @@ Overfull \hbox (11.63387pt too wide) in paragraph at lines 522--522
 AgeMaximo],[] 
  []
 
-<image/consulta1.png, id=457, 245.11575pt x 52.39575pt>
+<image/consulta1.png, id=463, 245.11575pt x 52.39575pt>
 File: image/consulta1.png Graphic file (type png)
 <use image/consulta1.png>
 Package pdftex.def Info: image/consulta1.png  used on input line 533.
@@ -1385,7 +1385,7 @@ Overfull \hbox (8.17421pt too wide) in paragraph at lines 558--559
 /m/n/12 [Measures].[TotalMedicamentos]
  []
 
-<image/consulta2.png, id=464, 154.77824pt x 173.448pt>
+<image/consulta2.png, id=470, 154.77824pt x 173.448pt>
 File: image/consulta2.png Graphic file (type png)
 <use image/consulta2.png>
 Package pdftex.def Info: image/consulta2.png  used on input line 562.
@@ -1427,7 +1427,7 @@ Overfull \hbox (59.43147pt too wide) in paragraph at lines 606--607
 in-cluyendo \OT1/cmtt/m/n/12 [Measures].[MediaPaO2]\OT1/cmr/m/n/12 ,
  []
 
-<image/consulta3.png, id=477, 314.3745pt x 200.54926pt>
+<image/consulta3.png, id=483, 314.3745pt x 200.54926pt>
 File: image/consulta3.png Graphic file (type png)
 <use image/consulta3.png>
 Package pdftex.def Info: image/consulta3.png  used on input line 610.
@@ -1455,12 +1455,12 @@ r regi^^Son hos-pi-ta-laria, y \OT1/cmtt/m/n/12 [Measures].[Porcentaje
 
 
 [30]
-<image/consulta4.png, id=490, 250.536pt x 73.4745pt>
+<image/consulta4.png, id=496, 250.536pt x 73.4745pt>
 File: image/consulta4.png Graphic file (type png)
 <use image/consulta4.png>
 Package pdftex.def Info: image/consulta4.png  used on input line 654.
 (pdftex.def)             Requested size: 341.43437pt x 100.13362pt.
-<image/consulta5.png, id=492, 174.6525pt x 188.50426pt>
+<image/consulta5.png, id=498, 174.6525pt x 188.50426pt>
 File: image/consulta5.png Graphic file (type png)
 <use image/consulta5.png>
 Package pdftex.def Info: image/consulta5.png  used on input line 681.
@@ -1485,7 +1485,7 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.698 		[Ingreso UCI].[Age].MEMBERS,
                                      <./image/consulta5.png>]
-<image/consulta6.png, id=506, 130.68825pt x 162.6075pt>
+<image/consulta6.png, id=512, 130.68825pt x 162.6075pt>
 File: image/consulta6.png Graphic file (type png)
 <use image/consulta6.png>
 Package pdftex.def Info: image/consulta6.png  used on input line 712.
@@ -1497,21 +1497,24 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.38}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.722 	
-        <./image/consulta6.png>]
-Overfull \hbox (4.00279pt too wide) in paragraph at lines 754--755
-[]\OT1/cmr/m/n/12 En esta con-sulta se em-plean los el-e-men-tos vis-tos an-te-
-ri-or-mente in-ten-tando obtener
+l.721 
+       <./image/consulta6.png>]
+Overfull \hbox (17.80887pt too wide) in paragraph at lines 728--728
+[]  \OT1/cmtt/m/n/12 [Measures].[Recuento UCI Alergia] / [Measures].[Recuento I
+ngreso UCI],[] 
  []
 
-<image/consulta7.png, id=514, 308.95425pt x 229.45724pt>
+
+Overfull \hbox (42.57419pt too wide) in paragraph at lines 757--758
+[]\OT1/cmr/m/n/12 En esta con-sulta, se de-fine la me-dida cal-cu-lada \OT1/cmt
+t/m/n/12 [Measures].[MediaAlergiaByIngresos]
+ []
+
+<image/consulta7.png, id=519, 339.06676pt x 208.98074pt>
 File: image/consulta7.png Graphic file (type png)
 <use image/consulta7.png>
-Package pdftex.def Info: image/consulta7.png  used on input line 758.
-(pdftex.def)             Requested size: 341.43437pt x 253.59064pt.
-
-Underfull \vbox (badness 5954) has occurred while \output is active []
-
+Package pdftex.def Info: image/consulta7.png  used on input line 761.
+(pdftex.def)             Requested size: 426.79135pt x 263.04926pt.
 
 
 [34]
@@ -1521,12 +1524,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.39}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.785 		
-         <./image/consulta7.png>]
-<image/consulta8.png, id=526, 239.09325pt x 87.9285pt>
+l.782 		SELECT
+               <./image/consulta7.png>]
+<image/consulta8.png, id=532, 239.09325pt x 87.9285pt>
 File: image/consulta8.png Graphic file (type png)
 <use image/consulta8.png>
-Package pdftex.def Info: image/consulta8.png  used on input line 810.
+Package pdftex.def Info: image/consulta8.png  used on input line 813.
 (pdftex.def)             Requested size: 341.43437pt x 125.57979pt.
 
 
@@ -1535,37 +1538,64 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.40}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.819 	
-        <./image/consulta8.png>]
-Overfull \hbox (4.4403pt too wide) in paragraph at lines 829--830
+l.822 
+       <./image/consulta8.png>]
+Overfull \hbox (42.50888pt too wide) in paragraph at lines 826--826
+[] \OT1/cmtt/m/n/12 [Measures].[Hospital Discharge Offset] / [Measures].[Recuen
+to Ingreso UCI],[] 
+ []
+
+
+Overfull \hbox (190.70895pt too wide) in paragraph at lines 857--857
+[] \OT1/cmtt/m/n/12 {[Hospital].[Region ID].&[36]} --Excluyendo pacientes de ho
+spitales cuya Region no esta asignada ""[] 
+ []
+
+<image/consulta9.png, id=541, 522.15076pt x 218.0145pt>
+File: image/consulta9.png Graphic file (type png)
+<use image/consulta9.png>
+Package pdftex.def Info: image/consulta9.png  used on input line 864.
+(pdftex.def)             Requested size: 426.79135pt x 178.20418pt.
+
+
+[37]
+
+[38
+pdfTeX warning (ext4): destination with the same identifier (name{figure.41}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.880 	
+        <./image/consulta9.png>]
+Overfull \hbox (4.4403pt too wide) in paragraph at lines 882--883
 \OT1/cmr/m/n/12 opci^^Son \OT1/cmr/m/it/12 New Query \OT1/cmr/m/n/12 y elija \O
 T1/cmr/m/it/12 MDX\OT1/cmr/m/n/12 . Esto le per-mi-tir^^Sa ac-ceder al cubo \OT
 1/cmtt/m/n/12 PruebaDefinitiva\OT1/cmr/m/n/12 .
  []
 
-<image/final.png, id=535, 687.7695pt x 196.3335pt>
+<image/final.png, id=553, 687.7695pt x 196.3335pt>
 File: image/final.png Graphic file (type png)
 <use image/final.png>
-Package pdftex.def Info: image/final.png  used on input line 837.
+Package pdftex.def Info: image/final.png  used on input line 890.
 (pdftex.def)             Requested size: 426.79135pt x 121.83635pt.
 
 
-[37
-pdfTeX warning (ext4): destination with the same identifier (name{figure.41}) h
+[39
+pdfTeX warning (ext4): destination with the same identifier (name{figure.42}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.846 	
+l.907 	
         <./image/final.png>]
 
-[38]
+[40]
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=551, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=570, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 877.
+Package pdftex.def Info: backcover.pdf  used on input line 930.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1573,7 +1603,7 @@ pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 877.
+Package pdftex.def Info: backcover.pdf  used on input line 930.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1583,56 +1613,49 @@ ersion <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
-<backcover.pdf, id=554, page=1, 597.23125pt x 845.1575pt>
+<backcover.pdf, id=573, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 877.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 930.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
-[39]
+[41]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 877.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 930.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 877.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 930.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 877.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 930.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-[40
+[42
 
  <./backcover.pdf>] (MAIN.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-08-30>
  ***********
-
-
-Package rerunfilecheck Warning: File `MAIN.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `MAIN.out':
-(rerunfilecheck)             Before: 8A8F3F8F40138093885992D1528B972A;10069
-(rerunfilecheck)             After:  EE0D45C690F4D2F35CADC15DECEFD856;10076.
+Package rerunfilecheck Info: File `MAIN.out' has not changed.
+(rerunfilecheck)             Checksum: 54CAB1CDF6D1ADE4FE14D8C931B1F223;10728.
 Package logreq Info: Writing requests to 'MAIN.run.xml'.
 \openout1 = `MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19836 strings out of 473899
- 352723 string characters out of 5722216
- 961788 words of memory out of 5000000
- 42385 multiletter control sequences out of 15000+600000
+ 19849 strings out of 473899
+ 352972 string characters out of 5722216
+ 961961 words of memory out of 5000000
+ 42394 multiletter control sequences out of 15000+600000
  563477 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,81p,1905b,1291s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,17n,81p,1905b,1470s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Diego De Pablo\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dp
 i600\tcrm1200.pk><C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Diego De Pablo/AppData/Local/Progr
@@ -1642,9 +1665,9 @@ s/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
 msy10.pfb><C:/Users/Diego De Pablo/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/amsfonts/cm/cmti12.pfb><C:/Users/Diego De Pablo/AppData/Local/Programs/MiK
 TeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (41 pages, 831068 bytes).
+Output written on MAIN.pdf (43 pages, 861766 bytes).
 PDF statistics:
- 641 PDF objects out of 1000 (max. 8388607)
- 121 named destinations out of 1000 (max. 500000)
- 546 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 660 PDF objects out of 1000 (max. 8388607)
+ 125 named destinations out of 1000 (max. 500000)
+ 559 words of extra memory for PDF output out of 10000 (max. 10000000)
 

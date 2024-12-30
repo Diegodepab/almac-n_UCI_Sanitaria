@@ -24,12 +24,13 @@
 \contentsline {subsection}{\numberline {5.4}Consulta 4: Cálculo de Porcentaje Acumulado de Ingresos UCI por Región Hospitalaria}{30}{subsection.5.4}%
 \contentsline {subsection}{\numberline {5.5}Consulta 5: Recuento de Ingresos a UCI por Hora y Total Anual}{31}{subsection.5.5}%
 \contentsline {subsection}{\numberline {5.6}Consulta 6: Recuento de Diagnósticos por Edad y prioridad en un Intervalo de Tiempo Específico (00:00:00 a 12:00:00 del 2014)}{32}{subsection.5.6}%
-\contentsline {subsection}{\numberline {5.7}Consulta 7: Cantidad de alergias, para los pacientes ingresados y Tasa Respiratoria Media por Edad, Tipo de Alergia y Diagnóstico para Pacientes Hispanos en 2015}{34}{subsection.5.7}%
+\contentsline {subsection}{\numberline {5.7}Consulta 7: Análisis de Recuento de UCI por Edad, Tipo de Alergia y Etnia con la Media de Alergia por Ingresos Ordenada en Forma Descendente}{34}{subsection.5.7}%
 \contentsline {subsection}{\numberline {5.8}Consulta 8: Análisis de Medicación y Parámetros Respiratorios por Género y Año, Excluyendo Pacientes de Etnia Hispánica y con Ventilación Distinta de Cero}{35}{subsection.5.8}%
-\contentsline {section}{\numberline {6}Instrucciones para ejecutar las consultas MDX}{37}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Acceso al servidor de Analysis Services}{37}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Ejecución de consultas MDX}{37}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Recomendaciones para la ejecución de consultas}{37}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Problemas encontrados}{38}{section.7}%
-\contentsline {section}{\numberline {8}Conclusiones}{38}{section.8}%
-\contentsline {section}{\numberline {9}Github y conjunto de instrucciones para su correcto despliegue en SQL Server.}{39}{section.9}%
+\contentsline {subsection}{\numberline {5.9}Consulta 9: Análisis del Tiempo Promedio de Alta Hospitalaria por Ruta de Medicación, Género y Diagnóstico en Pacientes de UCI}{37}{subsection.5.9}%
+\contentsline {section}{\numberline {6}Instrucciones para ejecutar las consultas MDX}{38}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Acceso al servidor de Analysis Services}{38}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Ejecución de consultas MDX}{39}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Recomendaciones para la ejecución de consultas}{39}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Problemas encontrados}{39}{section.7}%
+\contentsline {section}{\numberline {8}Conclusiones}{40}{section.8}%
+\contentsline {section}{\numberline {9}Github y conjunto de instrucciones para su correcto despliegue en SQL Server.}{40}{section.9}%
