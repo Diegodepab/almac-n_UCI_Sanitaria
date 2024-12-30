@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  30 DEC 2024 04:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  30 DEC 2024 04:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1294,10 +1294,10 @@ as been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.455 
        <./image/relacionesTiempoDps2.png> <./image/gruposMedida.png>]
-<image/dimensionesNuevas.png, id=377, 155.3805pt x 99.37125pt>
-File: image/dimensionesNuevas.png Graphic file (type png)
-<use image/dimensionesNuevas.png>
-Package pdftex.def Info: image/dimensionesNuevas.png  used on input line 464.
+<image/medidasNuevas.png, id=377, 155.3805pt x 99.37125pt>
+File: image/medidasNuevas.png Graphic file (type png)
+<use image/medidasNuevas.png>
+Package pdftex.def Info: image/medidasNuevas.png  used on input line 464.
 (pdftex.def)             Requested size: 298.75264pt x 191.0681pt.
 <image/checkVerde.png, id=379, 852.786pt x 446.26724pt>
 File: image/checkVerde.png Graphic file (type png)
@@ -1315,7 +1315,7 @@ as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.480 
-       <./image/dimensionesNuevas.png>]
+       <./image/medidasNuevas.png>]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 4
 84.
 
@@ -1410,8 +1410,8 @@ Package logreq Info: Writing requests to 'MAIN.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  19724 strings out of 473681
- 348384 string characters out of 5718718
- 960090 words of memory out of 5000000
+ 348340 string characters out of 5718718
+ 960088 words of memory out of 5000000
  42516 multiletter control sequences out of 15000+600000
  563477 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1424,7 +1424,7 @@ nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jismbs/AppData/Local/Programs/
 MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jismbs/AppData/Local
 /Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/jismbs/App
 Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (30 pages, 698558 bytes).
+Output written on MAIN.pdf (30 pages, 698554 bytes).
 PDF statistics:
  486 PDF objects out of 1000 (max. 8388607)
  90 named destinations out of 1000 (max. 500000)
