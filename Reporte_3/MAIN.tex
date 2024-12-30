@@ -440,9 +440,9 @@ Procedemos a darle a aceptar, y con ello habremos construido una jerarquía corr
 
 \subsection{Modificaciones del cubo}
 
-Antes de desplegar el cubo, tendremos hacer unos cambios en los grupos de medida para que las tablas NxM funcionen correctamente. 
+Antes de proceder al despliegue del cubo, será necesario realizar ciertos ajustes en los grupos de medida para garantizar que las tablas de relación NxM funcionen correctamente. 
 
-El principal cambio es el que se ve en la Figura \ref{fig:30}. En la que tendremos que poner en Ingreso UCI y en las filas Allergy, Diagnosis y Medication sus correspondientes tablas intermedias para que se relacionen esas tablas con el hecho con relación varios a varios. 
+El ajuste principal se ilustra en la Figura \ref{fig:30}, en la cual será necesario asociar el hecho \textbf{Ingreso UCI} a la tablas  las tablas \textbf{Allergy}, \textbf{Diagnosis} y \textbf{Medication} mediante una relación de tipo varios a varios utilizando sus tablas intermedias correspondientes.
 
 \begin{figure}[H]
 	\centering
@@ -451,13 +451,13 @@ El principal cambio es el que se ve en la Figura \ref{fig:30}. En la que tendrem
 	\label{fig:30}
 \end{figure}
 
-Con el resto de tablas, Allergy, Diagnosis y Medication, no tienen relación por lo que se pueden quedar vacías. ç
+\textbf{Allergy}, \textbf{Diagnosis} y \textbf{Medication} no tienen relaciones con el resto de tablas, por lo que el resto de columnas que no sean IngresoUCI o las tablas intermedias, deberán quedar vacías.
 
-Además también habrá que poner Allergy ID como atributo de granularidad entre las tablas Allergy y UCI\_Alergia (Tendremos que hacer lo mismo para el resto de tablas intermedias).
+Adicionalmente, será necesario asignar \textbf{Allergy ID} como atributo de granularidad entre las tablas \textbf{Allergy} y \textbf{UCI\_Alergia}. Este mismo procedimiento deberá aplicarse a todas las demás tablas intermedias.
 
 \subsubsection{Despliegue del cubo}
 
-Una vez hayamos realizado todos estos pasos podremos desplegar el cubo. Bastará con darle al botón de iniciar. Y si lo hemos hecho bien saldrá un check en verde \ref{fig:31}
+Una vez realizados todos los ajustes necesarios, el cubo estará listo para ser desplegado. El proceso se inicia pulsando el botón correspondiente, y si todos los pasos han sido ejecutados correctamente, el sistema mostrará un \textbf{check verde}, tal como se ilustra en la Figura \ref{fig:31}.
 
 \begin{figure}[H]
 	\centering
@@ -465,6 +465,7 @@ Una vez hayamos realizado todos estos pasos podremos desplegar el cubo. Bastará
 	\caption{Check Verde}
 	\label{fig:31}
 \end{figure}
+
 
 \subsection{Instrucciones para desplegar el proyecto en el equipo}
 	 

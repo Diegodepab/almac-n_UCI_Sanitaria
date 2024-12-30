@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  30 DEC 2024 03:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.11.12)  30 DEC 2024 03:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1286,36 +1286,34 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.28}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.456 A
-       demás también habrá que poner Allergy ID como atributo de granular...
-
+l.455 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.29}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.456 A
-       demás también habrá que poner Allergy ID como atributo de granular...
- <./image/relacionesTiempoDps2.png> <./image/gruposMedida.png>]
+l.455 
+       <./image/relacionesTiempoDps2.png> <./image/gruposMedida.png>]
 <image/checkVerde.png, id=372, 852.786pt x 446.26724pt>
 File: image/checkVerde.png Graphic file (type png)
 <use image/checkVerde.png>
 Package pdftex.def Info: image/checkVerde.png  used on input line 464.
 (pdftex.def)             Requested size: 426.79135pt x 223.33734pt.
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 4
-71.
+72.
 
 (C:\Users\jismbs\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 471.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 472.
 <image/despliegue.png, id=373, 591.4095pt x 374.5995pt>
 File: image/despliegue.png Graphic file (type png)
 <use image/despliegue.png>
-Package pdftex.def Info: image/despliegue.png  used on input line 475.
+Package pdftex.def Info: image/despliegue.png  used on input line 476.
 (pdftex.def)             Requested size: 426.79135pt x 270.32875pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5345) has occurred while \output is active []
 
 
 
@@ -1324,7 +1322,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.30}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.479 	
+l.480 	
         <./image/checkVerde.png>]
 
 [26
@@ -1332,7 +1330,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.31}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.507 
+l.508 
        <./image/despliegue.png>]
 
 pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
@@ -1340,7 +1338,7 @@ ersion <1.7>, but at most version <1.5> allowed
 <backcover.pdf, id=392, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 532.
+Package pdftex.def Info: backcover.pdf  used on input line 533.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1348,7 +1346,7 @@ pdfTeX warning: pdflatex.exe (file ./backcover.pdf): PDF inclusion: found PDF v
 ersion <1.7>, but at most version <1.5> allowed
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
-Package pdftex.def Info: backcover.pdf  used on input line 532.
+Package pdftex.def Info: backcover.pdf  used on input line 533.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1361,24 +1359,24 @@ ersion <1.7>, but at most version <1.5> allowed
 <backcover.pdf, id=395, page=1, 597.23125pt x 845.1575pt>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 532.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 533.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 [27]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 532.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 533.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 532.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 533.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
-Package pdftex.def Info: backcover.pdf , page1 used on input line 532.
+Package pdftex.def Info: backcover.pdf , page1 used on input line 533.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 [28
 
@@ -1394,10 +1392,10 @@ Package logreq Info: Writing requests to 'MAIN.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19709 strings out of 473681
- 347967 string characters out of 5718718
+ 19708 strings out of 473681
+ 347959 string characters out of 5718718
  960049 words of memory out of 5000000
- 42504 multiletter control sequences out of 15000+600000
+ 42503 multiletter control sequences out of 15000+600000
  563477 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,81p,1905b,1291s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1409,7 +1407,7 @@ nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jismbs/AppData/Local/Programs/
 MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jismbs/AppData/Local
 /Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/jismbs/App
 Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on MAIN.pdf (29 pages, 692288 bytes).
+Output written on MAIN.pdf (29 pages, 692488 bytes).
 PDF statistics:
  473 PDF objects out of 1000 (max. 8388607)
  87 named destinations out of 1000 (max. 500000)
