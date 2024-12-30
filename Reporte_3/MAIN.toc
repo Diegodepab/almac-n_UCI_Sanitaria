@@ -14,10 +14,11 @@
 \contentsline {subsubsection}{\numberline {4.3.7}Medication}{19}{subsubsection.4.3.7}%
 \contentsline {subsubsection}{\numberline {4.3.8}Tiempo}{21}{subsubsection.4.3.8}%
 \contentsline {subsection}{\numberline {4.4}Modificaciones del cubo}{24}{subsection.4.4}%
-\contentsline {subsubsection}{\numberline {4.4.1}Despliegue del cubo}{25}{subsubsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.5}Instrucciones para desplegar el proyecto en el equipo}{25}{subsection.4.5}%
-\contentsline {section}{\numberline {5}Consultas en MDX}{26}{section.5}%
-\contentsline {section}{\numberline {6}Instrucciones para ejecutar las consultas.}{26}{section.6}%
-\contentsline {section}{\numberline {7}Problemas encontrados}{27}{section.7}%
-\contentsline {section}{\numberline {8}Conclusión}{27}{section.8}%
-\contentsline {section}{\numberline {9}Github y conjunto de instrucciones para su correcto despliegue en SQL Server.}{27}{section.9}%
+\contentsline {subsubsection}{\numberline {4.4.1}Nuevas medidas}{25}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Despliegue del cubo}{25}{subsubsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.5}Instrucciones para desplegar el proyecto en el equipo}{26}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Consultas en MDX}{27}{section.5}%
+\contentsline {section}{\numberline {6}Instrucciones para ejecutar las consultas.}{27}{section.6}%
+\contentsline {section}{\numberline {7}Problemas encontrados}{28}{section.7}%
+\contentsline {section}{\numberline {8}Conclusión}{28}{section.8}%
+\contentsline {section}{\numberline {9}Github y conjunto de instrucciones para su correcto despliegue en SQL Server.}{28}{section.9}%
